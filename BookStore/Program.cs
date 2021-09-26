@@ -1,12 +1,11 @@
 ﻿
 /*
- Раз уж такая пьянка пошла, но замутим прилагу магазина книг
  Чтобы функционал был следующий: 
- просмотр списка книг, 
- добавление определённых в корзину, 
- просмотр корзины, 
- сортировка по цене вверх и вниз, 
- поиск по названию
+ case 1: просмотр списка книг, 
+ case 2: добавление определённых в корзину, 
+ case 3:просмотр корзины, 
+ case 4 and 5: сортировка по цене вверх и вниз, 
+ case 6: поиск по названию
  */
 
 using System;
@@ -37,7 +36,7 @@ namespace BookStore
                                   "3 - Look at the list of books in cart\n" +
                                   "4 - Sorting up by price\n" +
                                   "5 - Sorting down by price\n" +
-                                  "6 - Find book by name");
+                                  "6 - Find book by name\n");
                 var selector = int.Parse(Console.ReadLine());
 
                 switch (selector)
@@ -72,6 +71,8 @@ namespace BookStore
                         string bookNameForFindAll = Console.ReadLine();
                         Book foundedBook = books.Find(book => bookNameForFindAll == book.Name);
                         Console.WriteLine(foundedBook);
+                        break;
+                    default: Console.WriteLine("You've chosen wrong action");
                         break;
                 }
             }
