@@ -64,6 +64,8 @@ namespace BookStore
                             Console.WriteLine($"Book name = {book.Name}, and price is {book.Price}");
                         }
                         break;
+                    case 4: Cart.bookList.Sort((book1, book2) => book1.Price - book2.Price);
+                        break;
                    
                 }
             }
