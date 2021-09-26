@@ -20,14 +20,6 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Choose action:\n" +
-                              "1 - Look at the list of books\n" +
-                              "2 - Add a book to cart\n" +
-                              "3 - Look at the list of books in cart\n" +
-                              "4 - Sorting up by price\n" +
-                              "5 - Sorting down by price\n" +
-                              "6 - Find book by name");
-            var selector = int.Parse(Console.ReadLine());
             List<Book> books = new List<Book>()
             {
                 new Book() {Price = 30, Name = "Game of thrones"},
@@ -37,14 +29,37 @@ namespace BookStore
                 new Book() {Price = 22, Name = "1984"}
                 
             };
-            switch(selector)
+            while (true)
             {
-                case 1:
-                    foreach (var book in books)
-                    {
-                        Console.WriteLine($"Book name = {book.Name}, and price is {book.Price}");
-                    }
-                    break;
+                Console.WriteLine("Choose action:\n" +
+                                  "1 - Look at the list of books\n" +
+                                  "2 - Add a book to cart\n" +
+                                  "3 - Look at the list of books in cart\n" +
+                                  "4 - Sorting up by price\n" +
+                                  "5 - Sorting down by price\n" +
+                                  "6 - Find book by name");
+                var selector = int.Parse(Console.ReadLine());
+
+                switch (selector)
+                {
+                    case 1:
+                        foreach (var book in books)
+                        {
+                            Console.WriteLine($"Book name = {book.Name}, and price is {book.Price}");
+                        }
+
+                        break;
+                    case 2:
+                        foreach (var book in books)
+                        {
+                            Console.WriteLine($"Book name = {book.Name}, and price is {book.Price}");
+                        }
+                        Console.WriteLine("Type the name of the book that you want to add to cart");
+                        string bookNameForAdd = Console.ReadLine();
+                        Cart.bookList.Add(books.Find(book => book.Name == bookNameForAdd));
+                        break;
+                    
+                }
             }
         }
     }
