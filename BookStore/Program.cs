@@ -28,6 +28,14 @@ namespace BookStore
                               "5 - Sorting down by price\n" +
                               "6 - Find book by name");
             var selector = int.Parse(Console.ReadLine());
+            List<Book> books = new List<Book>()
+            {
+                new Book() {Price = 30, Name = "Game of thrones"},
+                new Book() {Price = 13, Name = "Jack of all trades"},
+                new Book() {Price = 20, Name = "Alice in the wonderland"},
+                new Book() {Price = 15, Name = "Through the eyes of the victim"},
+                new Book() {Price = 22, Name = "1984"}
+            };
         }
     }
 }
