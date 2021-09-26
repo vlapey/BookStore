@@ -66,7 +66,9 @@ namespace BookStore
                         break;
                     case 4: Cart.bookList.Sort((book1, book2) => book1.Price - book2.Price);
                         break;
-                   
+                    case 5: Cart.bookList.Sort((book1, book2) => book2.Price - book1.Price);
+                        break;
+                    
                 }
             }
         }
