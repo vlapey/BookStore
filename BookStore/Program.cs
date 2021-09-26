@@ -58,7 +58,13 @@ namespace BookStore
                         string bookNameForAdd = Console.ReadLine();
                         Cart.bookList.Add(books.Find(book => book.Name == bookNameForAdd));
                         break;
-                    
+                    case 3: 
+                        foreach (var book in Cart.bookList)
+                        {
+                            Console.WriteLine($"Book name = {book.Name}, and price is {book.Price}");
+                        }
+                        break;
+                   
                 }
             }
         }
