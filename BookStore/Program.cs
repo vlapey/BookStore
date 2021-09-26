@@ -20,7 +20,14 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello world");
+            Console.WriteLine("Choose action:\n" +
+                              "1 - Look at the list of books\n" +
+                              "2 - Add a book to cart\n" +
+                              "3 - Look at the list of books in cart\n" +
+                              "4 - Sorting up by price\n" +
+                              "5 - Sorting down by price\n" +
+                              "6 - Find book by name");
+            var selector = int.Parse(Console.ReadLine());
         }
     }
 }
