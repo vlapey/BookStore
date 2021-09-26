@@ -45,14 +45,14 @@ namespace BookStore
                     case 1:
                         foreach (var book in books)
                         {
-                            Console.WriteLine($"Book name = {book.Name}, and price is {book.Price}");
+                            Console.WriteLine(book);
                         }
 
                         break;
                     case 2:
                         foreach (var book in books)
                         {
-                            Console.WriteLine($"Book name = {book.Name}, and price is {book.Price}");
+                            Console.WriteLine(book);
                         }
                         Console.WriteLine("Type the name of the book that you want to add to cart");
                         string bookNameForAdd = Console.ReadLine();
@@ -61,7 +61,7 @@ namespace BookStore
                     case 3: 
                         foreach (var book in Cart.bookList)
                         {
-                            Console.WriteLine($"Book name = {book.Name}, and price is {book.Price}");
+                            Console.WriteLine(book);
                         }
                         break;
                     case 4: Cart.bookList.Sort((book1, book2) => book1.Price - book2.Price);
@@ -71,7 +71,7 @@ namespace BookStore
                     case 6:  Console.WriteLine("Type the name of the book that you want to find in the store");
                         string bookNameForFindAll = Console.ReadLine();
                         Book foundedBook = books.Find(book => bookNameForFindAll == book.Name);
-                        Console.WriteLine($"The name and the price of the founded book are {foundedBook.Name}, {foundedBook.Price}");
+                        Console.WriteLine(foundedBook);
                         break;
                 }
             }
