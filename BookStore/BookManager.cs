@@ -4,9 +4,9 @@ using System;
 
 namespace BookStore
 {
-    public class BookManager
+    public static class BookManager
     {
-       public static List<Book> books = new List<Book>()
+        private static List<Book> books = new ()
         {
             new Book() {Price = 30, Name = "Game of thrones"},
             new Book() {Price = 13, Name = "Jack of all trades"},
@@ -14,14 +14,14 @@ namespace BookStore
             new Book() {Price = 15, Name = "Through the eyes of the victim"},
             new Book() {Price = 22, Name = "1984"}
         };
-        public static void PrintBookList(List<Book> books)
+        public static void PrintBookList()
         {
             foreach (var book in books)
             {
                 Console.WriteLine(book);
             }
         }
-        public static void PrintCartList(List<Book> bookList)
+        public static void PrintCartList()
         {
             if (Cart.bookList.Count == 0)
                 Console.WriteLine("Cart is empty");
@@ -33,7 +33,7 @@ namespace BookStore
                 }
             }
         }
-        public static void AddBook(List<Book> books)
+        public static void AddBook()
         {
             Console.WriteLine("Type the name of the book that you want to add to cart");
             string bookNameForAdd = Console.ReadLine();
@@ -48,17 +48,17 @@ namespace BookStore
                 Console.WriteLine("Book was not added");
             }
         }
-        public static void AscendingSort(List<Book> books)
+        public static void AscendingSort()
         {
             books.Sort((book1, book2) => book1.Price - book2.Price);
             Console.WriteLine("Sorted up by price");
         }
-        public static void DescendingSort(List<Book> books)
+        public static void DescendingSort()
         {
             books.Sort((book1, book2) => book2.Price - book1.Price);
             Console.WriteLine("Sorted up by price");
         }
-        public static void FindBook(List<Book> books)
+        public static void FindBook()
         {
             Console.WriteLine("Type the name of the book that you want to find in the store");
             string bookNameForFindAll = Console.ReadLine();

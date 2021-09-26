@@ -32,29 +32,28 @@ namespace BookStore
                                   "5 - Sorting down by price\n" +
                                   "6 - Find book by name");
                 var selector = int.Parse(Console.ReadLine());
-                BookManager books = new BookManager();
                 switch (selector)
                 {
                     case 1:
-                       BookManager.PrintBookList(BookManager.books);
+                       BookManager.PrintBookList();
                         break;
                     
                     case 2:
-                        BookManager.PrintBookList(BookManager.books);
-                        BookManager.AddBook(BookManager.books);
+                        BookManager.PrintBookList();
+                        BookManager.AddBook();
                         break;
                     
                     case 3: 
-                        BookManager.PrintCartList(BookManager.books);
+                        BookManager.PrintCartList();
                         break;
                     
-                    case 4: BookManager.AscendingSort(BookManager.books);
+                    case 4: BookManager.AscendingSort();
                         break;
                     
-                    case 5: BookManager.DescendingSort(BookManager.books);
+                    case 5: BookManager.DescendingSort();
                         break;
                     
-                    case 6:  BookManager.FindBook(BookManager.books);
+                    case 6:  BookManager.FindBook();
                         break;
                     
                     default: Console.WriteLine("You've chosen wrong action");
