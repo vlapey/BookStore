@@ -35,7 +35,17 @@ namespace BookStore
                 new Book() {Price = 20, Name = "Alice in the wonderland"},
                 new Book() {Price = 15, Name = "Through the eyes of the victim"},
                 new Book() {Price = 22, Name = "1984"}
+                
             };
+            switch(selector)
+            {
+                case 1:
+                    foreach (var book in books)
+                    {
+                        Console.WriteLine($"Book name = {book.Name}, and price is {book.Price}");
+                    }
+                    break;
+            }
         }
     }
 }
