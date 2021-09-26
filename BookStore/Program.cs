@@ -68,7 +68,11 @@ namespace BookStore
                         break;
                     case 5: Cart.bookList.Sort((book1, book2) => book2.Price - book1.Price);
                         break;
-                    
+                    case 6:  Console.WriteLine("Type the name of the book that you want to find in the store");
+                        string bookNameForFindAll = Console.ReadLine();
+                        Book foundedBook = books.Find(book => bookNameForFindAll == book.Name);
+                        Console.WriteLine($"The name and the price of the founded book are {foundedBook.Name}, {foundedBook.Price}");
+                        break;
                 }
             }
         }
