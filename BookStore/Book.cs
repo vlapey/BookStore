@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-
-namespace BookStore
+﻿namespace BookStore
 {
     public class Book
     {
