@@ -7,7 +7,8 @@ namespace BookStore
     public class DataBase
     {
         private static MySqlConnection connection = new("server=localhost;port=3306;" +
-                                                        "username=root;password=root;database=bookstore");
+                                                        "username=root;password=root;" + 
+                                                        "database=bookstore;SSL Mode=None");
 
         public static void OpenConnection()
         {
