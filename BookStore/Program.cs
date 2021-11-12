@@ -9,10 +9,8 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            foreach (var user in DataBase.GetUsers())
-            {
-                Console.WriteLine($"{user[1]} your password is {user[2]}");
-            }
+            var user1 = DataBase.GetUserById(1);
+            Console.WriteLine($"User1 login is {user1.Login} and password is {user1.Password}");
         }
     }
 }
