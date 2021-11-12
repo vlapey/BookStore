@@ -68,5 +68,13 @@ namespace BookStore
             CloseConnection();
             return data;
         }
+
+        public static void DeleteUserById(uint id)
+        {
+            OpenConnection();
+            MySqlCommand mySqlCommand = new MySqlCommand($"DELETE FROM users WHERE users.id = {id}",connection);
+            mySqlCommand.ExecuteNonQuery();
+            CloseConnection();
+        }
     }
 }
