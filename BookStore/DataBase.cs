@@ -25,7 +25,7 @@ namespace BookStore
         public static List<string[]> GetUsers()
         {
             OpenConnection();
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `users`", connection);
+            MySqlCommand command = new MySqlCommand("SELECT * FROM 'users'", connection);
             /*command.ExecuteNonQuery(); Вариант для insert и для delete*/
             List<string[]> users = new List<string[]>();
             MySqlDataReader dataReader = command.ExecuteReader();

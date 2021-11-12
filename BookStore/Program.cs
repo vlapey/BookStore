@@ -9,8 +9,10 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            DataBase.OpenConnection();
-            DataBase.CloseConnection();
+            foreach (var user in DataBase.GetUsers())
+            {
+                Console.WriteLine($"{user[1]} your password is {user[2]}");
+            }
         }
     }
 }

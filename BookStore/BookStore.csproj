@@ -9,6 +9,9 @@
       <Reference Include="MySql.Data, Version=8.0.26.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
         <HintPath>..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 8.0.26\Assemblies\v4.8\MySql.Data.dll</HintPath>
       </Reference>
+      <Reference Include="MySql.Data, Version=8.0.27.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
+        <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 8.0.27\Assemblies\net5.0\MySql.Data.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
     <ItemGroup>
