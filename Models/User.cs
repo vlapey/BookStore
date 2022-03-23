@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System;
-using System.Collections.Generic;
+﻿
 
 namespace BookStore
 {
@@ -9,5 +7,10 @@ namespace BookStore
         public uint id;
         public string Login;
         public string Password;
+
+        public override string ToString()
+        {
+            return $"{Login}, {Password}";
+        }
     }
 }

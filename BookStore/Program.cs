@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
+using System;
 
 namespace BookStore
 {
@@ -9,7 +8,7 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-           DataBase.DeleteUserById(2);
+            Console.WriteLine(DataBase.GetUserById(2));
         }
     }
 }

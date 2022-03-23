@@ -21,33 +21,6 @@ namespace BookStore
                 Console.WriteLine(book);
             }
         }
-        public static void PrintCartList()
-        {
-            if (Cart.bookList.Count == 0)
-                Console.WriteLine("Cart is empty");
-            else 
-            {
-                foreach (var book in Cart.bookList)
-                {
-                    Console.WriteLine(book);
-                }
-            }
-        }
-        public static void AddBook()
-        {
-            Console.WriteLine("Type the name of the book that you want to add to cart");
-            string bookNameForAdd = Console.ReadLine();
-            try
-            {
-                Book bookToAdd = books.First(book => book.Name == bookNameForAdd);
-                Cart.bookList.Add(bookToAdd);
-                Console.WriteLine("Book added");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Book was not added");
-            }
-        }
         public static void AscendingSort()
         {
             books.Sort((book1, book2) => book1.Price - book2.Price);
