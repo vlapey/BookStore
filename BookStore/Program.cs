@@ -1,5 +1,6 @@
-﻿
-using System;
+﻿using System;
+using Services;
+using Services.Interfaces;
 
 namespace BookStore
 {
@@ -8,7 +9,11 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(DataBase.GetUserById(2));
+            IUserService userService = new DbUserService();
+            Console.WriteLine(userService.GetUserById(2));
+            //todo: Меню в котором можно: просмотреть список книг, найти книгу по названию, найти книгу по автору, вывести имя юзера по айдишнику
+            // для этого придется сделать еще один BookService
+        
         }
     }
 }

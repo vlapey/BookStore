@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BookStore;
+using Models;
 
 namespace Services.Interfaces
 {
@@ -9,5 +9,6 @@ namespace Services.Interfaces
         public User GetUserById(uint id);
         public void DeleteUserById(uint id);
         public void EditUser(User user);
+        public void CreateUser(User user);
     }
 }
