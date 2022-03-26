@@ -42,7 +42,8 @@ namespace Services
 
         public void EditUser(User user)
         {
-            
+            ApplicationContext.Execute($"UPDATE users SET users.login = '{user.Login}', users.password = '{user.Password}' " + 
+                                       $"WHERE users.id = {user.Id}");
         }
 
         public void CreateUser(User user)
