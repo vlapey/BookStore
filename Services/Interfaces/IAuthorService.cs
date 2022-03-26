@@ -8,7 +8,7 @@ namespace Services.Interfaces
         public List<Author> GetAuthors();
         public Author GetAuthorById(uint id);
         public void DeleteAuthorById(uint id);
-        public void EditAuthor();
+        public void EditAuthor(Author author);
         public void CreateAuthor(Author author);
     }
 }

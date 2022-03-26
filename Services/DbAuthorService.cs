@@ -38,9 +38,10 @@ namespace Services
             ApplicationContext.Execute($"DELETE FROM authors WHERE authors.id = {id}");
         }
 
-        public void EditAuthor()
+        public void EditAuthor(Author author)
         {
-            
+            ApplicationContext.Execute($"UPDATE authors SET authors.name = '{author.Name}' " + 
+            $"WHERE authors.id = {author.Id}");
         }
 
         public void CreateAuthor(Author author)
