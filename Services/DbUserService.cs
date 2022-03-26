@@ -42,13 +42,12 @@ namespace Services
 
         public void EditUser(User user)
         {
-            //todo: написать реализацию editUser
-            //"UPDATE FROM users WHERE users.id = {id}"
+            
         }
 
         public void CreateUser(User user)
         {
-            //todo: Сделать метод createuser
+            ApplicationContext.Execute($"INSERT INTO `users` (`login`, `password` ) VALUES ('{user.Login}', '{user.Password}')");
         }
     }
 }

@@ -10,12 +10,7 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            IAuthorService authorService = new DbAuthorService();
-            Author author = new Author()
-            {
-                Name =  "Эрнест"
-            };
-            authorService.CreateAuthor(author);
+            
         }
     }
 }
