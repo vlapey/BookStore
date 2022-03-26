@@ -45,7 +45,7 @@ namespace Services
 
         public void CreateAuthor(Author author)
         {
-            
+            ApplicationContext.Execute($"INSERT INTO `authors` (`name`) VALUES ('{author.Name}')");
         }
     }
 }

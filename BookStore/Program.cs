@@ -10,18 +10,12 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            
-            IBookService bookService = new DbBookService();
-            foreach (var book in bookService.GetBooks())
+            IAuthorService authorService = new DbAuthorService();
+            Author author = new Author()
             {
-                Console.WriteLine(book);
-            }
-            Book gettedBook = bookService.GetBookByName("1984");
-            Console.WriteLine(gettedBook);
-            gettedBook.Price++;
-            bookService.EditBook(gettedBook);
-            Book newGettedBook = bookService.GetBookByName("1984");
-            Console.WriteLine(newGettedBook);
+                Name =  "Эрнест"
+            };
+            authorService.CreateAuthor(author);
         }
     }
 }
