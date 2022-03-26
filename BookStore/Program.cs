@@ -1,4 +1,5 @@
 ﻿using System;
+using Models;
 using Services;
 using Services.Interfaces;
 
@@ -9,11 +10,18 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            IUserService userService = new DbUserService();
-            Console.WriteLine(userService.GetUserById(2));
-            //todo: Меню в котором можно: просмотреть список книг, найти книгу по названию, найти книгу по автору, вывести имя юзера по айдишнику
-            // для этого придется сделать еще один BookService
-        
+            
+            IBookService bookService = new DbBookService();
+            foreach (var book in bookService.GetBooks())
+            {
+                Console.WriteLine(book);
+            }
+            Book gettedBook = bookService.GetBookByName("1984");
+            Console.WriteLine(gettedBook);
+            gettedBook.Price++;
+            bookService.EditBook(gettedBook);
+            Book newGettedBook = bookService.GetBookByName("1984");
+            Console.WriteLine(newGettedBook);
         }
     }
 }

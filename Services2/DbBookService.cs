@@ -11,8 +11,7 @@ namespace Services
         public void CreateBook(Book book)
         {
             var authordata = ApplicationContext.ToList
-            ($"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'"); //GetAuthorIdByName и если такого автора не нашлось,
-                                                                                      //создавать его и возвращать его айдишник
+            ($"SELECT authors.id FROM authors WHERE authors.name = {book.Author}");
             ApplicationContext.Execute($"INSERT INTO `books` (`name`, `price`, `authors_id`)" +
                 $"VALUES ('{book.Name}', '{book.Price}', '{authordata[0][0]}')");
         } 
@@ -21,12 +20,11 @@ namespace Services
         {
             List<Book> books = new List<Book>();
             var bookdata = ApplicationContext.ToList
-                ("SELECT books.id, books.name, books.price, authors.name" + 
-                 " FROM books LEFT JOIN authors ON books.authors_id = authors.id");
+                ($"SELECT books.name, books.price, authors.name" + 
+                 "FROM books LEFT JOIN authors ON books.authors_id = authors.id");
             foreach (var book in bookdata)
             {
                 books.Add(new Book(){
-                    Id = Convert.ToUInt32(book[0]),
                     Name = book[1],
                     Price = Convert.ToInt32(book[2]),
                     Author = book[3]
@@ -38,11 +36,10 @@ namespace Services
         public Book GetBookByName(string name)
         {
             var bookdata = ApplicationContext.ToList
-            ($"SELECT books.id, books.name, books.price, authors.name" + 
-             $" FROM books LEFT JOIN authors ON books.authors_id = authors.id");
+            ($"SELECT books.name, books.price, authors.name" + 
+             "FROM books LEFT JOIN authors ON books.authors_id = authors.id");
             Book book = new Book()
             {
-                Id = Convert.ToUInt32(bookdata[0][0]),
                 Name = name,
                 Price = Convert.ToInt32(bookdata[0][2]),
                 Author = bookdata[0][3]
@@ -55,12 +52,10 @@ namespace Services
             ApplicationContext.Execute($"DELETE FROM books WHERE books.id = {id}");
         }
 
-        public void EditBook(Book book)
+        public void EditBook()
         {
-            var authordata = ApplicationContext.ToList
-                ($"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
-            ApplicationContext.Execute($"UPDATE books SET books.name = '{book.Name}', books.price = {book.Price}, " 
-                                       + $"books.authors_id = {authordata[0][0]} WHERE books.id = {book.Id}");
+            
         }
+        
     }
 }

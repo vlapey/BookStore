@@ -15,7 +15,7 @@ namespace Services
             foreach (var user in usersdata)
             {
                 users.Add(new User(){
-                    Id = uint.Parse(user[0]),
+                    id = uint.Parse(user[0]),
                     Login = user[1],
                     Password = user[2]
                 });
@@ -28,7 +28,7 @@ namespace Services
             var userdata = ApplicationContext.ToList($"SELECT * FROM users WHERE users.id = {id}");
             User user = new User()
             {
-                Id = id,
+                id = id,
                 Login = userdata[0][1],
                 Password = userdata[0][2]
             };
