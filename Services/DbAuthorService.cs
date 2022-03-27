@@ -54,6 +54,15 @@ namespace Services
         {
             var authordata = ApplicationContext.ToList
                 ($"SELECT authors.id FROM authors WHERE authors.name = '{name}'");
+            if (authordata.Count == 0)
+            {
+                Author author = new Author()
+                {
+                    Name = name
+                };
+                CreateAuthor(author);
+                return GetAuthorIdByName(name);
+            }
             return Convert.ToUInt32(authordata[0][0]);
         }
     }
