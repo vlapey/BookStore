@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Context;
 using Models;
 using Services.Interfaces;
@@ -47,6 +48,17 @@ namespace Services
         public void CreateAuthor(Author author)
         {
             ApplicationContext.Execute($"INSERT INTO `authors` (`name`) VALUES ('{author.Name}')");
+        }
+
+        public Author GetAuthorIdByName(Author author)
+        {
+            var authordata = ApplicationContext.ToList
+                ($"SELECT authors.id FROM authors WHERE authors.name = '{author.Name}'");
+            Author author1 = new Author()
+            {
+                Name = authordata[0][1]
+            };
+            return author1;
         }
     }
 }

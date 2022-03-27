@@ -10,14 +10,12 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            IUserService userService = new DbUserService();
-            User user = new User()
+            IAuthorService authorService = new DbAuthorService();
+            Author author = new Author()
             {
-                Id = 3,
-                Login = "Funduk",
-                Password = "3456"
+                Name = "Вуичич"
             };
-            userService.EditUser(user);
+            authorService.GetAuthorIdByName(author);
         }
     }
 }
