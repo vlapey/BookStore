@@ -11,11 +11,7 @@ namespace BookStore
         static void Main(string[] args)
         {
             IAuthorService authorService = new DbAuthorService();
-            Author author = new Author()
-            {
-                Name = "Вуичич"
-            };
-            authorService.GetAuthorIdByName(author);
+            Console.WriteLine(authorService.GetAuthorIdByName("Вуичич"));
         }
     }
 }

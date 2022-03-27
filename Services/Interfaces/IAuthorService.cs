@@ -10,6 +10,6 @@ namespace Services.Interfaces
         public void DeleteAuthorById(uint id);
         public void EditAuthor(Author author);
         public void CreateAuthor(Author author);
-        public Author GetAuthorIdByName(Author author);
+        public uint GetAuthorIdByName(string name);
     }
 }
