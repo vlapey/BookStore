@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Context;
 using Models;
 using Services.Interfaces;
@@ -42,13 +43,37 @@ namespace Services
 
         public void EditUser(User user)
         {
-            ApplicationContext.Execute($"UPDATE users SET users.login = '{user.Login}', users.password = '{user.Password}' " + 
-                                       $"WHERE users.id = {user.Id}");
+            ApplicationContext.Execute($"UPDATE users SET users.login = '{user.Login}'," +
+                                       $" users.password = '{user.Password}' WHERE users.id = {user.Id}");
         }
 
         public void CreateUser(User user)
         {
-            ApplicationContext.Execute($"INSERT INTO `users` (`login`, `password` ) VALUES ('{user.Login}', '{user.Password}')");
+            ApplicationContext.Execute($"INSERT INTO `users` (`login`, `password`) " + 
+                                       $"VALUES ('{user.Login}', '{user.Password}')");
+        }
+
+        public List<Book> GetUsersBooks(uint id)
+        {
+            List<Book> usersbooks = new List<Book>();
+            
+            var booksDataFromDatabase = ApplicationContext.ToList($"SELECT books.id, books.name," + 
+            $" books.price, authors.name FROM users_to_books" + 
+            $" LEFT JOIN books ON users_to_books.books_id = books.id" + 
+            $" LEFT JOIN authors ON books.authors_id = authors.id WHERE users_id = {id}");
+            
+            foreach (var bookAsStringsArray in booksDataFromDatabase)
+            {
+                usersbooks.Add(new Book()
+                {
+                    Id = Convert.ToUInt32(bookAsStringsArray[0]),
+                    Name = bookAsStringsArray[1],
+                    Price = Convert.ToInt32(bookAsStringsArray[2]),
+                    Author = bookAsStringsArray[3]
+                });
+                
+            }
+            return usersbooks;
         }
     }
 }

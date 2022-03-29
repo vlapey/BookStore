@@ -9,8 +9,11 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            IAuthorService authorService = new DbAuthorService();
-            Console.WriteLine(authorService.GetAuthorIdByName("Vasya"));
+            DbUserService service = new DbUserService();
+            foreach (var book in service.GetUsersBooks(3))
+            {
+                Console.WriteLine(book);
+            }
         }
     }
 }

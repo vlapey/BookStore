@@ -10,6 +10,6 @@ namespace Services.Interfaces
         public void DeleteUserById(uint id);
         public void EditUser(User user);
         public void CreateUser(User user);
-        public List<Book> GetUsersBooks(User user);
+        public List<Book> GetUsersBooks(uint id);
     }
 }
