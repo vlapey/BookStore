@@ -11,8 +11,7 @@ namespace Services
         public void CreateBook(Book book)
         {
             var authordata = ApplicationContext.ToList
-            ($"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'"); //GetAuthorIdByName и если такого автора не нашлось,
-                                                                                      //создавать его и возвращать его айдишник
+            ($"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
             ApplicationContext.Execute($"INSERT INTO `books` (`name`, `price`, `authors_id`)" +
                 $"VALUES ('{book.Name}', '{book.Price}', '{authordata[0][0]}')");
         } 
