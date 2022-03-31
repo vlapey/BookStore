@@ -8,11 +8,13 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Выберите сервис:\n" +
-                              "1 - Книжный сервис\n" +
-                              "2 - Пользовательский сервис\n" +
-                              "3 - Авторский сервис\n");
-            int selector = int.Parse(Console.ReadLine());
+            while (true)
+            {
+                Console.WriteLine("Выберите сервис:\n" +
+                                  "1 - Книжный сервис\n" +
+                                  "2 - Пользовательский сервис\n" +
+                                  "3 - Авторский сервис\n");
+                int selector = int.Parse(Console.ReadLine());
             switch (selector)
                 {
                     case 1:
@@ -62,6 +64,7 @@ namespace BookStore
                     default: Console.WriteLine("Вы ввели неверное число, попробуйте снова");
                         break;
                 }
+            }
         }
         
     }

@@ -135,6 +135,8 @@ namespace Services
                     DeleteAuthorById(id);
                     break;
                 }
+                default: Console.WriteLine("Вы ввели неверное число, попробуйте снова");
+                    break;
             }
         }
     }

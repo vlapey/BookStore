@@ -150,6 +150,8 @@ namespace Services
                     DeleteUserById(id);
                     break;
                 }
+                default: Console.WriteLine("Вы ввели неверное число, попробуйте снова");
+                    break;
             }
         }
     }
