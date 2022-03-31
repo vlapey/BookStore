@@ -107,11 +107,11 @@ namespace Services
                 {
                     Console.WriteLine("Введите Id книги, которую хотите поменять");
                     uint bookId = Convert.ToUInt32(Console.ReadLine());
-                    Console.WriteLine("Введите название книги, которую хотите поменять");
+                    Console.WriteLine("Введите название книги, на которое хотите поменять");
                     string bookName = Console.ReadLine();
-                    Console.WriteLine("Введите цену книги, которую хотите поменять");
+                    Console.WriteLine("Введите цену книги, на которую хотите поменять");
                     int price = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Введите автора книги, которую хотите поменять");
+                    Console.WriteLine("Введите автора книги, на которого хотите поменять");
                     string authorName = Console.ReadLine();
                     Book book = new Book()
                     {

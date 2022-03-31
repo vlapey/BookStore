@@ -33,11 +33,14 @@ namespace BookStore
                     {
                         Console.WriteLine("Вы выбрали пользовательский сервис");
                         Console.WriteLine("Выберите, что хотитет выполнить?" +
-                                          "1 - Показать список всех книг\n" +
-                                          "2 - Показать книгу по имени" +
-                                          "3 - Создать книгу\n" +
-                                          "4 - Редактировать книгу\n" +
-                                          "5 - Удалить книгу\n");
+                                          "1 - Показать список всех пользователей\n" +
+                                          "2 - Показать пользователя по Id\n" +
+                                          "3 - Показать книги пользователя\n" +
+                                          "4 - Создать пользователя\n" +  
+                                          "5 - Редактировать пользователя\n" +
+                                          "6 - Удалить пользователя");
+                        DbUserService userManager = new DbUserService();
+                        userManager.UserManager();
                         break;
                     }
                     
@@ -56,12 +59,6 @@ namespace BookStore
                     default: Console.WriteLine("Вы ввели неверное число, попробуйте снова");
                         break;
                 }
-            // DbUserService service = new DbUserService();
-            // foreach (var book in service.GetUsersBooks(3))
-            // {
-            //     Console.WriteLine(book);
-            // }
-            //todo: сделать меню на каждую функцию
         }
         
     }
