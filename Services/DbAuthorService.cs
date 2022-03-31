@@ -6,7 +6,7 @@ using Services.Interfaces;
 
 namespace Services
 {
-    public class DbAuthorService:IAuthorService
+    public class DbAuthorService : IAuthorService
     {
         public List<Author> GetAuthors()
         {
@@ -14,11 +14,13 @@ namespace Services
             var authordata = ApplicationContext.ToList($"SELECT * FROM authors");
             foreach (var author in authordata)
             {
-                authors.Add(new Author(){
+                authors.Add(new Author()
+                {
                     Id = uint.Parse(author[0]),
                     Name = author[1],
                 });
             }
+
             return authors;
         }
 
@@ -41,8 +43,8 @@ namespace Services
 
         public void EditAuthor(Author author)
         {
-            ApplicationContext.Execute($"UPDATE authors SET authors.name = '{author.Name}' " + 
-            $"WHERE authors.id = {author.Id}");
+            ApplicationContext.Execute($"UPDATE authors SET authors.name = '{author.Name}' " +
+                                       $"WHERE authors.id = {author.Id}");
         }
 
         public void CreateAuthor(Author author)
@@ -63,7 +65,77 @@ namespace Services
                 CreateAuthor(author);
                 return GetAuthorIdByName(name);
             }
+
             return Convert.ToUInt32(authordata[0][0]);
+        }
+
+        public void AuthorManager()
+        {
+            int selector = int.Parse(Console.ReadLine());
+            switch (selector)
+            {
+                case 1:
+                {
+                    DbAuthorService authorService = new DbAuthorService();
+                    foreach (var author in authorService.GetAuthors())
+                    {
+                        Console.WriteLine(author);
+                    }
+
+                    break;
+                }
+
+                case 2:
+                {
+                    Console.WriteLine("Введите Id автора, которого хотите вывести");
+                    uint authorId = Convert.ToUInt32(Console.ReadLine());
+                    Console.WriteLine(GetAuthorById(authorId));
+                    break;
+                }
+
+                case 3:
+                {
+                    Console.WriteLine("Введите имя автора, чтобы получить его Id");
+                    string name = Console.ReadLine();
+                    Console.WriteLine(GetAuthorIdByName(name));
+                    break; //????????????
+                }
+
+                case 4:
+                {
+                    Console.WriteLine("Введите Имя");
+                    string authorName = Console.ReadLine();
+                    Author author = new Author()
+                    {
+                        Name = authorName,
+                    };
+                    CreateAuthor(author);
+                    break;
+                }
+
+                case 5:
+                {
+                    Console.WriteLine("Введите Id автора, которого хотите поменять");
+                    uint userId = Convert.ToUInt32(Console.ReadLine());
+                    Console.WriteLine("Введите Имя автора, на которое хотите поменять");
+                    string authorName = Console.ReadLine();
+                    Author author = new Author()
+                    {
+                        Id = userId,
+                        Name = authorName,
+                    };
+                    EditAuthor(author);
+                    break;
+                }
+
+                case 6:
+                {
+                    Console.WriteLine("Введите Id автора, которого хотите удалить");
+                    uint id = Convert.ToUInt32(Console.ReadLine());
+                    DeleteAuthorById(id);
+                    break;
+                }
+            }
         }
     }
 }

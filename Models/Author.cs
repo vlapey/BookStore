@@ -6,7 +6,7 @@
         public string Name;
         public override string ToString()
         {
-            return $"Id = {Id}";
+            return $"{Id}: {Name}";
         }
     }
 }
