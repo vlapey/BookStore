@@ -21,12 +21,13 @@ namespace Context
                 connection.Close();
         }
 
-        public static void Execute(string command)
+        public static int Execute(string command)
         {
             OpenConnection();
             MySqlCommand mySqlCommand = new MySqlCommand(command, connection);
-            mySqlCommand.ExecuteNonQuery();
+            var rowsAffected = mySqlCommand.ExecuteNonQuery();
             CloseConnection();
+            return rowsAffected;
         }
         
         /// <summary>

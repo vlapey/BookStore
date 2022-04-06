@@ -36,19 +36,22 @@ namespace Services
             return author;
         }
 
-        public void DeleteAuthorById(uint id)
+        public bool DeleteAuthorById(uint id)
         {
-            ApplicationContext.Execute($"DELETE FROM authors WHERE authors.id = {id}");
+            var result = ApplicationContext.Execute($"DELETE FROM authors WHERE authors.id = {id}");
+            return result > 0;
         }
 
         public void EditAuthor(Author author)
         {
+            //todo: return suc ass statement (as in delete func)
             ApplicationContext.Execute($"UPDATE authors SET authors.name = '{author.Name}' " +
                                        $"WHERE authors.id = {author.Id}");
         }
 
         public void CreateAuthor(Author author)
         {
+            //todo: return suc ass statement (as in delete func)
             ApplicationContext.Execute($"INSERT INTO `authors` (`name`) VALUES ('{author.Name}')");
         }
 
@@ -71,6 +74,7 @@ namespace Services
 
         public void AuthorManager()
         {
+            //todo: remove in UI 
             int selector = int.Parse(Console.ReadLine());
             switch (selector)
             {
@@ -98,7 +102,7 @@ namespace Services
                     Console.WriteLine("Введите имя автора, чтобы получить его Id");
                     string name = Console.ReadLine();
                     Console.WriteLine(GetAuthorIdByName(name));
-                    break; //????????????
+                    break;
                 }
 
                 case 4:
@@ -135,6 +139,7 @@ namespace Services
                     DeleteAuthorById(id);
                     break;
                 }
+                //todo: replace with Back to main menu option
                 default: Console.WriteLine("Вы ввели неверное число, попробуйте снова");
                     break;
             }

@@ -3,7 +3,6 @@ using Services;
 
 namespace BookStore
 {
-
     class Program
     {
         static void Main(string[] args)
@@ -15,7 +14,7 @@ namespace BookStore
                                   "2 - Пользовательский сервис\n" +
                                   "3 - Авторский сервис\n");
                 int selector = int.Parse(Console.ReadLine());
-            switch (selector)
+                switch (selector)
                 {
                     case 1:
                     {
@@ -30,7 +29,7 @@ namespace BookStore
                         bookManager.BookManager();
                         break;
                     }
-                    
+
                     case 2:
                     {
                         Console.WriteLine("Вы выбрали пользовательский сервис");
@@ -38,15 +37,15 @@ namespace BookStore
                                           "1 - Показать список всех пользователей\n" +
                                           "2 - Показать пользователя по Id\n" +
                                           "3 - Показать книги пользователя\n" +
-                                          "4 - Создать пользователя\n" +  
+                                          "4 - Создать пользователя\n" +
                                           "5 - Редактировать пользователя\n" +
                                           "6 - Удалить пользователя");
                         DbUserService userManager = new DbUserService();
                         userManager.UserManager();
                         break;
                     }
-                    
-                    case 3: 
+
+                    case 3:
                     {
                         Console.WriteLine("Вы выбрали авторский сервис");
                         Console.WriteLine("Выберите, что хотитет выполнить?\n" +
@@ -60,12 +59,12 @@ namespace BookStore
                         authorManager.AuthorManager();
                         break;
                     }
-                    
-                    default: Console.WriteLine("Вы ввели неверное число, попробуйте снова");
+
+                    default:
+                        Console.WriteLine("Вы ввели неверное число, попробуйте снова");
                         break;
                 }
             }
         }
-        
     }
 }
