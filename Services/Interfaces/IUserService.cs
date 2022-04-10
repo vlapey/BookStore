@@ -7,9 +7,9 @@ namespace Services.Interfaces
     {
         public List<User> GetUsers();
         public User GetUserById(uint id);
-        public void DeleteUserById(uint id);
-        public void EditUser(User user);
-        public void CreateUser(User user);
+        public bool DeleteUserById(uint id);
+        public bool EditUser(User user);
+        public bool CreateUser(User user);
         public List<Book> GetUsersBooks(uint id);
     }
 }

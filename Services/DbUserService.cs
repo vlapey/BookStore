@@ -36,21 +36,24 @@ namespace Services
             return user;
         }
 
-        public void DeleteUserById(uint id)
+        public bool DeleteUserById(uint id)
         {
-            ApplicationContext.Execute($"DELETE FROM users WHERE users.id = {id}");
+            var result = ApplicationContext.Execute($"DELETE FROM users WHERE users.id = {id}");
+            return result > 0;
         }
 
-        public void EditUser(User user)
+        public bool EditUser(User user)
         {
-            ApplicationContext.Execute($"UPDATE users SET users.login = '{user.Login}'," +
+            var result = ApplicationContext.Execute($"UPDATE users SET users.login = '{user.Login}'," +
                                        $" users.password = '{user.Password}' WHERE users.id = {user.Id}");
+            return result > 0;
         }
 
-        public void CreateUser(User user)
+        public bool CreateUser(User user)
         {
-            ApplicationContext.Execute($"INSERT INTO `users` (`login`, `password`) " + 
+           var result = ApplicationContext.Execute($"INSERT INTO `users` (`login`, `password`) " + 
                                        $"VALUES ('{user.Login}', '{user.Password}')");
+           return result > 0;
         }
 
         public List<Book> GetUsersBooks(uint id)
@@ -74,85 +77,6 @@ namespace Services
                 
             }
             return usersbooks;
-        }
-
-        public void UserManager()
-        {
-            int selector = int.Parse(Console.ReadLine());
-            switch (selector)
-            {
-                case 1:
-                {
-                    DbUserService userService = new DbUserService();
-                    foreach (var user in userService.GetUsers())
-                    {
-                        Console.WriteLine(user);
-                    }
-                    break;
-                }
-                
-                case 2:
-                {
-                    Console.WriteLine("Введите Id пользователя, которого хотите вывести");
-                    uint userId = Convert.ToUInt32(Console.ReadLine());
-                    Console.WriteLine(GetUserById(userId));
-                    break;
-                }
-
-                case 3:
-                {
-                    Console.WriteLine("Введите Id пользователя, книги которого хотите вывести");
-                    uint userId = Convert.ToUInt32(Console.ReadLine());
-                    foreach (var book in GetUsersBooks(userId))
-                    {
-                        Console.WriteLine(book);
-                    }
-                    break;
-                }
-                
-                case 4:
-                {
-                    Console.WriteLine("Введите Login");
-                    string login = Console.ReadLine();
-                    Console.WriteLine("Введите пароль");
-                    string password = Console.ReadLine();
-                    User user = new User()
-                    {
-                        Login = login,
-                        Password = password,
-                    };
-                    CreateUser(user);
-                    break;
-                }
-
-                case 5:
-                {
-                    Console.WriteLine("Введите Id пользователя, которого хотите поменять");
-                    uint userId = Convert.ToUInt32(Console.ReadLine());
-                    Console.WriteLine("Введите Login пользователя, на который хотите поменять");
-                    string login = Console.ReadLine();
-                    Console.WriteLine("Введите пароль пользователя, на который хотите поменять");
-                    string password = Console.ReadLine();
-                    User user = new User()
-                    {
-                        Id = userId,
-                        Login = login,
-                        Password = password,
-                    };
-                    EditUser(user);
-                    break;
-                }
-                
-                case 6:
-                {
-                    Console.WriteLine("Введите Id пользователя, которого хотите удалить");
-                    uint id = Convert.ToUInt32(Console.ReadLine());
-                    DeleteUserById(id);
-                    break;
-                }
-                default: Console.WriteLine("Вы ввели неверное число, попробуйте снова");
-                    break;
-            }
         }
     }
 }
