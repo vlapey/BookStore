@@ -9,6 +9,7 @@ namespace BookStore
         static void Main(string[] args)
         {
             MainMenu.Display();
+            //тест
         }
     }
 }
