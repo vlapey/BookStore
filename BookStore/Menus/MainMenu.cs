@@ -4,7 +4,6 @@ namespace BookStore.Menus
 {
     public static class MainMenu
     {
-        //todo: implement this class
         public static void Display()
         {
             Console.WriteLine("Выберите сервис:\n" +
