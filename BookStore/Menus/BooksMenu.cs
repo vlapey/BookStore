@@ -1,12 +1,13 @@
 ﻿using System;
 using Models;
 using Services;
+using Services.Interfaces;
 
 namespace BookStore.Menus
 {
     public static class BooksMenu
     {
-        private static DbBookService _bookService = new DbBookService();
+        private static IBookService _bookService = DiContainer.BookService;
         public static void Display()
         {
             bool exit = false;

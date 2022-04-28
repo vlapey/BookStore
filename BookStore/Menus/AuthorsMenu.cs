@@ -1,12 +1,13 @@
 ﻿using System;
 using Models;
 using Services;
+using Services.Interfaces;
 
 namespace BookStore.Menus
 {
     public class AuthorsMenu
     {
-        private static DbAuthorService _authorService = new DbAuthorService();
+        private static IAuthorService _authorService = DiContainer.AuthorService;
         public static void Display()
         {
             while (true)
@@ -47,6 +48,7 @@ namespace BookStore.Menus
                 }   
             }
         }
+        //todo: проверка через count == 0
         public static void ShowAll()
         {
             DbAuthorService authorService = new DbAuthorService();

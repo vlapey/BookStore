@@ -1,12 +1,13 @@
 ﻿using Services;
 using System;
 using Models;
+using Services.Interfaces;
 
 namespace BookStore.Menus
 {
     public static class UsersMenu
     {
-        private static DbUserService _userService = new DbUserService();
+        private static IUserService _userService = DiContainer.UserService;
         public static void Display()
         {
             bool exit = false;
