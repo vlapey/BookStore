@@ -9,8 +9,8 @@ namespace BookStore.Menus
         private static DbAuthorService _authorService = new DbAuthorService();
         public static void Display()
         {
-            bool exit = false;
-            while (!exit)
+            bool exit = true;
+            while (exit)
             {
                 Console.WriteLine("\nВы выбрали авторский сервис");
                 Console.WriteLine("Выберите, что хотитет выполнить?\n" +
@@ -20,7 +20,7 @@ namespace BookStore.Menus
                                   "4 - Создать автора\n" +
                                   "5 - Редактировать автора\n" +
                                   "6 - Удалить автора\n" +
-                                  "Другое - Выйти\n");
+                                  "Другое - Вернуться в главное меню\n");
                 
                 string selector = Console.ReadLine();
                 switch (selector)
@@ -44,7 +44,8 @@ namespace BookStore.Menus
                         Delete();
                         break;
                     default:
-                        exit = true;
+                        MainMenu.Display();
+                        exit = false;
                         break;
                 }   
             }
