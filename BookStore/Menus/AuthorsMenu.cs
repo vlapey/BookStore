@@ -9,8 +9,7 @@ namespace BookStore.Menus
         private static DbAuthorService _authorService = new DbAuthorService();
         public static void Display()
         {
-            bool exit = true;
-            while (exit)
+            while (true)
             {
                 Console.WriteLine("\nВы выбрали авторский сервис");
                 Console.WriteLine("Выберите, что хотитет выполнить?\n" +
@@ -44,9 +43,7 @@ namespace BookStore.Menus
                         Delete();
                         break;
                     default:
-                        MainMenu.Display();
-                        exit = false;
-                        break;
+                        return;
                 }   
             }
         }
@@ -63,15 +60,13 @@ namespace BookStore.Menus
         {
             Console.WriteLine("Введите Id автора, которого хотите вывести");
             uint authorId = Convert.ToUInt32(Console.ReadLine());
-            try
-            {
-                Console.WriteLine(_authorService.GetAuthorById(authorId));
-            }
-            catch (Exception e)
+            Author author = _authorService.GetAuthorById(authorId);
+            if (author == null)
             {
                 Console.WriteLine("Такого id не существует");
-                Display();
+                return;
             }
+            Console.WriteLine(author);
         }
 
         public static void ShowAuthorIdByName()

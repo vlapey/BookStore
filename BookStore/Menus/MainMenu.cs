@@ -6,28 +6,31 @@ namespace BookStore.Menus
     {
         public static void Display()
         {
-            Console.WriteLine("Выберите сервис:\n" +
-                              "1 - Книжный сервис\n" +
-                              "2 - Пользовательский сервис\n" +
-                              "3 - Авторский сервис\n" +
-                              "Другое - Выйти\n");
-
-            string selector = Console.ReadLine();
-            switch (selector)
+            while (true)
             {
-                case "1":
-                    BooksMenu.Display();
-                    break;
+                Console.WriteLine("Выберите сервис:\n" +
+                                  "1 - Книжный сервис\n" +
+                                  "2 - Пользовательский сервис\n" +
+                                  "3 - Авторский сервис\n" +
+                                  "Другое - Выйти\n");
 
-                case "2":
-                    UsersMenu.Display();
-                    break;
-                case "3":
-                    AuthorsMenu.Display();
-                    break;
-                default:
-                    Console.WriteLine("Вы вышли из программы");
-                    break;
+                string selector = Console.ReadLine();
+                switch (selector)
+                {
+                    case "1":
+                        BooksMenu.Display();
+                        break;
+
+                    case "2":
+                        UsersMenu.Display();
+                        break;
+                    case "3":
+                        AuthorsMenu.Display();
+                        break;
+                    default:
+                        Console.WriteLine("Вы вышли из программы");
+                        return;
+                }
             }
         }
     }

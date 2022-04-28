@@ -28,6 +28,10 @@ namespace Services
         {
             var authordata = ApplicationContext.ToList
                 ($"SELECT * FROM authors WHERE authors.id = {id}");
+            if (authordata.Count == 0)
+            {
+                return null;
+            }
             Author author = new Author()
             {
                 Id = id,
