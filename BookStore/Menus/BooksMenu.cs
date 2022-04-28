@@ -5,10 +5,14 @@ using Services.Interfaces;
 
 namespace BookStore.Menus
 {
-    public static class BooksMenu
+    public class BooksMenu
     {
-        private static IBookService _bookService = DiContainer.BookService;
-        public static void Display()
+        private static IBookService _bookService;
+        public BooksMenu(IBookService bookService)
+        {
+            _bookService = bookService;
+        }
+        public void Display()
         {
             bool exit = false;
             while (!exit)
@@ -47,22 +51,21 @@ namespace BookStore.Menus
             }
         }
 
-        private static void ShowAll()
+        private void ShowAll()
         {
-            DbBookService bookService = new DbBookService();
-            foreach (var book in bookService.GetBooks())
+            foreach (var book in _bookService.GetBooks())
             {
                 Console.WriteLine(book);
             }
         }
 
-        private static void ShowBookByName()
+        private void ShowBookByName()
         {
             Console.WriteLine("Введите имя книги, которую хотите вывести");
             string bookName = Console.ReadLine();
             Console.WriteLine(_bookService.GetBookByName(bookName));
         }
-        private static void Create()
+        private void Create()
         {
             Console.WriteLine("Введите название книги, которую хотите добавить");
             string bookName = Console.ReadLine();
@@ -79,7 +82,7 @@ namespace BookStore.Menus
             _bookService.CreateBook(book);
         }
 
-        private static void Edit()
+        private void Edit()
         {
             Console.WriteLine("Введите Id книги, которую хотите поменять");
             uint bookId = Convert.ToUInt32(Console.ReadLine());
@@ -99,7 +102,7 @@ namespace BookStore.Menus
             _bookService.EditBook(book);
         }
 
-        private static void Delete()
+        private void Delete()
         {
             Console.WriteLine("Введите Id книги, которую хотите удалить");
             uint id = Convert.ToUInt32(Console.ReadLine());

@@ -1,12 +1,15 @@
-﻿using Services;
+﻿using Context;
+using Services;
 using Services.Interfaces;
 
 namespace BookStore
 {
     public static class DiContainer
     {
-        public static IBookService BookService => new DbBookService();
-        public static IAuthorService AuthorService => new DbAuthorService();
-        public static IUserService UserService => new DbUserService();
+        private static readonly IApplicationContext Database = new ApplicationContext();
+        public static IBookService BookService => new DbBookService(Database);
+        public static IAuthorService AuthorService => new DbAuthorService(Database);
+        public static IUserService UserService => new DbUserService(Database);
+        
     }
 }

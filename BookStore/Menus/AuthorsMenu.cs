@@ -7,8 +7,13 @@ namespace BookStore.Menus
 {
     public class AuthorsMenu
     {
-        private static IAuthorService _authorService = DiContainer.AuthorService;
-        public static void Display()
+        private static IAuthorService _authorService;
+
+        public AuthorsMenu(IAuthorService authorService)
+        {
+            _authorService = authorService;
+        }
+        public void Display()
         {
             while (true)
             {
@@ -49,16 +54,15 @@ namespace BookStore.Menus
             }
         }
         //todo: проверка через count == 0
-        public static void ShowAll()
+        public void ShowAll()
         {
-            DbAuthorService authorService = new DbAuthorService();
-            foreach (var author in authorService.GetAuthors())
+            foreach (var author in _authorService.GetAuthors())
             {
                 Console.WriteLine(author);
             }
         }
 
-        public static void ShowAuthorById()
+        public void ShowAuthorById()
         {
             Console.WriteLine("Введите Id автора, которого хотите вывести");
             uint authorId = Convert.ToUInt32(Console.ReadLine());
@@ -71,13 +75,13 @@ namespace BookStore.Menus
             Console.WriteLine(author);
         }
 
-        public static void ShowAuthorIdByName()
+        public void ShowAuthorIdByName()
         {
             Console.WriteLine("Введите имя автора, чтобы получить его Id");
             string name = Console.ReadLine();
             Console.WriteLine(_authorService.GetAuthorIdByName(name));
         }
-        public static void Create()
+        public void Create()
         {
             Console.WriteLine("Введите Имя");
             string authorName = Console.ReadLine();
@@ -88,7 +92,7 @@ namespace BookStore.Menus
             _authorService.CreateAuthor(author);
         }
 
-        public static void Edit()
+        public void Edit()
         {
             Console.WriteLine("Введите Id автора, которого хотите поменять");
             uint userId = Convert.ToUInt32(Console.ReadLine());
@@ -102,7 +106,7 @@ namespace BookStore.Menus
             _authorService.EditAuthor(author);
         }
 
-        public static void Delete()
+        public void Delete()
         {
             Console.WriteLine("Введите Id автора, которого хотите удалить");
             uint id = Convert.ToUInt32(Console.ReadLine());

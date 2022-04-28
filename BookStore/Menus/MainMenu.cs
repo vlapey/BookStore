@@ -2,10 +2,14 @@
 
 namespace BookStore.Menus
 {
-    public static class MainMenu
+    public class MainMenu
     {
-        public static void Display()
+        public void Display()
         {
+            BooksMenu booksMenu = new BooksMenu(DiContainer.BookService);
+            AuthorsMenu authorsMenu = new AuthorsMenu(DiContainer.AuthorService);
+            UsersMenu usersMenu = new UsersMenu(DiContainer.UserService);
+            
             while (true)
             {
                 Console.WriteLine("Выберите сервис:\n" +
@@ -18,14 +22,14 @@ namespace BookStore.Menus
                 switch (selector)
                 {
                     case "1":
-                        BooksMenu.Display();
+                        booksMenu.Display();
                         break;
 
                     case "2":
-                        UsersMenu.Display();
+                        usersMenu.Display();
                         break;
                     case "3":
-                        AuthorsMenu.Display();
+                        authorsMenu.Display();
                         break;
                     default:
                         Console.WriteLine("Вы вышли из программы");

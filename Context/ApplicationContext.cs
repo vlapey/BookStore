@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Context
 {
-    public class ApplicationContext
+    public class ApplicationContext:IApplicationContext
     {
         private static MySqlConnection connection 
             = new("server=localhost;port=3306;username=root;password=root;database=bookstore;SSL Mode=None");
@@ -21,7 +21,7 @@ namespace Context
                 connection.Close();
         }
 
-        public static int Execute(string command)
+        public int Execute(string command)
         {
             OpenConnection();
             MySqlCommand mySqlCommand = new MySqlCommand(command, connection);
@@ -35,7 +35,7 @@ namespace Context
         /// </summary>
         /// <param name="command"> строка sql запроса </param>
         /// <returns></returns>
-        public static List<string[]> ToList(string command)
+        public List<string[]> ToList(string command)
         {
             OpenConnection();
             MySqlCommand mySqlCommand = new MySqlCommand(command, connection);
