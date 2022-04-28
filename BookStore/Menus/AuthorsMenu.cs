@@ -63,7 +63,15 @@ namespace BookStore.Menus
         {
             Console.WriteLine("Введите Id автора, которого хотите вывести");
             uint authorId = Convert.ToUInt32(Console.ReadLine());
-            Console.WriteLine(_authorService.GetAuthorById(authorId));
+            try
+            {
+                Console.WriteLine(_authorService.GetAuthorById(authorId));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Такого id не существует");
+                Display();
+            }
         }
 
         public static void ShowAuthorIdByName()
