@@ -26,7 +26,7 @@ namespace BookStore.Menus
                     AuthorsMenu.Display();
                     break;
                 default:
-                    Console.WriteLine("Вы ввели неверное число, попробуйте снова");
+                    Console.WriteLine("Вы вышли из программы");
                     break;
             }
         }
