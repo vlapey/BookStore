@@ -9,10 +9,16 @@ namespace Services
 {
     public class DbUserService:IUserService
     {
+        private static IApplicationContext _database;
+
+        public DbUserService(IApplicationContext applicationContext)
+        {
+            _database = applicationContext;
+        }
         public List<User> GetUsers()
         {
             List<User> users = new List<User>();
-            var usersdata = ApplicationContext.ToList($"SELECT * FROM users");
+            var usersdata = _database.ToList($"SELECT * FROM users");
             foreach (var user in usersdata)
             {
                 users.Add(new User(){
@@ -26,7 +32,7 @@ namespace Services
 
         public User GetUserById(uint id)
         {
-            var userdata = ApplicationContext.ToList($"SELECT * FROM users WHERE users.id = {id}");
+            var userdata = _database.ToList($"SELECT * FROM users WHERE users.id = {id}");
             User user = new User()
             {
                 Id = id,
@@ -38,21 +44,21 @@ namespace Services
 
         public bool DeleteUserById(uint id)
         {
-            var result = ApplicationContext.Execute($"DELETE FROM users WHERE users.id = {id}");
+            var result = _database.Execute($"DELETE FROM users WHERE users.id = {id}");
             return result > 0;
         }
 
         public bool EditUser(User user)
         {
-            var result = ApplicationContext.Execute($"UPDATE users SET users.login = '{user.Login}'," +
-                                       $" users.password = '{user.Password}' WHERE users.id = {user.Id}");
+            var result = _database.Execute($"UPDATE users SET users.login = '{user.Login}'," +
+                                           $" users.password = '{user.Password}' WHERE users.id = {user.Id}");
             return result > 0;
         }
 
         public bool CreateUser(User user)
         {
-           var result = ApplicationContext.Execute($"INSERT INTO `users` (`login`, `password`) " + 
-                                       $"VALUES ('{user.Login}', '{user.Password}')");
+           var result = _database.Execute($"INSERT INTO `users` (`login`, `password`) " + 
+                                          $"VALUES ('{user.Login}', '{user.Password}')");
            return result > 0;
         }
 
@@ -60,10 +66,11 @@ namespace Services
         {
             List<Book> usersbooks = new List<Book>();
             
-            var booksDataFromDatabase = ApplicationContext.ToList($"SELECT books.id, books.name," + 
-            $" books.price, authors.name FROM users_to_books" + 
-            $" LEFT JOIN books ON users_to_books.books_id = books.id" + 
-            $" LEFT JOIN authors ON books.authors_id = authors.id WHERE users_id = {id}");
+            var booksDataFromDatabase = _database
+                .ToList($"SELECT books.id, books.name," + 
+                        $" books.price, authors.name FROM users_to_books" + 
+                        $" LEFT JOIN books ON users_to_books.books_id = books.id" + 
+                        $" LEFT JOIN authors ON books.authors_id = authors.id WHERE users_id = {id}");
             
             foreach (var bookAsStringsArray in booksDataFromDatabase)
             {

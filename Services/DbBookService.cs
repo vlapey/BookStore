@@ -9,19 +9,25 @@ namespace Services
 {
     public class DbBookService:IBookService
     {
+        private static IApplicationContext _database;
+
+        public DbBookService(IApplicationContext applicationContext)
+        {
+            _database = applicationContext;
+        }
         public bool CreateBook(Book book)
         {
-            var authordata = ApplicationContext.ToList
+            var authordata = _database.ToList
             ($"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
-            var result = ApplicationContext.Execute($"INSERT INTO `books` (`name`, `price`, `authors_id`)" +
-                $"VALUES ('{book.Name}', '{book.Price}', '{authordata[0][0]}')");
+            var result = _database.Execute($"INSERT INTO `books` (`name`, `price`, `authors_id`)" +
+                                           $"VALUES ('{book.Name}', '{book.Price}', '{authordata[0][0]}')");
             return result > 0;
         } 
         
         public List<Book> GetBooks()
         {
             List<Book> books = new List<Book>();
-            var bookdata = ApplicationContext.ToList
+            var bookdata = _database.ToList
                 ("SELECT books.id, books.name, books.price, authors.name" + 
                  " FROM books LEFT JOIN authors ON books.authors_id = authors.id");
             foreach (var book in bookdata)
@@ -38,7 +44,7 @@ namespace Services
 
         public Book GetBookByName(string name)
         {
-            var bookdata = ApplicationContext.ToList
+            var bookdata = _database.ToList
             ($"SELECT books.id, books.name, books.price, authors.name" + 
              $" FROM books LEFT JOIN authors ON books.authors_id = authors.id");
             Book book = new Book()
@@ -53,16 +59,16 @@ namespace Services
 
         public bool DeleteBookById(uint id)
         {
-            var result = ApplicationContext.Execute($"DELETE FROM books WHERE books.id = {id}");
+            var result = _database.Execute($"DELETE FROM books WHERE books.id = {id}");
             return result > 0;
         }
 
         public bool EditBook(Book book)
         {
-            var authordata = ApplicationContext.ToList
+            var authordata = _database.ToList
                 ($"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
-            var result = ApplicationContext.Execute($"UPDATE books SET books.name = '{book.Name}', books.price = {book.Price}, " 
-                                       + $"books.authors_id = {authordata[0][0]} WHERE books.id = {book.Id}");
+            var result = _database.Execute($"UPDATE books SET books.name = '{book.Name}', books.price = {book.Price}, " 
+                                           + $"books.authors_id = {authordata[0][0]} WHERE books.id = {book.Id}");
             return result > 0;
         }
         

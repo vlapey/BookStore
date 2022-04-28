@@ -1,13 +1,18 @@
 ﻿using Services;
 using System;
 using Models;
+using Services.Interfaces;
 
 namespace BookStore.Menus
 {
-    public static class UsersMenu
+    public class UsersMenu
     {
-        private static DbUserService _userService = new DbUserService();
-        public static void Display()
+        private static IUserService _userService;
+        public UsersMenu(IUserService userService)
+        {
+            _userService = userService;
+        }
+        public void Display()
         {
             bool exit = false;
             while (!exit)
@@ -19,28 +24,28 @@ namespace BookStore.Menus
                                   "3 - Показать книги пользователя\n" +
                                   "4 - Создать пользователя\n" +
                                   "5 - Редактировать пользователя\n" +
-                                  "6 - Удалить пользователя" +
+                                  "6 - Удалить пользователя\n" +
                                   "Другое - Выйти\n");
                 
-                int selector = int.Parse(Console.ReadLine());
+                string selector = Console.ReadLine();
                 switch (selector)
                 {
-                    case 1:
+                    case "1":
                         ShowAll();
                         break;
-                    case 2:
+                    case "2":
                         ShowUserById();
                         break;
-                    case 3:
+                    case "3":
                         ShowBooksOfUser();
                         break;
-                    case 4:
+                    case "4":
                         Create();
                         break;
-                    case 5:
+                    case "5":
                         Edit();
                         break;
-                    case 6:
+                    case "6":
                         Delete();
                         break;
                     default:
@@ -49,23 +54,22 @@ namespace BookStore.Menus
                 }   
             }
         }
-        public static void ShowAll()
+        public void ShowAll()
         {
-            DbUserService userService = new DbUserService();
-            foreach (var user in userService.GetUsers())
+            foreach (var user in _userService.GetUsers())
             {
                 Console.WriteLine(user);
             }
         }
 
-        public static void ShowUserById()
+        public void ShowUserById()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите вывести");
             uint userId = Convert.ToUInt32(Console.ReadLine());
             Console.WriteLine(_userService.GetUserById(userId));
         }
 
-        public static void ShowBooksOfUser()
+        public void ShowBooksOfUser()
         {
             Console.WriteLine("Введите Id пользователя, книги которого хотите вывести");
             uint userId = Convert.ToUInt32(Console.ReadLine());
@@ -74,7 +78,7 @@ namespace BookStore.Menus
                 Console.WriteLine(book);
             }
         }
-        public static void Create()
+        public void Create()
         {
             Console.WriteLine("Введите Login");
             string login = Console.ReadLine();
@@ -88,7 +92,7 @@ namespace BookStore.Menus
             _userService.CreateUser(user);
         }
 
-        public static void Edit()
+        public void Edit()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите поменять");
             uint userId = Convert.ToUInt32(Console.ReadLine());
@@ -105,7 +109,7 @@ namespace BookStore.Menus
             _userService.EditUser(user);
         }
 
-        public static void Delete()
+        public void Delete()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите удалить");
             uint id = Convert.ToUInt32(Console.ReadLine());

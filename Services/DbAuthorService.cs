@@ -8,10 +8,16 @@ namespace Services
 {
     public class DbAuthorService : IAuthorService
     {
+        private static IApplicationContext _database;
+
+        public DbAuthorService(IApplicationContext applicationContext)
+        {
+            _database = applicationContext;
+        }
         public List<Author> GetAuthors()
         {
             List<Author> authors = new List<Author>();
-            var authordata = ApplicationContext.ToList($"SELECT * FROM authors");
+            var authordata = _database.ToList($"SELECT * FROM authors");
             foreach (var author in authordata)
             {
                 authors.Add(new Author()
@@ -26,8 +32,12 @@ namespace Services
 
         public Author GetAuthorById(uint id)
         {
-            var authordata = ApplicationContext.ToList
+            var authordata = _database.ToList
                 ($"SELECT * FROM authors WHERE authors.id = {id}");
+            if (authordata.Count == 0)
+            {
+                return null;
+            }
             Author author = new Author()
             {
                 Id = id,
@@ -38,28 +48,28 @@ namespace Services
 
         public bool DeleteAuthorById(uint id)
         {
-            var result = ApplicationContext.Execute($"DELETE FROM authors WHERE authors.id = {id}");
+            var result = _database.Execute($"DELETE FROM authors WHERE authors.id = {id}");
             return result > 0;
         }
 
         public bool EditAuthor(Author author)
         {
             //todo: return suc ass statement (as in delete func)
-            var result = ApplicationContext.Execute($"UPDATE authors SET authors.name = '{author.Name}' " +
-                                       $"WHERE authors.id = {author.Id}");
+            var result = _database.Execute($"UPDATE authors SET authors.name = '{author.Name}' " +
+                                           $"WHERE authors.id = {author.Id}");
             return result > 0;
         }
 
         public bool CreateAuthor(Author author)
         {
             //todo: return suc ass statement (as in delete func)
-            var result = ApplicationContext.Execute($"INSERT INTO `authors` (`name`) VALUES ('{author.Name}')");
+            var result = _database.Execute($"INSERT INTO `authors` (`name`) VALUES ('{author.Name}')");
             return result > 0;
         }
 
         public uint GetAuthorIdByName(string name)
         {
-            var authordata = ApplicationContext.ToList
+            var authordata = _database.ToList
                 ($"SELECT authors.id FROM authors WHERE authors.name = '{name}'");
             if (authordata.Count == 0)
             {
