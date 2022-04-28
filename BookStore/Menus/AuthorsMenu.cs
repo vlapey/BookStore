@@ -12,7 +12,7 @@ namespace BookStore.Menus
             bool exit = false;
             while (!exit)
             {
-                Console.WriteLine("Вы выбрали авторский сервис");
+                Console.WriteLine("\nВы выбрали авторский сервис");
                 Console.WriteLine("Выберите, что хотитет выполнить?\n" +
                                   "1 - Показать список всех авторов\n" +
                                   "2 - Показать автора по Id\n" +
@@ -22,25 +22,25 @@ namespace BookStore.Menus
                                   "6 - Удалить автора\n" +
                                   "Другое - Выйти\n");
                 
-                int selector = int.Parse(Console.ReadLine());
+                string selector = Console.ReadLine();
                 switch (selector)
                 {
-                    case 1:
+                    case "1":
                         ShowAll();
                         break;
-                    case 2:
+                    case "2":
                         ShowAuthorById();
                         break;
-                    case 3:
+                    case "3":
                         ShowAuthorIdByName();
                         break;
-                    case 4:
+                    case "4":
                         Create();
                         break;
-                    case 5:
+                    case "5":
                         Edit();
                         break;
-                    case 6:
+                    case "6":
                         Delete();
                         break;
                     default:

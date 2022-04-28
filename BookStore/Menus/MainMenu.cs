@@ -12,17 +12,17 @@ namespace BookStore.Menus
                               "3 - Авторский сервис\n" +
                               "Другое - Выйти");
 
-            int selector = int.Parse(Console.ReadLine());
+            string selector = Console.ReadLine();
             switch (selector)
             {
-                case 1:
+                case "1":
                     BooksMenu.Display();
                     break;
 
-                case 2:
+                case "2":
                     UsersMenu.Display();
                     break;
-                case 3:
+                case "3":
                     AuthorsMenu.Display();
                     break;
                 default:

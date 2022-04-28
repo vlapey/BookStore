@@ -22,25 +22,25 @@ namespace BookStore.Menus
                                   "6 - Удалить пользователя" +
                                   "Другое - Выйти\n");
                 
-                int selector = int.Parse(Console.ReadLine());
+                string selector = Console.ReadLine();
                 switch (selector)
                 {
-                    case 1:
+                    case "1":
                         ShowAll();
                         break;
-                    case 2:
+                    case "2":
                         ShowUserById();
                         break;
-                    case 3:
+                    case "3":
                         ShowBooksOfUser();
                         break;
-                    case 4:
+                    case "4":
                         Create();
                         break;
-                    case 5:
+                    case "5":
                         Edit();
                         break;
-                    case 6:
+                    case "6":
                         Delete();
                         break;
                     default:
