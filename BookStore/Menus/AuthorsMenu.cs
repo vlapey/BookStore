@@ -105,7 +105,7 @@ namespace BookStore.Menus
             bool result = _authorService.CreateAuthor(author);
             if (result)
             {
-                Console.WriteLine("Автор успешно добавлен");
+                Console.WriteLine("Автор добавлен");
             }
             else Console.WriteLine("Автор не добавлен");
         }
@@ -124,7 +124,7 @@ namespace BookStore.Menus
             bool result = _authorService.EditAuthor(author);
             if (result)
             {
-                Console.WriteLine("Автор успешно изменен");
+                Console.WriteLine("Автор изменен");
             }
             else Console.WriteLine("Такого автора не существует");
         }
@@ -136,7 +136,7 @@ namespace BookStore.Menus
             bool result = _authorService.DeleteAuthorById(id);
             if (result)
             {
-                Console.WriteLine("Автор успешно удален");
+                Console.WriteLine("Автор удален");
             }
             else Console.WriteLine("Такого автора не существует");
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Channels;
 using Models;
 using Services;
 using Services.Interfaces;
@@ -75,7 +76,7 @@ namespace BookStore.Menus
             }
             else Console.WriteLine(book);
         }
-        //
+        //проверка есть
         private void Create()
         {
             Console.WriteLine("Введите название книги, которую хотите добавить");
@@ -90,9 +91,14 @@ namespace BookStore.Menus
                 Price = price,
                 Author = authorName
             };
-            _bookService.CreateBook(book);
+            bool result = _bookService.CreateBook(book);
+            if (result)
+            {
+                Console.WriteLine("Книга добавлена");
+            }
+            else Console.WriteLine("Книга не добавлена");
         }
-
+        //проверка есть
         private void Edit()
         {
             Console.WriteLine("Введите Id книги, которую хотите поменять");
@@ -110,14 +116,24 @@ namespace BookStore.Menus
                 Price = price,
                 Author = authorName
             };
-            _bookService.EditBook(book);
+            bool result = _bookService.EditBook(book);
+            if (result)
+            {
+                Console.WriteLine("Книга изменена");
+            }
+            else Console.WriteLine("Такой книги не существует");
         }
-
+        //проверка есть
         private void Delete()
         {
             Console.WriteLine("Введите Id книги, которую хотите удалить");
             uint id = Convert.ToUInt32(Console.ReadLine());
-            _bookService.DeleteBookById(id);
+            bool result = _bookService.DeleteBookById(id);
+            if (result)
+            {
+                Console.WriteLine("Книга успешно удалена");
+            }
+            else Console.WriteLine("Такой книги не существует");
         }
     }
 }
