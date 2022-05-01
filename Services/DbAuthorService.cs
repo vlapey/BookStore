@@ -67,21 +67,15 @@ namespace Services
             var result = _database.Execute($"INSERT INTO `authors` (`name`) VALUES ('{author.Name}')");
             return result > 0;
         }
-
+        //todo: доделать проверку return
         public uint GetAuthorIdByName(string name)
         {
             var authordata = _database.ToList
                 ($"SELECT authors.id FROM authors WHERE authors.name = '{name}'");
             if (authordata.Count == 0)
             {
-                Author author = new Author()
-                {
-                    Name = name
-                };
-                CreateAuthor(author);
-                return GetAuthorIdByName(name);
+                return 0;
             }
-
             return Convert.ToUInt32(authordata[0][0]);
         }
     }
