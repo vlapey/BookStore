@@ -56,13 +56,11 @@ namespace BookStore.Menus
             if (_bookService.GetBooks() == null)
             {
                 Console.WriteLine("Книги еще не добавлены");
+                return;
             }
-            else 
+            foreach (var book in _bookService.GetBooks())
             {
-                foreach (var book in _bookService.GetBooks())
-                {
-                    Console.WriteLine(book);
-                }
+                Console.WriteLine(book);
             }
         }
         //проверка есть
@@ -77,6 +75,7 @@ namespace BookStore.Menus
             }
             else Console.WriteLine(book);
         }
+        //
         private void Create()
         {
             Console.WriteLine("Введите название книги, которую хотите добавить");

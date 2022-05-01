@@ -60,14 +60,13 @@ namespace BookStore.Menus
             if (_authorService.GetAuthors() == null)
             {
                 Console.WriteLine("Авторы еще не добавлены");
+                return;
             }
-            else 
+            foreach (var author in _authorService.GetAuthors())
             {
-                foreach (var author in _authorService.GetAuthors())
-                {
-                    Console.WriteLine(author);
-                }
+                Console.WriteLine(author);
             }
+            
         }
         // проверка есть 
         public void ShowAuthorById()
