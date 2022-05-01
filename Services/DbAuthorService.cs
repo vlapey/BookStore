@@ -18,6 +18,10 @@ namespace Services
         {
             List<Author> authors = new List<Author>();
             var authordata = _database.ToList($"SELECT * FROM authors");
+            if (authordata.Count == 0)
+            {
+                return null;
+            }
             foreach (var author in authordata)
             {
                 authors.Add(new Author()
@@ -26,7 +30,6 @@ namespace Services
                     Name = author[1],
                 });
             }
-
             return authors;
         }
 
@@ -54,7 +57,6 @@ namespace Services
 
         public bool EditAuthor(Author author)
         {
-            //todo: return suc ass statement (as in delete func)
             var result = _database.Execute($"UPDATE authors SET authors.name = '{author.Name}' " +
                                            $"WHERE authors.id = {author.Id}");
             return result > 0;
@@ -62,7 +64,6 @@ namespace Services
 
         public bool CreateAuthor(Author author)
         {
-            //todo: return suc ass statement (as in delete func)
             var result = _database.Execute($"INSERT INTO `authors` (`name`) VALUES ('{author.Name}')");
             return result > 0;
         }

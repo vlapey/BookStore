@@ -56,12 +56,19 @@ namespace BookStore.Menus
         //todo: проверка через count == 0
         public void ShowAll()
         {
-            foreach (var author in _authorService.GetAuthors())
+            if (_authorService.GetAuthors() == null)
             {
-                Console.WriteLine(author);
+                Console.WriteLine("Авторы еще не добавлены");
+            }
+            else 
+            {
+                foreach (var author in _authorService.GetAuthors())
+                {
+                    Console.WriteLine(author);
+                }
             }
         }
-
+        
         public void ShowAuthorById()
         {
             Console.WriteLine("Введите Id автора, которого хотите вывести");
@@ -110,7 +117,12 @@ namespace BookStore.Menus
         {
             Console.WriteLine("Введите Id автора, которого хотите удалить");
             uint id = Convert.ToUInt32(Console.ReadLine());
-            _authorService.DeleteAuthorById(id);
+            bool result = _authorService.DeleteAuthorById(id);
+            if (result)
+            {
+                Console.WriteLine("Автор успешно удален");
+            }
+            else Console.WriteLine("Автор не удален\n");
         }
     }
 }
