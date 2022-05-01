@@ -50,20 +50,32 @@ namespace BookStore.Menus
                 }   
             }
         }
-
+        //проверка есть
         private void ShowAll()
         {
-            foreach (var book in _bookService.GetBooks())
+            if (_bookService.GetBooks() == null)
             {
-                Console.WriteLine(book);
+                Console.WriteLine("Книги еще не добавлены");
+            }
+            else 
+            {
+                foreach (var book in _bookService.GetBooks())
+                {
+                    Console.WriteLine(book);
+                }
             }
         }
-
+        //проверка есть
         private void ShowBookByName()
         {
             Console.WriteLine("Введите имя книги, которую хотите вывести");
             string bookName = Console.ReadLine();
-            Console.WriteLine(_bookService.GetBookByName(bookName));
+            Book book = _bookService.GetBookByName(bookName);
+            if (book == null)
+            {
+                Console.WriteLine("Такой книги не существует\n");
+            }
+            else Console.WriteLine(book);
         }
         private void Create()
         {
