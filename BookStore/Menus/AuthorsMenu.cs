@@ -13,6 +13,7 @@ namespace BookStore.Menus
         {
             _authorService = authorService;
         }
+
         public void Display()
         {
             while (true)
@@ -26,7 +27,7 @@ namespace BookStore.Menus
                                   "5 - Редактировать автора\n" +
                                   "6 - Удалить автора\n" +
                                   "Другое - Вернуться в главное меню\n");
-                
+
                 string selector = Console.ReadLine();
                 switch (selector)
                 {
@@ -50,18 +51,24 @@ namespace BookStore.Menus
                         break;
                     default:
                         return;
-                }   
+                }
             }
         }
-        //todo: проверка через count == 0
+        //проверка есть
         public void ShowAll()
         {
+            if (_authorService.GetAuthors() == null)
+            {
+                Console.WriteLine("Авторы еще не добавлены");
+                return;
+            }
             foreach (var author in _authorService.GetAuthors())
             {
                 Console.WriteLine(author);
             }
+            
         }
-
+        // проверка есть 
         public void ShowAuthorById()
         {
             Console.WriteLine("Введите Id автора, которого хотите вывести");
@@ -74,13 +81,19 @@ namespace BookStore.Menus
             }
             Console.WriteLine(author);
         }
-
+        //todo: доделать проверку return 
         public void ShowAuthorIdByName()
         {
             Console.WriteLine("Введите имя автора, чтобы получить его Id");
             string name = Console.ReadLine();
-            Console.WriteLine(_authorService.GetAuthorIdByName(name));
+            uint result = _authorService.GetAuthorIdByName(name);
+            if (result == 0)
+            {
+                Console.WriteLine("Такого автора не существует");
+            }
+            else Console.WriteLine(result);
         }
+        //проверка есть
         public void Create()
         {
             Console.WriteLine("Введите Имя");
@@ -89,9 +102,14 @@ namespace BookStore.Menus
             {
                 Name = authorName,
             };
-            _authorService.CreateAuthor(author);
+            bool result = _authorService.CreateAuthor(author);
+            if (result)
+            {
+                Console.WriteLine("Автор добавлен");
+            }
+            else Console.WriteLine("Автор не добавлен");
         }
-
+        //проверка есть
         public void Edit()
         {
             Console.WriteLine("Введите Id автора, которого хотите поменять");
@@ -103,14 +121,24 @@ namespace BookStore.Menus
                 Id = userId,
                 Name = authorName,
             };
-            _authorService.EditAuthor(author);
+            bool result = _authorService.EditAuthor(author);
+            if (result)
+            {
+                Console.WriteLine("Автор изменен");
+            }
+            else Console.WriteLine("Такого автора не существует");
         }
-
+        //проверка есть 
         public void Delete()
         {
             Console.WriteLine("Введите Id автора, которого хотите удалить");
             uint id = Convert.ToUInt32(Console.ReadLine());
-            _authorService.DeleteAuthorById(id);
+            bool result = _authorService.DeleteAuthorById(id);
+            if (result)
+            {
+                Console.WriteLine("Автор удален");
+            }
+            else Console.WriteLine("Такого автора не существует");
         }
     }
 }

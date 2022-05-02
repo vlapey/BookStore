@@ -30,6 +30,10 @@ namespace Services
             var bookdata = _database.ToList
                 ("SELECT books.id, books.name, books.price, authors.name" + 
                  " FROM books LEFT JOIN authors ON books.authors_id = authors.id");
+            if (bookdata.Count == 0)
+            {
+                return null;
+            }
             foreach (var book in bookdata)
             {
                 books.Add(new Book(){
@@ -47,6 +51,10 @@ namespace Services
             var bookdata = _database.ToList
             ($"SELECT books.id, books.name, books.price, authors.name" + 
              $" FROM books LEFT JOIN authors ON books.authors_id = authors.id");
+            if (bookdata[0][1] != name)
+            {
+                return null;
+            }
             Book book = new Book()
             {
                 Id = Convert.ToUInt32(bookdata[0][0]),
