@@ -19,6 +19,10 @@ namespace Services
         {
             var authordata = _database.ToList
             ($"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
+            if (authordata.Count == 0)
+            {
+                return false;
+            }
             var result = _database.Execute($"INSERT INTO `books` (`name`, `price`, `authors_id`)" +
                                            $"VALUES ('{book.Name}', '{book.Price}', '{authordata[0][0]}')");
             return result > 0;

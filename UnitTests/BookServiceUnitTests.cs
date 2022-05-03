@@ -129,37 +129,6 @@ namespace UnitTests
         }
 
         [Fact]
-        public void DbBookService_CreateBook_ReturnsFalse_ForInvalidAuthor()
-        {
-            var testBook = new Book
-            {
-                Author = "Author",
-                Id = 1,
-                Name = "Name",
-                Price = 1,
-            };
-
-            var fakeAuthorData = new List<string[]>();
-
-            var command1 = $"SELECT authors.id FROM authors WHERE authors.name = '{testBook.Author}'";
-            var command2 = $"INSERT INTO `books` (`name`, `price`, `authors_id`)" +
-                           $"VALUES ('{testBook.Name}', '{testBook.Price}', '{fakeAuthorData[0][0]}')";
-
-            var mockRepository = new Mock<IApplicationContext>();
-            mockRepository
-                .Setup(repo => repo.ToList(command1))
-                .Returns(fakeAuthorData);
-            mockRepository
-                .Setup(repo => repo.Execute(command2))
-                .Returns(1);
-
-            var service = new DbBookService(mockRepository.Object);
-            var creationResult = service.CreateBook(testBook);
-
-            Assert.True(creationResult);
-        }
-
-        [Fact]
         public void DbBookService_CreateBook_ReturnsFalse_ForBookEqualsNull()
         {
             var testBook = null as Book;
