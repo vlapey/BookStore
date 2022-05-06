@@ -121,7 +121,7 @@ namespace BookStore.Menus
             {
                 Console.WriteLine("Книга изменена");
             }
-            else Console.WriteLine("Такой книги не существует");
+            else Console.WriteLine("Ошибка, книга не изменена, проверьте введенные данные");
         }
         //проверка есть
         private void Delete()
