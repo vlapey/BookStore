@@ -96,7 +96,7 @@ namespace BookStore.Menus
             {
                 Console.WriteLine("Книга добавлена");
             }
-            else Console.WriteLine("Такого автора не существует");
+            else Console.WriteLine("Ошибка, книга не добавлена");
         }
         //проверка есть
         private void Edit()

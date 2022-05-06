@@ -15,11 +15,12 @@ namespace Services
         {
             _database = applicationContext;
         }
+        //проверка есть
         public bool CreateBook(Book book)
         {
             var authordata = _database.ToList
             ($"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
-            if (authordata.Count == 0)
+            if (authordata.Count == 0 || book == null)
             {
                 return false;
             }
@@ -27,7 +28,7 @@ namespace Services
                                            $"VALUES ('{book.Name}', '{book.Price}', '{authordata[0][0]}')");
             return result > 0;
         } 
-        
+        //проверка есть
         public List<Book> GetBooks()
         {
             List<Book> books = new List<Book>();
@@ -49,7 +50,7 @@ namespace Services
             }
             return books;
         }
-
+        //проверка есть
         public Book GetBookByName(string name)
         {
             var bookdata = _database.ToList
@@ -79,8 +80,10 @@ namespace Services
         {
             var authordata = _database.ToList
                 ($"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
-            var result = _database.Execute($"UPDATE books SET books.name = '{book.Name}', books.price = {book.Price}, " 
+            var result = _database.Execute($"UPDATE books SET books.name = '{book.Name}', " +
+                                           $"books.price = {book.Price}, " 
                                            + $"books.authors_id = {authordata[0][0]} WHERE books.id = {book.Id}");
+            // if(authordata.Count == 0 )
             return result > 0;
         }
         
