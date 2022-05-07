@@ -1,5 +1,4 @@
-﻿using Services;
-using System;
+﻿using System;
 using Models;
 using Services.Interfaces;
 
@@ -54,30 +53,53 @@ namespace BookStore.Menus
                 }   
             }
         }
+        
+        //проверка есть
         public void ShowAll()
         {
+            if (_userService.GetUsers() == null)
+            {
+                Console.WriteLine("Пользователи еще не добавлены");
+                return;
+            }
             foreach (var user in _userService.GetUsers())
             {
                 Console.WriteLine(user);
             }
         }
-
+        
+        //проверка есть
         public void ShowUserById()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите вывести");
             uint userId = Convert.ToUInt32(Console.ReadLine());
-            Console.WriteLine(_userService.GetUserById(userId));
+            User user = _userService.GetUserById(userId);
+            if (user == null)
+            {
+                Console.WriteLine("Такого id не существует");
+                return;
+            }
+            Console.WriteLine(user);
         }
-
+        
+        //проверка есть
         public void ShowBooksOfUser()
         {
             Console.WriteLine("Введите Id пользователя, книги которого хотите вывести");
             uint userId = Convert.ToUInt32(Console.ReadLine());
-            foreach (var book in _userService.GetUsersBooks(userId))
+            var result = _userService.GetUsersBooks(userId);
+            if (result == null)
+            {
+                Console.WriteLine("Ошибка, данного пользователя не существует");
+                return;
+            }
+            foreach (var book in result)
             {
                 Console.WriteLine(book);
             }
         }
+        
+        //проверка есть
         public void Create()
         {
             Console.WriteLine("Введите Login");
@@ -88,10 +110,16 @@ namespace BookStore.Menus
             {
                 Login = login,
                 Password = password,
-            };
-            _userService.CreateUser(user);
+            }; 
+            bool result = _userService.CreateUser(user);
+            if (result)
+            {
+                Console.WriteLine("Пользователь добавлен");
+            }
+            else Console.WriteLine("Ошибка, пользователь не добавлен");
         }
-
+        
+        //проверка есть
         public void Edit()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите поменять");
@@ -106,14 +134,25 @@ namespace BookStore.Menus
                 Login = login,
                 Password = password,
             };
-            _userService.EditUser(user);
+            bool result = _userService.EditUser(user);
+            if (result)
+            {
+                Console.WriteLine("Пользователь изменен");
+            }
+            else Console.WriteLine("Ошибка, пользователь не изменен");
         }
 
+        //проверка есть
         public void Delete()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите удалить");
             uint id = Convert.ToUInt32(Console.ReadLine());
-            _userService.DeleteUserById(id);
+            bool result = _userService.DeleteUserById(id);
+            if (result)
+            {
+                Console.WriteLine("Пользователь удален");
+            }
+            else Console.WriteLine("Такого пользователя не существует");
         }
     }
 }

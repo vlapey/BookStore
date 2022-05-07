@@ -54,6 +54,7 @@ namespace BookStore.Menus
                 }
             }
         }
+        
         //проверка есть
         public void ShowAll()
         {
@@ -68,6 +69,7 @@ namespace BookStore.Menus
             }
             
         }
+        
         // проверка есть 
         public void ShowAuthorById()
         {
@@ -81,7 +83,8 @@ namespace BookStore.Menus
             }
             Console.WriteLine(author);
         }
-        //todo: доделать проверку return 
+        
+        //проверка есть
         public void ShowAuthorIdByName()
         {
             Console.WriteLine("Введите имя автора, чтобы получить его Id");
@@ -93,6 +96,7 @@ namespace BookStore.Menus
             }
             else Console.WriteLine(result);
         }
+        
         //проверка есть
         public void Create()
         {
@@ -109,6 +113,7 @@ namespace BookStore.Menus
             }
             else Console.WriteLine("Автор не добавлен");
         }
+        
         //проверка есть
         public void Edit()
         {
@@ -126,7 +131,7 @@ namespace BookStore.Menus
             {
                 Console.WriteLine("Автор изменен");
             }
-            else Console.WriteLine("Такого автора не существует");
+            else Console.WriteLine("Ошибка, автор не изменен");
         }
         //проверка есть 
         public void Delete()

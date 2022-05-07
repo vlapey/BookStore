@@ -70,28 +70,28 @@ namespace Services
             return book;
         }
 
+        //проверка есть
         public bool DeleteBookById(uint id)
         {
             var result = _database.Execute($"DELETE FROM books WHERE books.id = {id}");
             return result > 0;
         }
 
+        //проверка есть
         public bool EditBook(Book book)
         {
+            int bookId = _database.Execute($"SELECT books.id FROM books WHERE books.id = '{book.Id}'");
+            if (bookId == -1)
+            {
+                return false;
+            }
             var authordata = _database.ToList
                 ($"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
-            try
-            {
+            
                 var result = _database.Execute($"UPDATE books SET books.name = '{book.Name}', " +
                                                $"books.price = {book.Price}, " 
                                                + $"books.authors_id = {authordata[0][0]} WHERE books.id = {book.Id}");
                 return result > 0;
-            }
-            catch
-            {
-                return false;
-            }
         }
-        
     }
 }
