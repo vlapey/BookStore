@@ -18,14 +18,14 @@ namespace BookStore.Menus
             bool exit = false;
             while (!exit)
             {
-                Console.WriteLine("Вы выбрали книжный сервис");
-                Console.WriteLine("Выберите, что хотитет выполнить?\n" +
+                Console.WriteLine("Вы выбрали книжный сервис\n" +
+                                  "Выберите, что хотитет выполнить?\n" +
                                   "1 - Показать список всех книг\n" +
                                   "2 - Показать книгу по имени\n" +
                                   "3 - Создать книгу\n" +
                                   "4 - Редактировать книгу\n" +
                                   "5 - Удалить книгу\n" +
-                                  "Другое - Выйти\n");
+                                  "Другое - Выйти");
                 
                 string selector = Console.ReadLine();
                 switch (selector)
@@ -82,7 +82,12 @@ namespace BookStore.Menus
             Console.WriteLine("Введите название книги, которую хотите добавить");
             string bookName = Console.ReadLine();
             Console.WriteLine("Введите цену книги, которую хотите добавить");
-            int price = int.Parse(Console.ReadLine());
+            int.TryParse(Console.ReadLine(), out int price);
+            if (price == 0)
+            {
+                Console.WriteLine("Ошибка, цена должна быть числом и максимум 10 символов");
+                return;
+            }
             Console.WriteLine("Введите автора книги, которую хотите добавить");
             string authorName = Console.ReadLine();
             Book book = new Book()
@@ -102,11 +107,21 @@ namespace BookStore.Menus
         private void Edit()
         {
             Console.WriteLine("Введите Id книги, которую хотите поменять");
-            uint bookId = Convert.ToUInt32(Console.ReadLine());
+            uint.TryParse(Console.ReadLine(), out uint bookId);
+            if (bookId == 0)
+            {
+                Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");
+                return;
+            }
             Console.WriteLine("Введите название книги, на которое хотите поменять");
             string bookName = Console.ReadLine();
             Console.WriteLine("Введите цену книги, на которую хотите поменять");
-            int price = int.Parse(Console.ReadLine());
+            int.TryParse(Console.ReadLine(), out int price);
+            if (price == 0)
+            {
+                Console.WriteLine("Ошибка, цена должна быть числом и максимум 10 символов");
+                return;
+            }
             Console.WriteLine("Введите автора книги, на которого хотите поменять");
             string authorName = Console.ReadLine();
             Book book = new Book()
@@ -127,8 +142,13 @@ namespace BookStore.Menus
         private void Delete()
         {
             Console.WriteLine("Введите Id книги, которую хотите удалить");
-            uint id = Convert.ToUInt32(Console.ReadLine());
-            bool result = _bookService.DeleteBookById(id);
+            uint.TryParse(Console.ReadLine(), out uint bookId);
+            if (bookId == 0)
+            {
+                Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");
+                return;
+            }
+            bool result = _bookService.DeleteBookById(bookId);
             if (result)
             {
                 Console.WriteLine("Книга успешно удалена");

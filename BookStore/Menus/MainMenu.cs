@@ -16,7 +16,7 @@ namespace BookStore.Menus
                                   "1 - Книжный сервис\n" +
                                   "2 - Пользовательский сервис\n" +
                                   "3 - Авторский сервис\n" +
-                                  "Другое - Выйти\n");
+                                  "Другое - Выйти");
 
                 string selector = Console.ReadLine();
                 switch (selector)
