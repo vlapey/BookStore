@@ -8,8 +8,8 @@ namespace BookStore
     {
         static void Main(string[] args)
         {
-            MainMenu.Display();
-            //тест
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.Display();
         }
     }
 }

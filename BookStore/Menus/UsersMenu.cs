@@ -1,46 +1,50 @@
-﻿using Services;
-using System;
+﻿using System;
 using Models;
+using Services.Interfaces;
 
 namespace BookStore.Menus
 {
-    public static class UsersMenu
+    public class UsersMenu
     {
-        private static DbUserService _userService = new DbUserService();
-        public static void Display()
+        private static IUserService _userService;
+        public UsersMenu(IUserService userService)
+        {
+            _userService = userService;
+        }
+        public void Display()
         {
             bool exit = false;
             while (!exit)
             {
-                Console.WriteLine("Вы выбрали пользовательский сервис");
-                Console.WriteLine("Выберите, что хотитет выполнить?\n" +
+                Console.WriteLine("Вы выбрали пользовательский сервис\n" +
+                                  "Выберите, что хотитет выполнить?\n" +
                                   "1 - Показать список всех пользователей\n" +
                                   "2 - Показать пользователя по Id\n" +
                                   "3 - Показать книги пользователя\n" +
                                   "4 - Создать пользователя\n" +
                                   "5 - Редактировать пользователя\n" +
-                                  "6 - Удалить пользователя" +
+                                  "6 - Удалить пользователя\n" +
                                   "Другое - Выйти\n");
                 
-                int selector = int.Parse(Console.ReadLine());
+                string selector = Console.ReadLine();
                 switch (selector)
                 {
-                    case 1:
+                    case "1":
                         ShowAll();
                         break;
-                    case 2:
+                    case "2":
                         ShowUserById();
                         break;
-                    case 3:
+                    case "3":
                         ShowBooksOfUser();
                         break;
-                    case 4:
+                    case "4":
                         Create();
                         break;
-                    case 5:
+                    case "5":
                         Edit();
                         break;
-                    case 6:
+                    case "6":
                         Delete();
                         break;
                     default:
@@ -49,32 +53,54 @@ namespace BookStore.Menus
                 }   
             }
         }
-        public static void ShowAll()
+        
+        //проверка есть
+        public void ShowAll()
         {
-            DbUserService userService = new DbUserService();
-            foreach (var user in userService.GetUsers())
+            if (_userService.GetUsers() == null)
+            {
+                Console.WriteLine("Пользователи еще не добавлены");
+                return;
+            }
+            foreach (var user in _userService.GetUsers())
             {
                 Console.WriteLine(user);
             }
         }
-
-        public static void ShowUserById()
+        
+        //проверка есть
+        public void ShowUserById()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите вывести");
             uint userId = Convert.ToUInt32(Console.ReadLine());
-            Console.WriteLine(_userService.GetUserById(userId));
+            User user = _userService.GetUserById(userId);
+            if (user == null)
+            {
+                Console.WriteLine("Такого id не существует");
+                return;
+            }
+            Console.WriteLine(user);
         }
-
-        public static void ShowBooksOfUser()
+        
+        //проверка есть
+        public void ShowBooksOfUser()
         {
             Console.WriteLine("Введите Id пользователя, книги которого хотите вывести");
             uint userId = Convert.ToUInt32(Console.ReadLine());
-            foreach (var book in _userService.GetUsersBooks(userId))
+            var result = _userService.GetUsersBooks(userId);
+            if (result == null)
+            {
+                Console.WriteLine("Ошибка, данного пользователя не существует");
+                return;
+            }
+            foreach (var book in result)
             {
                 Console.WriteLine(book);
             }
         }
-        public static void Create()
+        
+        //проверка есть
+        public void Create()
         {
             Console.WriteLine("Введите Login");
             string login = Console.ReadLine();
@@ -84,11 +110,17 @@ namespace BookStore.Menus
             {
                 Login = login,
                 Password = password,
-            };
-            _userService.CreateUser(user);
+            }; 
+            bool result = _userService.CreateUser(user);
+            if (result)
+            {
+                Console.WriteLine("Пользователь добавлен");
+            }
+            else Console.WriteLine("Ошибка, пользователь не добавлен");
         }
-
-        public static void Edit()
+        
+        //проверка есть
+        public void Edit()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите поменять");
             uint userId = Convert.ToUInt32(Console.ReadLine());
@@ -102,14 +134,25 @@ namespace BookStore.Menus
                 Login = login,
                 Password = password,
             };
-            _userService.EditUser(user);
+            bool result = _userService.EditUser(user);
+            if (result)
+            {
+                Console.WriteLine("Пользователь изменен");
+            }
+            else Console.WriteLine("Ошибка, пользователь не изменен");
         }
 
-        public static void Delete()
+        //проверка есть
+        public void Delete()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите удалить");
             uint id = Convert.ToUInt32(Console.ReadLine());
-            _userService.DeleteUserById(id);
+            bool result = _userService.DeleteUserById(id);
+            if (result)
+            {
+                Console.WriteLine("Пользователь удален");
+            }
+            else Console.WriteLine("Такого пользователя не существует");
         }
     }
 }
