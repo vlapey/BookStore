@@ -24,7 +24,6 @@ namespace BookStore.Menus
                     case "1":
                         booksMenu.Display();
                         break;
-
                     case "2":
                         usersMenu.Display();
                         break;
