@@ -8,9 +8,9 @@ namespace Services
 {
     public class DbAuthorService : IAuthorService
     {
-        private static IMsSqlContext _database;
+        private static IRepository _database;
 
-        public DbAuthorService(IMsSqlContext applicationContext)
+        public DbAuthorService(IRepository applicationContext)
         {
             _database = applicationContext;
         }

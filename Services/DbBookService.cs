@@ -9,9 +9,9 @@ namespace Services
 {
     public class DbBookService : IBookService
     {
-        private static IMsSqlContext _database;
+        private static IRepository _database;
 
-        public DbBookService(IMsSqlContext applicationContext)
+        public DbBookService(IRepository applicationContext)
         {
             _database = applicationContext;
         }

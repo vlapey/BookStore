@@ -3,7 +3,7 @@ using Models;
 
 namespace Context
 {
-    public interface IMsSqlContext
+    public interface IRepository
     {
         public List<Author> GetAuthors();
         public Author GetAuthorById(uint id);

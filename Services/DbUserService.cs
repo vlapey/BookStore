@@ -9,9 +9,9 @@ namespace Services
 {
     public class DbUserService : IUserService
     {
-        private static IMsSqlContext _database;
+        private static IRepository _database;
 
-        public DbUserService(IMsSqlContext applicationContext)
+        public DbUserService(IRepository applicationContext)
         {
             _database = applicationContext;
         }
