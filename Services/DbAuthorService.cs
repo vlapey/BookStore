@@ -15,47 +15,39 @@ namespace Services
             _database = applicationContext;
         }
         
-        //из-за ошибки: Cannot access non-static method 'GetAuthors' in static context 
-        //приходится вызывать через объект класса
         public List<Author> GetAuthors()
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.GetAuthors();
+            return _database.GetAuthors();
         }
         
-        //проверка есть
+        
         public Author GetAuthorById(uint id)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.GetAuthorById(id);
+           return _database.GetAuthorById(id);
         }
         
-        //проверка есть
+        
         public bool DeleteAuthorById(uint id)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.DeleteAuthorById(id);
+            return _database.DeleteAuthorById(id);
         }
         
-        //проверка есть
+        
         public bool EditAuthor(Author author)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.EditAuthor(author);
+            return _database.EditAuthor(author);
         }
         
-        //проверка есть
+        
         public bool CreateAuthor(Author author)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.CreateAuthor(author);
+           return _database.CreateAuthor(author);
         }
         
-        //проверка есть
+        
         public uint GetAuthorIdByName(string name)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.GetAuthorIdByName(name);
+            return _database.GetAuthorIdByName(name);
         }
     }
 }

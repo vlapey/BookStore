@@ -18,38 +18,32 @@ namespace Services
 
         public List<User> GetUsers()
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.GetUsers();
+            return _database.GetUsers();
         }
 
         public User GetUserById(uint id)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.GetUserById(id);
+            return _database.GetUserById(id);
         }
 
         public bool DeleteUserById(uint id)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.DeleteUserById(id);
+           return _database.DeleteUserById(id);
         }
 
         public bool EditUser(User user)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.EditUser(user);
+            return _database.EditUser(user);
         }
         
         public bool CreateUser(User user)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.CreateUser(user);
+           return _database.CreateUser(user);
         }
         
         public List<Book> GetUsersBooks(uint id)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.GetUsersBooks(id);
+            return _database.GetUsersBooks(id);
         }
     }
 }

@@ -19,36 +19,31 @@ namespace Services
         
         public bool CreateBook(Book book)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.CreateBook(book);
+            return _database.CreateBook(book);
         }
 
         
         public List<Book> GetBooks()
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.GetBooks();
+            return _database.GetBooks();
         }
 
        
         public Book GetBookByName(string name)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.GetBookByName(name);
+            return _database.GetBookByName(name);
         }
 
         
         public bool DeleteBookById(uint id)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.DeleteBookById(id);
+            return _database.DeleteBookById(id);
         }
 
         
         public bool EditBook(Book book)
         {
-            MsSqlContext context = new MsSqlContext();
-            return context.EditBook(book);
+            return _database.EditBook(book);
         }
     }
 }
