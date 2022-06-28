@@ -54,7 +54,6 @@ namespace BookStore.Menus
             }
         }
         
-        //проверка есть
         public void ShowAll()
         {
             if (_userService.GetUsers() == null)
@@ -68,7 +67,6 @@ namespace BookStore.Menus
             }
         }
         
-        //проверка есть
         public void ShowUserById()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите вывести");
@@ -82,7 +80,6 @@ namespace BookStore.Menus
             Console.WriteLine(user);
         }
         
-        //проверка есть
         public void ShowBooksOfUser()
         {
             Console.WriteLine("Введите Id пользователя, книги которого хотите вывести");
@@ -99,7 +96,6 @@ namespace BookStore.Menus
             }
         }
         
-        //проверка есть
         public void Create()
         {
             Console.WriteLine("Введите Login");
@@ -119,7 +115,6 @@ namespace BookStore.Menus
             else Console.WriteLine("Ошибка, пользователь не добавлен");
         }
         
-        //проверка есть
         public void Edit()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите поменять");
@@ -142,7 +137,6 @@ namespace BookStore.Menus
             else Console.WriteLine("Ошибка, пользователь не изменен");
         }
 
-        //проверка есть
         public void Delete()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите удалить");

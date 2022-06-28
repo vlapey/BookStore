@@ -1,6 +1,5 @@
 ﻿using System;
 using Models;
-using Services;
 using Services.Interfaces;
 
 namespace BookStore.Menus
@@ -55,7 +54,6 @@ namespace BookStore.Menus
             }
         }
         
-        //проверка есть
         public void ShowAll()
         {
             if (_authorService.GetAuthors() == null)
@@ -70,7 +68,6 @@ namespace BookStore.Menus
             
         }
         
-        // проверка есть 
         public void ShowAuthorById()
         {
             Console.WriteLine("Введите Id автора, которого хотите вывести");
@@ -84,7 +81,6 @@ namespace BookStore.Menus
             Console.WriteLine(author);
         }
         
-        //проверка есть
         public void ShowAuthorIdByName()
         {
             Console.WriteLine("Введите имя автора, чтобы получить его Id");
@@ -97,7 +93,6 @@ namespace BookStore.Menus
             else Console.WriteLine(result);
         }
         
-        //проверка есть
         public void Create()
         {
             Console.WriteLine("Введите Имя");
@@ -114,8 +109,7 @@ namespace BookStore.Menus
             else Console.WriteLine("Автор не добавлен");
         }
         
-        //проверка есть
-        public void Edit()
+       public void Edit()
         {
             Console.WriteLine("Введите Id автора, которого хотите поменять");
             uint userId = Convert.ToUInt32(Console.ReadLine());
@@ -133,7 +127,7 @@ namespace BookStore.Menus
             }
             else Console.WriteLine("Ошибка, автор не изменен");
         }
-        //проверка есть 
+       
         public void Delete()
         {
             Console.WriteLine("Введите Id автора, которого хотите удалить");
