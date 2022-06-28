@@ -51,7 +51,7 @@ namespace BookStore.Menus
                 }   
             }
         }
-        //проверка есть
+        
         private void ShowAll()
         {
             if (_bookService.GetBooks() == null)
@@ -64,7 +64,7 @@ namespace BookStore.Menus
                 Console.WriteLine(book);
             }
         }
-        //проверка есть
+        
         private void ShowBookByName()
         {
             Console.WriteLine("Введите имя книги, которую хотите вывести");
@@ -76,7 +76,7 @@ namespace BookStore.Menus
             }
             else Console.WriteLine(book);
         }
-        //проверка есть
+        
         private void Create()
         {
             Console.WriteLine("Введите название книги, которую хотите добавить");
@@ -103,7 +103,7 @@ namespace BookStore.Menus
             }
             else Console.WriteLine("Ошибка, книга не добавлена");
         }
-        //проверка есть
+        
         private void Edit()
         {
             Console.WriteLine("Введите Id книги, которую хотите поменять");
@@ -138,7 +138,7 @@ namespace BookStore.Menus
             }
             else Console.WriteLine("Ошибка, книга не изменена, проверьте введенные данные");
         }
-        //проверка есть
+        
         private void Delete()
         {
             Console.WriteLine("Введите Id книги, которую хотите удалить");

@@ -32,11 +32,6 @@ namespace Context
             return rowsAffected;
         }
         
-        /// <summary>
-        /// Функция которая возвращает из базы данных двумерный массив строк
-        /// </summary>
-        /// <param name="command"> строка sql запроса </param>
-        /// <returns></returns>
         public static List<string[]> ToList(string command)
         {
             OpenConnection();
