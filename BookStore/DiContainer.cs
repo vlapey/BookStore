@@ -6,10 +6,12 @@ namespace BookStore
 {
     public static class DiContainer
     {
-        private static readonly IRepository Database = new MySqlRepository();
-        public static IBookService BookService => new DbBookService(Database);
-        public static IAuthorService AuthorService => new DbAuthorService(Database);
-        public static IUserService UserService => new DbUserService(Database);
+        private static readonly IAuthorRepository AuthorRepository = new AuthorRepository();
+        private static readonly IBookRepository BookRepository = new BookRepository();
+        private static readonly IUserRepository UserRepository = new UserRepository();
+        public static IBookService BookService => new DbBookService(BookRepository);
+        public static IAuthorService AuthorService => new DbAuthorService(AuthorRepository);
+        public static IUserService UserService => new DbUserService(UserRepository);
         
     }
 }

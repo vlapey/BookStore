@@ -54,7 +54,6 @@ namespace BookStore.Menus
             }
         }
         
-        
         public void ShowAll()
         {
             if (_userService.GetUsers() == null)
@@ -67,7 +66,6 @@ namespace BookStore.Menus
                 Console.WriteLine(user);
             }
         }
-        
         
         public void ShowUserById()
         {
@@ -82,7 +80,6 @@ namespace BookStore.Menus
             Console.WriteLine(user);
         }
         
-       
         public void ShowBooksOfUser()
         {
             Console.WriteLine("Введите Id пользователя, книги которого хотите вывести");
@@ -98,7 +95,6 @@ namespace BookStore.Menus
                 Console.WriteLine(book);
             }
         }
-        
         
         public void Create()
         {
@@ -118,7 +114,6 @@ namespace BookStore.Menus
             }
             else Console.WriteLine("Ошибка, пользователь не добавлен");
         }
-        
         
         public void Edit()
         {
@@ -142,7 +137,6 @@ namespace BookStore.Menus
             else Console.WriteLine("Ошибка, пользователь не изменен");
         }
 
-        
         public void Delete()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите удалить");
