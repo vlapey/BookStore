@@ -56,15 +56,16 @@ namespace Context
             {
                 return false;
             }
-            var result = MySqlContext.Execute($"UPDATE users SET users.login = '{user.Login}'," +
-                                              $" users.password = '{user.Password}' WHERE users.id = {user.Id}");
+            var result = MySqlContext.Execute(
+                $"UPDATE users SET users.login = '{user.Login}'," +
+                $" users.password = '{user.Password}' WHERE users.id = {user.Id}");
             return result > 0;
         }
 
         public bool CreateUser(User user)
         {
-            var result = MySqlContext.Execute($"INSERT INTO `users` (`login`, `password`) " +
-                                              $"VALUES ('{user.Login}', '{user.Password}')");
+            var result = MySqlContext.Execute(
+                $"INSERT INTO `users` (`login`, `password`) VALUES ('{user.Login}', '{user.Password}')");
             return result > 0;
         }
 
@@ -76,8 +77,8 @@ namespace Context
             var usersbooks = new List<Book>();
             
             var booksDataFromDatabase = 
-                MySqlContext.ToList($"SELECT books.id, books.name," +
-                                    $" books.price, authors.name FROM users_to_books" +
+                MySqlContext.ToList($"" +
+                                    $"SELECT books.id, books.name, books.price, authors.name FROM users_to_books" +
                                     $" LEFT JOIN books ON users_to_books.books_id = books.id" +
                                     $" LEFT JOIN authors ON books.authors_id = authors.id WHERE users_id = {id}");
 

@@ -27,8 +27,8 @@ namespace Context
 
         public Author GetAuthorById(uint id)
         {
-            var authordata = 
-                MySqlContext.ToList($"SELECT * FROM authors WHERE authors.id = {id}");
+            var authordata = MySqlContext.ToList(
+                $"SELECT * FROM authors WHERE authors.id = {id}");
             if (authordata.Count == 0)
             {
                 return null;
@@ -49,15 +49,14 @@ namespace Context
 
         public bool EditAuthor(Author author)
         {
-            int authorId = 
-                MySqlContext.Execute($"SELECT authors.id FROM authors WHERE authors.id = '{author.Id}'");
+            int authorId = MySqlContext.Execute(
+                $"SELECT authors.id FROM authors WHERE authors.id = '{author.Id}'");
             if (authorId == -1)
             {
                 return false;
             }
-            var result = 
-                MySqlContext.Execute($"UPDATE authors SET authors.name = '{author.Name}' " +
-                                     $"WHERE authors.id = {author.Id}");
+            var result = MySqlContext.Execute(
+                $"UPDATE authors SET authors.name = '{author.Name}' WHERE authors.id = {author.Id}");
             return result > 0;
         }
 
@@ -69,8 +68,8 @@ namespace Context
 
         public uint GetAuthorIdByName(string name)
         {
-            var authordata = MySqlContext.ToList
-                ($"SELECT authors.id FROM authors WHERE authors.name = '{name}'");
+            var authordata = MySqlContext.ToList(
+                $"SELECT authors.id FROM authors WHERE authors.name = '{name}'");
             if (authordata.Count == 0)
             {
                 return 0;

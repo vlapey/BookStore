@@ -82,7 +82,7 @@ namespace BookStore.Menus
             Console.WriteLine(author);
         }
         
-      public void ShowAuthorIdByName()
+        public void ShowAuthorIdByName()
         {
             Console.WriteLine("Введите имя автора, чтобы получить его Id");
             string name = Console.ReadLine();

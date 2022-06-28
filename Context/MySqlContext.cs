@@ -36,7 +36,6 @@ namespace Context
         {
             OpenConnection();
             MySqlCommand mySqlCommand = new MySqlCommand(command, connection);
-            /*command.ExecuteNonQuery(); Вариант для insert и для delete*/
             List<string[]> data = new List<string[]>();
             MySqlDataReader dataReader = mySqlCommand.ExecuteReader();
             while (dataReader.Read())
