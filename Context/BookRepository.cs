@@ -8,15 +8,15 @@ namespace Context
     {
         public bool CreateBook(Book book)
         {
-            var authordata = MySqlContext.ToList(
-                $"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
-            if (authordata.Count == 0 || book == null)
+            AuthorRepository authorRepository = new AuthorRepository();
+            var authordata = authorRepository.GetAuthorIdByName(book.Author);
+            if (authordata == 0)
             {
                 return false;
             }
             var result = MySqlContext.Execute(
                 $"INSERT INTO `books` (`name`, `price`, `authors_id`)" +
-                $"VALUES ('{book.Name}', '{book.Price}', '{authordata[0][0]}')");
+                $"VALUES ('{book.Name}', '{book.Price}', '{authordata}')");
             return result > 0;
         }
 
