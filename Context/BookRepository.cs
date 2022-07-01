@@ -70,17 +70,20 @@ namespace Context
 
         public bool EditBook(Book book)
         {
-            int bookId = MySqlContext.Execute($"SELECT books.id FROM books WHERE books.id = '{book.Id}'");
-            if (bookId == -1)
+            List<string[]> bookId = MySqlContext.ToList($"SELECT books.id FROM books WHERE books.id = {book.Id}");
+            if (bookId.Count == 0)
             {
                 return false;
             }
-            var authordata = MySqlContext.ToList(
-                $"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
-
+            AuthorRepository authorRepository = new AuthorRepository();
+            var authordata = authorRepository.GetAuthorIdByName(book.Author);
+            if (authordata == 0)
+            {
+                return false;
+            }
             var result = MySqlContext.Execute(
                 $"UPDATE books SET books.name = '{book.Name}', books.price = {book.Price}, "
-                + $"books.authors_id = {authordata[0][0]} WHERE books.id = {book.Id}");
+                + $"books.authors_id = {authordata} WHERE books.id = {book.Id}");
             return result > 0;
         }
     }
