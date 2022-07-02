@@ -36,7 +36,13 @@ namespace Services
         
         public bool EditBook(Book book)
         {
-            return _database.EditBook(book);
+            AuthorRepository authorRepository = new AuthorRepository();
+            var authordata = authorRepository.GetAuthorIdByName(book.Author);
+            if (authordata == 0)
+            {
+                return false;
+            }
+            return _database.EditBook(book, authordata);
         }
     }
 }

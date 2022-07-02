@@ -68,16 +68,10 @@ namespace Context
             return result > 0;
         }
 
-        public bool EditBook(Book book)
+        public bool EditBook(Book book, uint authordata)
         {
             List<string[]> bookId = MySqlContext.ToList($"SELECT books.id FROM books WHERE books.id = {book.Id}");
             if (bookId.Count == 0)
-            {
-                return false;
-            }
-            AuthorRepository authorRepository = new AuthorRepository();
-            var authordata = authorRepository.GetAuthorIdByName(book.Author);
-            if (authordata == 0)
             {
                 return false;
             }
