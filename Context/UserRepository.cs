@@ -51,8 +51,9 @@ namespace Context
 
         public bool EditUser(User user)
         {
-            int userId = MySqlContext.Execute($"SELECT users.id FROM users WHERE users.id = '{user.Id}'");
-            if (userId == -1)
+            List<string[]> userId = MySqlContext.ToList(
+                $"SELECT users.id FROM users WHERE users.id = '{user.Id}'");
+            if (userId.Count == 0)
             {
                 return false;
             }
@@ -71,11 +72,12 @@ namespace Context
 
         public List<Book> GetUsersBooks(uint id)
         {
-            int userId = MySqlContext.Execute($"SELECT users.id FROM users WHERE users.id = '{id}'");
-            if (userId == -1)
+            List<string[]> userId = MySqlContext.ToList($"SELECT users.id FROM users WHERE users.id = '{id}'");
+            if (userId.Count == 0)
+            {
                 return null;
+            }
             var usersbooks = new List<Book>();
-            
             var booksDataFromDatabase = 
                 MySqlContext.ToList(
                     $"SELECT books.id, books.name, books.price, authors.name FROM users_to_books" +
