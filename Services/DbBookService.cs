@@ -16,7 +16,13 @@ namespace Services
         
         public bool CreateBook(Book book)
         {
-            return _database.CreateBook(book);
+            AuthorRepository authorRepository = new AuthorRepository();
+            var authordata = authorRepository.GetAuthorIdByName(book.Author);
+            if (authordata == 0)
+            {
+                return false;
+            }
+            return _database.CreateBook(book, authordata);
         }
         
         public List<Book> GetBooks()

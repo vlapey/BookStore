@@ -6,14 +6,9 @@ namespace Context
 {
     public class BookRepository : IBookRepository
     {
-        public bool CreateBook(Book book)
+        public bool CreateBook(Book book, uint authordata)
         {
-            AuthorRepository authorRepository = new AuthorRepository();
-            var authordata = authorRepository.GetAuthorIdByName(book.Author);
-            if (authordata == 0)
-            {
-                return false;
-            }
+           
             var result = MySqlContext.Execute(
                 $"INSERT INTO `books` (`name`, `price`, `authors_id`)" +
                 $"VALUES ('{book.Name}', '{book.Price}', '{authordata}')");

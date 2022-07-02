@@ -5,7 +5,7 @@ namespace Context
 {
     public interface IBookRepository
     {
-        public bool CreateBook(Book book);
+        public bool CreateBook(Book book, uint authordata);
         public List<Book> GetBooks();
         public Book GetBookByName(string name);
         public bool DeleteBookById(uint id);
