@@ -6,10 +6,9 @@ namespace Context
     public interface IUserRepository
     {
         public List<User> GetUsers();
-        public User GetUserById(uint id);
-        public bool DeleteUserById(uint id);
+        public User GetUserById(int id);
+        public bool DeleteUserById(int id);
         public bool EditUser(User user);
         public bool CreateUser(User user);
-        public List<Book> GetUsersBooks(uint id);
     }
 }

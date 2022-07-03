@@ -18,14 +18,14 @@ namespace Context
             {
                 authors.Add(new Author()
                 {
-                    Id = uint.Parse(author[0]),
+                    Id = int.Parse(author[0]),
                     Name = author[1],
                 });
             }
             return authors;
         }
 
-        public Author GetAuthorById(uint id)
+        public Author GetAuthorById(int id)
         {
             var authordata = MySqlContext.ToList(
                 $"SELECT * FROM authors WHERE authors.id = {id}");
@@ -41,7 +41,7 @@ namespace Context
             return author;
         }
 
-        public bool DeleteAuthorById(uint id)
+        public bool DeleteAuthorById(int id)
         {
             var result = MySqlContext.Execute($"DELETE FROM authors WHERE authors.id = {id}");
             return result > 0;
@@ -66,7 +66,7 @@ namespace Context
             return result > 0;
         }
 
-        public uint GetAuthorIdByName(string name)
+        public int GetAuthorIdByName(string name)
         {
             var authordata = MySqlContext.ToList(
                 $"SELECT authors.id FROM authors WHERE authors.name = '{name}'");
@@ -74,7 +74,7 @@ namespace Context
             {
                 return 0;
             }
-            return Convert.ToUInt32(authordata[0][0]);
+            return Convert.ToInt32(authordata[0][0]);
         }
     }
 }

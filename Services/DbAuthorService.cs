@@ -19,12 +19,12 @@ namespace Services
             return _database.GetAuthors();
         }
         
-        public Author GetAuthorById(uint id)
+        public Author GetAuthorById(int id)
         {
            return _database.GetAuthorById(id);
         }
         
-        public bool DeleteAuthorById(uint id)
+        public bool DeleteAuthorById(int id)
         {
             return _database.DeleteAuthorById(id);
         }
@@ -39,7 +39,7 @@ namespace Services
            return _database.CreateAuthor(author);
         }
         
-        public uint GetAuthorIdByName(string name)
+        public int GetAuthorIdByName(string name)
         {
             return _database.GetAuthorIdByName(name);
         }

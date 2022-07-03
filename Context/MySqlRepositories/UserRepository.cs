@@ -19,7 +19,7 @@ namespace Context
             {
                 users.Add(new User()
                 {
-                    Id = uint.Parse(user[0]),
+                    Id = int.Parse(user[0]),
                     Login = user[1],
                     Password = user[2]
                 });
@@ -27,7 +27,7 @@ namespace Context
             return users;
         }
 
-        public User GetUserById(uint id)
+        public User GetUserById(int id)
         {
             var userdata = MySqlContext.ToList($"SELECT * FROM users WHERE users.id = {id}");
             if (userdata.Count == 0)
@@ -43,7 +43,7 @@ namespace Context
             return user;
         }
 
-        public bool DeleteUserById(uint id)
+        public bool DeleteUserById(int id)
         {
             var result = MySqlContext.Execute($"DELETE FROM users WHERE users.id = {id}");
             return result > 0;
@@ -70,7 +70,7 @@ namespace Context
             return result > 0;
         }
 
-        public List<Book> GetUsersBooks(uint id)
+        public List<Book> GetUsersBooks(int id)
         {
             List<string[]> userId = MySqlContext.ToList($"SELECT users.id FROM users WHERE users.id = '{id}'");
             if (userId.Count == 0)
@@ -88,7 +88,7 @@ namespace Context
             {
                 usersbooks.Add(new Book()
                 {
-                    Id = Convert.ToUInt32(bookAsStringsArray[0]),
+                    Id = Convert.ToInt32(bookAsStringsArray[0]),
                     Name = bookAsStringsArray[1],
                     Price = Convert.ToInt32(bookAsStringsArray[2]),
                     Author = new Author()

@@ -70,7 +70,7 @@ namespace BookStore.Menus
         private void ShowAuthorById()
         {
             Console.WriteLine("Введите Id автора, которого хотите вывести");
-            uint authorId = Convert.ToUInt32(Console.ReadLine());
+            int authorId = Convert.ToInt32(Console.ReadLine());
             Author author = _authorService.GetAuthorById(authorId);
             if (author == null)
             {
@@ -84,7 +84,7 @@ namespace BookStore.Menus
         {
             Console.WriteLine("Введите имя автора, чтобы получить его Id");
             string name = Console.ReadLine();
-            uint result = _authorService.GetAuthorIdByName(name);
+            int result = _authorService.GetAuthorIdByName(name);
             if (result == 0)
             {
                 Console.WriteLine("Такого автора не существует");
@@ -111,7 +111,7 @@ namespace BookStore.Menus
         private void Edit()
         {
             Console.WriteLine("Введите Id автора, которого хотите поменять");
-            uint userId = Convert.ToUInt32(Console.ReadLine());
+            int userId = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Введите Имя автора, на которое хотите поменять");
             string authorName = Console.ReadLine();
             Author author = new Author()
@@ -130,7 +130,7 @@ namespace BookStore.Menus
         private void Delete()
         {
             Console.WriteLine("Введите Id автора, которого хотите удалить");
-            uint id = Convert.ToUInt32(Console.ReadLine());
+            int id = Convert.ToInt32(Console.ReadLine());
             bool result = _authorService.DeleteAuthorById(id);
             if (result)
             {

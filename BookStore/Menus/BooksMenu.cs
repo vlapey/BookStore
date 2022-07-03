@@ -107,7 +107,7 @@ namespace BookStore.Menus
         private void Edit()
         {
             Console.WriteLine("Введите Id книги, которую хотите поменять");
-            uint.TryParse(Console.ReadLine(), out uint bookId);
+            int.TryParse(Console.ReadLine(), out int bookId);
             if (bookId == 0)
             {
                 Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");
@@ -141,7 +141,7 @@ namespace BookStore.Menus
         private void Delete()
         {
             Console.WriteLine("Введите Id книги, которую хотите удалить");
-            uint.TryParse(Console.ReadLine(), out uint bookId);
+            int.TryParse(Console.ReadLine(), out int bookId);
             if (bookId == 0)
             {
                 Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");

@@ -20,10 +20,9 @@ namespace BookStore.Menus
                                   "Выберите, что хотитет выполнить?\n" +
                                   "1 - Показать список всех пользователей\n" +
                                   "2 - Показать пользователя по Id\n" +
-                                  "3 - Показать книги пользователя\n" +
-                                  "4 - Создать пользователя\n" +
-                                  "5 - Редактировать пользователя\n" +
-                                  "6 - Удалить пользователя\n" +
+                                  "3 - Создать пользователя\n" +
+                                  "4 - Редактировать пользователя\n" +
+                                  "5 - Удалить пользователя\n" +
                                   "Другое - Выйти\n");
                 
                 string selector = Console.ReadLine();
@@ -36,15 +35,12 @@ namespace BookStore.Menus
                         ShowUserById();
                         break;
                     case "3":
-                        ShowBooksOfUser();
-                        break;
-                    case "4":
                         Create();
                         break;
-                    case "5":
+                    case "4":
                         Edit();
                         break;
-                    case "6":
+                    case "5":
                         Delete();
                         break;
                     default:
@@ -70,7 +66,7 @@ namespace BookStore.Menus
         private void ShowUserById()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите вывести");
-            uint userId = Convert.ToUInt32(Console.ReadLine());
+            int userId = Convert.ToInt32(Console.ReadLine());
             User user = _userService.GetUserById(userId);
             if (user == null)
             {
@@ -78,22 +74,6 @@ namespace BookStore.Menus
                 return;
             }
             Console.WriteLine(user);
-        }
-
-        private void ShowBooksOfUser()
-        {
-            Console.WriteLine("Введите Id пользователя, книги которого хотите вывести");
-            uint userId = Convert.ToUInt32(Console.ReadLine());
-            var result = _userService.GetUsersBooks(userId);
-            if (result == null)
-            {
-                Console.WriteLine("Ошибка, данного пользователя не существует");
-                return;
-            }
-            foreach (var book in result)
-            {
-                Console.WriteLine(book);
-            }
         }
 
         private void Create()
@@ -118,7 +98,7 @@ namespace BookStore.Menus
         private void Edit()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите поменять");
-            uint userId = Convert.ToUInt32(Console.ReadLine());
+            int userId = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Введите Login пользователя, на который хотите поменять");
             string login = Console.ReadLine();
             Console.WriteLine("Введите пароль пользователя, на который хотите поменять");
@@ -140,7 +120,7 @@ namespace BookStore.Menus
         private void Delete()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите удалить");
-            uint id = Convert.ToUInt32(Console.ReadLine());
+            int id = Convert.ToInt32(Console.ReadLine());
             bool result = _userService.DeleteUserById(id);
             if (result)
             {
