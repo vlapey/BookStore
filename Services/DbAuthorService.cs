@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Context;
 using Models;
-using Services.Dto.Interfaces;
+using Services.Interfaces;
 
-namespace Services.Dto
+namespace Services
 {
     public class DbAuthorService : IAuthorService
     {

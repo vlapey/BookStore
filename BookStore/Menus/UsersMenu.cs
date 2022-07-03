@@ -1,6 +1,6 @@
 ﻿using System;
 using Models;
-using Services.Dto.Interfaces;
+using Services.Interfaces;
 
 namespace BookStore.Menus
 {

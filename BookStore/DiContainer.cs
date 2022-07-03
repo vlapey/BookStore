@@ -1,6 +1,6 @@
 ﻿using Context;
-using Services.Dto;
-using Services.Dto.Interfaces;
+using Services;
+using Services.Interfaces;
 
 namespace BookStore
 {

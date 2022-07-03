@@ -1,4 +1,5 @@
-namespace Services.Dto
+namespace Services
+
 {
     public class BookDto
     {
