@@ -12,6 +12,5 @@ namespace BookStore
         public static IBookService BookService => new DbBookService(BookRepository);
         public static IAuthorService AuthorService => new DbAuthorService(AuthorRepository);
         public static IUserService UserService => new DbUserService(UserRepository);
-        
     }
 }
