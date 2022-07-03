@@ -6,12 +6,12 @@ namespace Context
 {
     public class BookRepository : IBookRepository
     {
-        public bool CreateBook(Book book, uint authordata)
+        public bool CreateBook(Book book, uint authorId)
         {
            
             var result = MySqlContext.Execute(
                 $"INSERT INTO `books` (`name`, `price`, `authors_id`)" +
-                $"VALUES ('{book.Name}', '{book.Price}', '{authordata}')");
+                $"VALUES ('{book.Name}', '{book.Price}', '{authorId}')");
             return result > 0;
         }
 
@@ -63,16 +63,17 @@ namespace Context
             return result > 0;
         }
 
-        public bool EditBook(Book book, uint authordata)
+        public bool EditBook(Book book, uint authorId)
         {
-            List<string[]> bookId = MySqlContext.ToList($"SELECT books.id FROM books WHERE books.id = {book.Id}");
+            List<string[]> bookId = MySqlContext.ToList(
+                $"SELECT books.id FROM books WHERE books.id = {book.Id}");
             if (bookId.Count == 0)
             {
                 return false;
             }
             var result = MySqlContext.Execute(
                 $"UPDATE books SET books.name = '{book.Name}', books.price = {book.Price}, "
-                + $"books.authors_id = {authordata} WHERE books.id = {book.Id}");
+                + $"books.authors_id = {authorId} WHERE books.id = {book.Id}");
             return result > 0;
         }
     }

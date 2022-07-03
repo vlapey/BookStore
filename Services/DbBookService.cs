@@ -17,12 +17,12 @@ namespace Services
         public bool CreateBook(Book book)
         {
             AuthorRepository authorRepository = new AuthorRepository();
-            var authordata = authorRepository.GetAuthorIdByName(book.Author);
-            if (authordata == 0)
+            var authorId = authorRepository.GetAuthorIdByName(book.Author);
+            if (authorId == 0)
             {
                 return false;
             }
-            return _database.CreateBook(book, authordata);
+            return _database.CreateBook(book, authorId);
         }
         
         public List<Book> GetBooks()
@@ -43,12 +43,12 @@ namespace Services
         public bool EditBook(Book book)
         {
             AuthorRepository authorRepository = new AuthorRepository();
-            var authordata = authorRepository.GetAuthorIdByName(book.Author);
-            if (authordata == 0)
+            var authorId = authorRepository.GetAuthorIdByName(book.Author);
+            if (authorId == 0)
             {
                 return false;
             }
-            return _database.EditBook(book, authordata);
+            return _database.EditBook(book, authorId);
         }
     }
 }

@@ -53,8 +53,8 @@ namespace BookStore.Menus
                 }
             }
         }
-        
-        public void ShowAll()
+
+        private void ShowAll()
         {
             if (_authorService.GetAuthors() == null)
             {
@@ -65,10 +65,9 @@ namespace BookStore.Menus
             {
                 Console.WriteLine(author);
             }
-            
         }
-        
-        public void ShowAuthorById()
+
+        private void ShowAuthorById()
         {
             Console.WriteLine("Введите Id автора, которого хотите вывести");
             uint authorId = Convert.ToUInt32(Console.ReadLine());
@@ -80,8 +79,8 @@ namespace BookStore.Menus
             }
             Console.WriteLine(author);
         }
-        
-        public void ShowAuthorIdByName()
+
+        private void ShowAuthorIdByName()
         {
             Console.WriteLine("Введите имя автора, чтобы получить его Id");
             string name = Console.ReadLine();
@@ -92,8 +91,8 @@ namespace BookStore.Menus
             }
             else Console.WriteLine(result);
         }
-        
-        public void Create()
+
+        private void Create()
         {
             Console.WriteLine("Введите Имя");
             string authorName = Console.ReadLine();
@@ -101,15 +100,15 @@ namespace BookStore.Menus
             {
                 Name = authorName,
             };
-            bool result = _authorService.CreateAuthor(author);
+            var result = _authorService.CreateAuthor(author);
             if (result)
             {
                 Console.WriteLine("Автор добавлен");
             }
             else Console.WriteLine("Автор не добавлен");
         }
-        
-       public void Edit()
+
+        private void Edit()
         {
             Console.WriteLine("Введите Id автора, которого хотите поменять");
             uint userId = Convert.ToUInt32(Console.ReadLine());
@@ -127,8 +126,8 @@ namespace BookStore.Menus
             }
             else Console.WriteLine("Ошибка, автор не изменен");
         }
-       
-        public void Delete()
+
+        private void Delete()
         {
             Console.WriteLine("Введите Id автора, которого хотите удалить");
             uint id = Convert.ToUInt32(Console.ReadLine());

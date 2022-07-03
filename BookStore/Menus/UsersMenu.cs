@@ -53,8 +53,8 @@ namespace BookStore.Menus
                 }   
             }
         }
-        
-        public void ShowAll()
+
+        private void ShowAll()
         {
             if (_userService.GetUsers() == null)
             {
@@ -66,8 +66,8 @@ namespace BookStore.Menus
                 Console.WriteLine(user);
             }
         }
-        
-        public void ShowUserById()
+
+        private void ShowUserById()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите вывести");
             uint userId = Convert.ToUInt32(Console.ReadLine());
@@ -79,8 +79,8 @@ namespace BookStore.Menus
             }
             Console.WriteLine(user);
         }
-        
-        public void ShowBooksOfUser()
+
+        private void ShowBooksOfUser()
         {
             Console.WriteLine("Введите Id пользователя, книги которого хотите вывести");
             uint userId = Convert.ToUInt32(Console.ReadLine());
@@ -95,8 +95,8 @@ namespace BookStore.Menus
                 Console.WriteLine(book);
             }
         }
-        
-        public void Create()
+
+        private void Create()
         {
             Console.WriteLine("Введите Login");
             string login = Console.ReadLine();
@@ -114,8 +114,8 @@ namespace BookStore.Menus
             }
             else Console.WriteLine("Ошибка, пользователь не добавлен");
         }
-        
-        public void Edit()
+
+        private void Edit()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите поменять");
             uint userId = Convert.ToUInt32(Console.ReadLine());
@@ -137,7 +137,7 @@ namespace BookStore.Menus
             else Console.WriteLine("Ошибка, пользователь не изменен");
         }
 
-        public void Delete()
+        private void Delete()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите удалить");
             uint id = Convert.ToUInt32(Console.ReadLine());
