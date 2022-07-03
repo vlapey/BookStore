@@ -2,8 +2,8 @@
 {
     public class Author
     {
-        public uint Id;
-        public string Name;
+        public uint Id { get; set; }
+        public string Name { get; set; }
         public override string ToString()
         {
             return $"{Id}: {Name}";
