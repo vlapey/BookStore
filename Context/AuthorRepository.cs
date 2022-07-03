@@ -49,9 +49,9 @@ namespace Context
 
         public bool EditAuthor(Author author)
         {
-            int authorId = MySqlContext.Execute(
+            List<string[]> authorId = MySqlContext.ToList(
                 $"SELECT authors.id FROM authors WHERE authors.id = '{author.Id}'");
-            if (authorId == -1)
+            if (authorId.Count == 0)
             {
                 return false;
             }

@@ -8,15 +8,10 @@ namespace Context
     {
         public bool CreateBook(Book book)
         {
-            var authordata = MySqlContext.ToList(
-                $"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
-            if (authordata.Count == 0 || book == null)
-            {
-                return false;
-            }
+           
             var result = MySqlContext.Execute(
                 $"INSERT INTO `books` (`name`, `price`, `authors_id`)" +
-                $"VALUES ('{book.Name}', '{book.Price}', '{authordata[0][0]}')");
+                $"VALUES ('{book.Name}', '{book.Price}', '{book.Author.Id}')");
             return result > 0;
         }
 
@@ -37,7 +32,10 @@ namespace Context
                     Id = Convert.ToUInt32(book[0]),
                     Name = book[1],
                     Price = Convert.ToInt32(book[2]),
-                    Author = book[3]
+                    Author = new Author()
+                    {
+                        Name = book[3]
+                    }
                 });
             }
             return books;
@@ -57,7 +55,10 @@ namespace Context
                 Id = Convert.ToUInt32(bookdata[0][0]),
                 Name = name,
                 Price = Convert.ToInt32(bookdata[0][2]),
-                Author = bookdata[0][3]
+                Author = new Author()
+                {
+                    Name = bookdata[0][3]
+                }
             };
             return book;
         }
@@ -70,17 +71,15 @@ namespace Context
 
         public bool EditBook(Book book)
         {
-            int bookId = MySqlContext.Execute($"SELECT books.id FROM books WHERE books.id = '{book.Id}'");
-            if (bookId == -1)
+            List<string[]> bookId = MySqlContext.ToList(
+                $"SELECT books.id FROM books WHERE books.id = {book.Id}");
+            if (bookId.Count == 0)
             {
                 return false;
             }
-            var authordata = MySqlContext.ToList(
-                $"SELECT authors.id FROM authors WHERE authors.name = '{book.Author}'");
-
             var result = MySqlContext.Execute(
                 $"UPDATE books SET books.name = '{book.Name}', books.price = {book.Price}, "
-                + $"books.authors_id = {authordata[0][0]} WHERE books.id = {book.Id}");
+                + $"books.authors_id = {book.Author.Id} WHERE books.id = {book.Id}");
             return result > 0;
         }
     }

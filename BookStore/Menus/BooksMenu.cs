@@ -1,5 +1,6 @@
 ﻿using System;
 using Models;
+using Services.Dto;
 using Services.Interfaces;
 
 namespace BookStore.Menus
@@ -11,6 +12,7 @@ namespace BookStore.Menus
         {
             _bookService = bookService;
         }
+        
         public void Display()
         {
             bool exit = false;
@@ -88,13 +90,13 @@ namespace BookStore.Menus
             }
             Console.WriteLine("Введите автора книги, которую хотите добавить");
             string authorName = Console.ReadLine();
-            Book book = new Book()
+            BookDto bookData = new BookDto()
             {
-                Name = bookName,
-                Price = price,
-                Author = authorName
+                BookName = bookName,
+                BookPrice = price,
+                AuthorName = authorName
             };
-            bool result = _bookService.CreateBook(book);
+            bool result = _bookService.CreateBook(bookData);
             if (result)
             {
                 Console.WriteLine("Книга добавлена");
@@ -122,14 +124,13 @@ namespace BookStore.Menus
             }
             Console.WriteLine("Введите автора книги, на которого хотите поменять");
             string authorName = Console.ReadLine();
-            Book book = new Book()
+            BookDto bookData = new BookDto()
             {
-                Id = bookId,
-                Name = bookName,
-                Price = price,
-                Author = authorName
+                BookName = bookName,
+                BookPrice = price,
+                AuthorName = authorName
             };
-            bool result = _bookService.EditBook(book);
+            bool result = _bookService.EditBook(bookData, bookId);
             if (result)
             {
                 Console.WriteLine("Книга изменена");
