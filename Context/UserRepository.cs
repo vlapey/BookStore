@@ -91,7 +91,10 @@ namespace Context
                     Id = Convert.ToUInt32(bookAsStringsArray[0]),
                     Name = bookAsStringsArray[1],
                     Price = Convert.ToInt32(bookAsStringsArray[2]),
-                    Author = bookAsStringsArray[3]
+                    Author = new Author()
+                    {
+                        Name = bookAsStringsArray[3]
+                    }
                 });
             }
             return usersbooks;

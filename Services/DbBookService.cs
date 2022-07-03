@@ -14,15 +14,25 @@ namespace Services
             _database = applicationContext;
         }
         
-        public bool CreateBook(Book book)
+        public bool CreateBook(BookDto bookData)
         {
             AuthorRepository authorRepository = new AuthorRepository();
-            var authorId = authorRepository.GetAuthorIdByName(book.Author);
+            var authorId = authorRepository.GetAuthorIdByName(bookData.AuthorName);
             if (authorId == 0)
             {
                 return false;
             }
-            return _database.CreateBook(book, authorId);
+            Book book = new Book()
+            {
+                Name = bookData.BookName,
+                Price = bookData.BookPrice,
+                Author = new Author()
+                {
+                    Id = authorId,
+                    Name = bookData.AuthorName
+                }
+            };
+            return _database.CreateBook(book);
         }
         
         public List<Book> GetBooks()
@@ -40,15 +50,26 @@ namespace Services
             return _database.DeleteBookById(id);
         }
         
-        public bool EditBook(Book book)
+        public bool EditBook(BookDto bookData, uint bookId)
         {
             AuthorRepository authorRepository = new AuthorRepository();
-            var authorId = authorRepository.GetAuthorIdByName(book.Author);
+            var authorId = authorRepository.GetAuthorIdByName(bookData.AuthorName);
             if (authorId == 0)
             {
                 return false;
             }
-            return _database.EditBook(book, authorId);
+            Book book = new Book()
+            {
+                Id = bookId,
+                Name = bookData.BookName,
+                Price = bookData.BookPrice,
+                Author = new Author()
+                {
+                    Id = authorId,
+                    Name = bookData.AuthorName
+                }
+            };
+            return _database.EditBook(book);
         }
     }
 }

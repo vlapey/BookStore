@@ -5,10 +5,10 @@ namespace Context
 {
     public interface IBookRepository
     {
-        public bool CreateBook(Book book, uint authorId);
+        public bool CreateBook(Book book);
         public List<Book> GetBooks();
         public Book GetBookByName(string name);
         public bool DeleteBookById(uint id);
-        public bool EditBook(Book book, uint authorId);
+        public bool EditBook(Book book);
     }
 }
