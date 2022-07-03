@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Context;
 using Models;
-using Services.Interfaces;
+using Services.Dto.Interfaces;
 
-namespace Services
+namespace Services.Dto
 {
     public class DbUserService : IUserService
     {

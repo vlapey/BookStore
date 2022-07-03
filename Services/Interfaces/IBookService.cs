@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Models;
 
-namespace Services.Interfaces
+namespace Services.Dto.Interfaces
 {
     public interface IBookService
     {
