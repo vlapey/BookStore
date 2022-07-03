@@ -11,7 +11,6 @@ namespace Context
          
         public MsSqlContext()
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         
