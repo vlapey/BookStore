@@ -29,7 +29,7 @@ namespace Context
             {
                 books.Add(new Book()
                 {
-                    Id = Convert.ToUInt32(book[0]),
+                    Id = Convert.ToInt32(book[0]),
                     Name = book[1],
                     Price = Convert.ToInt32(book[2]),
                     Author = new Author()
@@ -52,7 +52,7 @@ namespace Context
             }
             Book book = new Book()
             {
-                Id = Convert.ToUInt32(bookdata[0][0]),
+                Id = Convert.ToInt32(bookdata[0][0]),
                 Name = name,
                 Price = Convert.ToInt32(bookdata[0][2]),
                 Author = new Author()
@@ -63,7 +63,7 @@ namespace Context
             return book;
         }
 
-        public bool DeleteBookById(uint id)
+        public bool DeleteBookById(int id)
         {
             var result = MySqlContext.Execute($"DELETE FROM books WHERE books.id = {id}");
             return result > 0;

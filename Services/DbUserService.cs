@@ -19,12 +19,12 @@ namespace Services
             return _database.GetUsers();
         }
 
-        public User GetUserById(uint id)
+        public User GetUserById(int id)
         {
             return _database.GetUserById(id);
         }
 
-        public bool DeleteUserById(uint id)
+        public bool DeleteUserById(int id)
         {
            return _database.DeleteUserById(id);
         }
@@ -37,11 +37,6 @@ namespace Services
         public bool CreateUser(User user)
         {
            return _database.CreateUser(user);
-        }
-        
-        public List<Book> GetUsersBooks(uint id)
-        {
-            return _database.GetUsersBooks(id);
         }
     }
 }

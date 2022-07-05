@@ -46,12 +46,12 @@ namespace Services
             return _database.GetBookByName(name);
         }
         
-        public bool DeleteBookById(uint id)
+        public bool DeleteBookById(int id)
         {
             return _database.DeleteBookById(id);
         }
         
-        public bool EditBook(BookDto bookData, uint bookId)
+        public bool EditBook(BookDto bookData, int bookId)
         {
             AuthorRepository authorRepository = new AuthorRepository();
             var authorId = authorRepository.GetAuthorIdByName(bookData.AuthorName);

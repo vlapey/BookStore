@@ -8,7 +8,7 @@ namespace Context
         public bool CreateBook(Book book);
         public List<Book> GetBooks();
         public Book GetBookByName(string name);
-        public bool DeleteBookById(uint id);
+        public bool DeleteBookById(int id);
         public bool EditBook(Book book);
     }
 }
