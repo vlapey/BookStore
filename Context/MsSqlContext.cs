@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Models;
-using System.Collections.Generic;
 
 namespace Context
 {
@@ -9,7 +8,7 @@ namespace Context
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
-        
+         
         public MsSqlContext()
         {
             Database.EnsureCreated();
