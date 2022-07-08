@@ -13,7 +13,7 @@ namespace Services
         {
             _database = applicationContext;
         }
-        
+
         public List<Author> GetAuthors()
         {
             return _database.GetItems();
