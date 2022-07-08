@@ -16,27 +16,27 @@ namespace Services
 
         public List<User> GetUsers()
         {
-            return _database.GetUsers();
+            return _database.GetItems();
         }
 
         public User GetUserById(int id)
         {
-            return _database.GetUserById(id);
+            return _database.GetItemById(id);
         }
 
-        public bool DeleteUserById(int id)
+        public bool DeleteUserById(User user)
         {
-           return _database.DeleteUserById(id);
+           return _database.DeleteItemById(user);
         }
 
         public bool EditUser(User user)
         {
-            return _database.EditUser(user);
+            return _database.EditItem(user);
         }
         
         public bool CreateUser(User user)
         {
-           return _database.CreateUser(user);
+           return _database.CreateItem(user);
         }
     }
 }

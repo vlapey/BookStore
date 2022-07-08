@@ -4,7 +4,7 @@ using Models;
 
 namespace Context
 {
-    public class EfUserRepository : IUserRepository
+    public class EfUserRepository : GenericRepository<User>, IUserRepository
     {
         private MsSqlContext _dataBase;
         
@@ -12,37 +12,33 @@ namespace Context
         {
             _dataBase = new MsSqlContext();
         }
-        public List<User> GetUsers()
+        public List<User> GetItems()
         {
-            return _dataBase.Users.ToList();
+            return _dataBase.Set<User>().ToList();
         }
 
-        public User GetUserById(int id)
+        public User GetItemById(int id)
         {
-            return _dataBase.Users.FirstOrDefault(user => user.Id == id);
+            return _dataBase.Set<User>().Find(id);
         }
-
-        public bool DeleteUserById(int id)
+        
+        public bool CreateItem(User item)
         {
-            User user = new User()
-            {
-                Id = id
-            };
-            var result = _dataBase.Users.Remove(user) != null;
+            var result = _dataBase.Set<User>().Add(item) != null;
             _dataBase.SaveChanges();
             return result;
         }
 
-        public bool EditUser(User user)
+        public bool EditItem(User item)
         {
-            var result = _dataBase.Users.Update(user) != null;
+            var result = _dataBase.Set<User>().Update(item) != null;
             _dataBase.SaveChanges();
             return result;
         }
-
-        public bool CreateUser(User user)
+        
+        public bool DeleteItemById(User item)
         {
-            var result = _dataBase.Users.Add(user) != null;
+            var result = _dataBase.Set<User>().Remove(item) != null;
             _dataBase.SaveChanges();
             return result;
         }

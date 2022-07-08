@@ -141,13 +141,17 @@ namespace BookStore.Menus
         private void Delete()
         {
             Console.WriteLine("Введите Id книги, которую хотите удалить");
-            int.TryParse(Console.ReadLine(), out int bookId);
-            if (bookId == 0)
+            int.TryParse(Console.ReadLine(), out int id);
+            if (id == 0)
             {
                 Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");
                 return;
             }
-            bool result = _bookService.DeleteBookById(bookId);
+            Book book = new Book()
+            {
+                Id = id
+            };
+            bool result = _bookService.DeleteBookById(book);
             if (result)
             {
                 Console.WriteLine("Книга успешно удалена");

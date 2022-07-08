@@ -1,27 +1,46 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Context
 {
-    public class GenericRepository<T> : IGenericRepository<T>
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public bool CreateEntity(T entity)
+        private MsSqlContext _dataBase;
+
+        public GenericRepository()
         {
-            throw new System.NotImplementedException();
+            _dataBase = new MsSqlContext();
+        }
+        
+        public List<T> GetItems()
+        {
+            return _dataBase.Set<T>().ToList();
         }
 
-        public List<T> GetEntity()
+        public T GetItemById(int id)
         {
-            throw new System.NotImplementedException();
+            return _dataBase.Set<T>().Find(id);
+        }
+        
+        public bool CreateItem(T item)
+        {
+            var result = _dataBase.Set<T>().Add(item) != null;
+            _dataBase.SaveChanges();
+            return result;
+        }
+        
+        public bool EditItem(T item)
+        {
+            var result = _dataBase.Set<T>().Update(item) != null;
+            _dataBase.SaveChanges();
+            return result;
         }
 
-        public bool DeleteEntityById(uint id)
+        public bool DeleteItemById(T item)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public bool EditEntity(T entity)
-        {
-            throw new System.NotImplementedException();
+            var result = _dataBase.Set<T>().Remove(item) != null;
+            _dataBase.SaveChanges();
+            return result;
         }
     }
 }

@@ -130,8 +130,17 @@ namespace BookStore.Menus
         private void Delete()
         {
             Console.WriteLine("Введите Id автора, которого хотите удалить");
-            int id = Convert.ToInt32(Console.ReadLine());
-            bool result = _authorService.DeleteAuthorById(id);
+            int.TryParse(Console.ReadLine(), out int id);
+            if (id == 0)
+            {
+                Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");
+                return;
+            }
+            Author author = new Author()
+            {
+                Id = id
+            };
+            bool result = _authorService.DeleteAuthorById(author);
             if (result)
             {
                 Console.WriteLine("Автор удален");

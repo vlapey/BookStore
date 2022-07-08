@@ -16,27 +16,27 @@ namespace Services
         
         public List<Author> GetAuthors()
         {
-            return _database.GetAuthors();
+            return _database.GetItems();
         }
         
         public Author GetAuthorById(int id)
         {
-           return _database.GetAuthorById(id);
+           return _database.GetItemById(id);
         }
         
-        public bool DeleteAuthorById(int id)
+        public bool DeleteAuthorById(Author author)
         {
-            return _database.DeleteAuthorById(id);
+            return _database.DeleteItemById(author);
         }
         
-        public bool EditAuthor(Author author)
+        public bool EditAuthor(Author item)
         {
-            return _database.EditAuthor(author);
+            return _database.EditItem(item);
         }
         
-        public bool CreateAuthor(Author author)
+        public bool CreateAuthor(Author item)
         {
-           return _database.CreateAuthor(author);
+           return _database.CreateItem(item);
         }
         
         public int GetAuthorIdByName(string name)

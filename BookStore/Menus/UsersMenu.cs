@@ -120,8 +120,18 @@ namespace BookStore.Menus
         private void Delete()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите удалить");
-            int id = Convert.ToInt32(Console.ReadLine());
-            bool result = _userService.DeleteUserById(id);
+            int.TryParse(Console.ReadLine(), out int id);
+            if (id == 0)
+            {
+                Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");
+                return;
+            }
+
+            User user = new User()
+            {
+                Id = id
+            };
+            bool result = _userService.DeleteUserById(user);
             if (result)
             {
                 Console.WriteLine("Пользователь удален");
