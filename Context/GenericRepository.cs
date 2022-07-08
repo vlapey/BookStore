@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Context
 {
@@ -39,7 +40,6 @@ namespace Context
         public bool DeleteItemById(T item)
         {
             var result = _dataBase.Set<T>().Remove(item) != null;
-            _dataBase.SaveChanges();
             return result;
         }
     }
