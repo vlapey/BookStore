@@ -18,7 +18,7 @@ namespace Context
             if (author == null)
             {
                 return 0;
-            }
+            }   
             return author.Id;
         }
     }

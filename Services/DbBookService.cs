@@ -15,8 +15,14 @@ namespace Services
             _database = applicationContext;
         }
         
-        public bool CreateBook(BookDto bookData)
+        public bool CreateBook(string bookName, int price, string authorName)
         {
+            BookDto bookData = new BookDto()
+            {
+                BookName = bookName,
+                BookPrice = price,
+                AuthorName = authorName
+            };
             EfAuthorRepository authorRepository = new EfAuthorRepository();
             var authorId = authorRepository.GetAuthorIdByName(bookData.AuthorName);
             if (authorId == 0)
@@ -46,13 +52,23 @@ namespace Services
             return _database.GetBookByName(name);
         }
         
-        public bool DeleteBookById(Book book)
+        public bool DeleteBook(int id)
         {
+            Book book = new Book()
+            {
+                Id = id
+            };
             return _database.DeleteItemById(book);
         }
         
-        public bool EditBook(BookDto bookData, int bookId)
+        public bool EditBook(string bookName, string authorName, int price, int bookId)
         {
+            BookDto bookData = new BookDto()
+            {
+                BookName = bookName,
+                BookPrice = price,
+                AuthorName = authorName
+            };
             EfAuthorRepository authorRepository = new EfAuthorRepository();
             var authorId = authorRepository.GetAuthorIdByName(bookData.AuthorName);
             if (authorId == 0)

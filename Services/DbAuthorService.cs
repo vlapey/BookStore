@@ -24,19 +24,32 @@ namespace Services
            return _database.GetItemById(id);
         }
         
-        public bool DeleteAuthorById(Author author)
+        public bool DeleteAuthor(int authorId)
         {
+            Author author = new Author()
+            {
+                Id = authorId
+            };
             return _database.DeleteItemById(author);
         }
         
-        public bool EditAuthor(Author item)
+        public bool EditAuthor(int authorId, string authorName)
         {
-            return _database.EditItem(item);
+            Author author = new Author()
+            {
+                Id = authorId,
+                Name = authorName,
+            };
+            return _database.EditItem(author);
         }
         
-        public bool CreateAuthor(Author item)
+        public bool CreateAuthor(string authorName)
         {
-           return _database.CreateItem(item);
+            Author author = new Author()
+            {
+                Name = authorName
+            };
+           return _database.CreateItem(author);
         }
         
         public int GetAuthorIdByName(string name)

@@ -90,13 +90,7 @@ namespace BookStore.Menus
             }
             Console.WriteLine("Введите автора книги, которую хотите добавить");
             string authorName = Console.ReadLine();
-            BookDto bookData = new BookDto()
-            {
-                BookName = bookName,
-                BookPrice = price,
-                AuthorName = authorName
-            };
-            bool result = _bookService.CreateBook(bookData);
+            bool result = _bookService.CreateBook(bookName, price, authorName);
             if (result)
             {
                 Console.WriteLine("Книга добавлена");
@@ -124,13 +118,7 @@ namespace BookStore.Menus
             }
             Console.WriteLine("Введите автора книги, на которого хотите поменять");
             string authorName = Console.ReadLine();
-            BookDto bookData = new BookDto()
-            {
-                BookName = bookName,
-                BookPrice = price,
-                AuthorName = authorName
-            };
-            bool result = _bookService.EditBook(bookData, bookId);
+            bool result = _bookService.EditBook(bookName, authorName, price, bookId);
             if (result)
             {
                 Console.WriteLine("Книга изменена");
@@ -141,22 +129,14 @@ namespace BookStore.Menus
         private void Delete()
         {
             Console.WriteLine("Введите Id книги, которую хотите удалить");
-            int.TryParse(Console.ReadLine(), out int id);
-            if (id == 0)
+            int.TryParse(Console.ReadLine(), out int bookId);
+            if (bookId == 0)
             {
                 Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");
                 return;
             }
-            Book book = new Book()
-            {
-                Id = id
-            };
-            bool result = _bookService.DeleteBookById(book);
-            if (result)
-            {
-                Console.WriteLine("Книга успешно удалена");
-            }
-            else Console.WriteLine("Такой книги не существует");
+            var result = _bookService.DeleteBook(bookId);
+            Console.WriteLine(result ? "Книга успешно удалена" : "Такой книги не существует");
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Models;
-using Services.Dto;
 
 namespace Services.Interfaces
 {
@@ -8,8 +7,8 @@ namespace Services.Interfaces
     {
         public List<Book> GetBooks();
         public Book GetBookByName(string name);
-        public bool DeleteBookById(Book book);
-        public bool EditBook(BookDto bookData, int bookId);
-        public bool CreateBook(BookDto bookData);
+        public bool DeleteBook(int id);
+        public bool EditBook(string bookName, string authorName, int price, int bookId);
+        public bool CreateBook(string bookName, int price, string authorName);
     }
 }

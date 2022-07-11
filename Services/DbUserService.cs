@@ -24,18 +24,33 @@ namespace Services
             return _database.GetItemById(id);
         }
 
-        public bool DeleteUserById(User user)
+        public bool DeleteUser(int id)
         {
+            User user = new User()
+            {
+                Id = id
+            };
            return _database.DeleteItemById(user);
         }
 
-        public bool EditUser(User user)
+        public bool EditUser(int userId, string login, string password)
         {
+            User user = new User()
+            {
+                Id = userId,
+                Login = login,
+                Password = password,
+            };
             return _database.EditItem(user);
         }
         
-        public bool CreateUser(User user)
+        public bool CreateUser(string login, string password)
         {
+            User user = new User()
+            {
+                Login = login,
+                Password = password,
+            }; 
            return _database.CreateItem(user);
         }
     }

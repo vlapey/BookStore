@@ -82,17 +82,8 @@ namespace BookStore.Menus
             string login = Console.ReadLine();
             Console.WriteLine("Введите пароль");
             string password = Console.ReadLine();
-            User user = new User()
-            {
-                Login = login,
-                Password = password,
-            }; 
-            bool result = _userService.CreateUser(user);
-            if (result)
-            {
-                Console.WriteLine("Пользователь добавлен");
-            }
-            else Console.WriteLine("Ошибка, пользователь не добавлен");
+            bool result = _userService.CreateUser(login, password);
+            Console.WriteLine(result ? "Пользователь добавлен" : "Ошибка, пользователь не добавлен");
         }
 
         private void Edit()
@@ -103,40 +94,21 @@ namespace BookStore.Menus
             string login = Console.ReadLine();
             Console.WriteLine("Введите пароль пользователя, на который хотите поменять");
             string password = Console.ReadLine();
-            User user = new User()
-            {
-                Id = userId,
-                Login = login,
-                Password = password,
-            };
-            bool result = _userService.EditUser(user);
-            if (result)
-            {
-                Console.WriteLine("Пользователь изменен");
-            }
-            else Console.WriteLine("Ошибка, пользователь не изменен");
+            bool result = _userService.EditUser(userId, login, password);
+            Console.WriteLine(result ? "Пользователь изменен" : "Ошибка, пользователь не изменен");
         }
 
         private void Delete()
         {
             Console.WriteLine("Введите Id пользователя, которого хотите удалить");
-            int.TryParse(Console.ReadLine(), out int id);
-            if (id == 0)
+            int.TryParse(Console.ReadLine(), out int userId);
+            if (userId == 0)
             {
                 Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");
                 return;
             }
-
-            User user = new User()
-            {
-                Id = id
-            };
-            bool result = _userService.DeleteUserById(user);
-            if (result)
-            {
-                Console.WriteLine("Пользователь удален");
-            }
-            else Console.WriteLine("Такого пользователя не существует");
+            bool result = _userService.DeleteUser(userId);
+            Console.WriteLine(result ? "Пользователь удален" : "Такого пользователя не существует");
         }
     }
 }
