@@ -26,11 +26,7 @@ namespace Services
 
         public bool DeleteUser(int id)
         {
-            User user = new User()
-            {
-                Id = id
-            };
-           return _unitOfWork.UserRepository.DeleteItemById(user);
+            return _unitOfWork.UserRepository.DeleteItemById(id);
         }
 
         public bool EditUser(int userId, string login, string password)

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using Models;
 
 namespace Context
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
         private MsSqlContext _dataBase;
 
@@ -36,11 +37,19 @@ namespace Context
             return result;
         }
 
-        public bool DeleteItemById(T item)
+        public bool DeleteItemById(int id)
         {
-            var result = _dataBase.Set<T>().Remove(item) != null;
-            _dataBase.SaveChanges();
-            return result;
+            var deletingEntity = _dataBase.Set<T>().FirstOrDefault(t => t.Id == id);
+
+            if (deletingEntity is null)
+            {
+                return false;
+            }
+            
+            _dataBase.Set<T>().Remove(deletingEntity);
+            var savedAmount = _dataBase.SaveChanges();
+
+            return savedAmount > 0;
         }
     }
 }

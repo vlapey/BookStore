@@ -26,11 +26,7 @@ namespace Services
         
         public bool DeleteAuthor(int authorId)
         {
-            Author author = new Author()
-            {
-                Id = authorId
-            };
-            return _unitOfWork.AuthorRepository.DeleteItemById(author);
+            return _unitOfWork.AuthorRepository.DeleteItemById(authorId);
         }
         
         public bool EditAuthor(int authorId, string authorName)

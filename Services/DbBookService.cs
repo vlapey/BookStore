@@ -32,7 +32,7 @@ namespace Services
             {
                 Name = bookData.BookName,
                 Price = bookData.BookPrice,
-                AuthorId = authorId
+                AuthorId = authorId,
             };
             return _unitOfWork.BookRepository.CreateItem(book);
         }
@@ -49,11 +49,7 @@ namespace Services
         
         public bool DeleteBook(int id)
         {
-            Book book = new Book()
-            {
-                Id = id
-            };
-            return _unitOfWork.BookRepository.DeleteItemById(book);
+            return _unitOfWork.BookRepository.DeleteItemById(id);
         }
         
         public bool EditBook(string bookName, string authorName, int price, int bookId)
