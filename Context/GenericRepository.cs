@@ -39,6 +39,7 @@ namespace Context
         public bool DeleteItemById(T item)
         {
             var result = _dataBase.Set<T>().Remove(item) != null;
+            _dataBase.SaveChanges();
             return result;
         }
     }

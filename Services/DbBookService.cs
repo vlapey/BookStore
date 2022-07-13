@@ -23,8 +23,7 @@ namespace Services
                 BookPrice = price,
                 AuthorName = authorName
             };
-            EfAuthorRepository authorRepository = new EfAuthorRepository();
-            var authorId = authorRepository.GetAuthorIdByName(bookData.AuthorName);
+            var authorId = _unitOfWork.AuthorRepository.GetAuthorIdByName(bookData.AuthorName);
             if (authorId == 0)
             {
                 return false;
