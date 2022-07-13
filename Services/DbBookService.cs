@@ -32,11 +32,7 @@ namespace Services
             {
                 Name = bookData.BookName,
                 Price = bookData.BookPrice,
-                Author = new Author()
-                {
-                    Id = authorId,
-                    Name = bookData.AuthorName
-                }
+                AuthorId = authorId
             };
             return _unitOfWork.BookRepository.CreateItem(book);
         }
@@ -79,11 +75,7 @@ namespace Services
                 Id = bookId,
                 Name = bookData.BookName,
                 Price = bookData.BookPrice,
-                Author = new Author()
-                {
-                    Id = authorId,
-                    Name = bookData.AuthorName
-                }
+                AuthorId = authorId
             };
             return _unitOfWork.BookRepository.EditItem(book);
         }
