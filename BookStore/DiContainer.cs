@@ -6,11 +6,9 @@ namespace BookStore
 {
     public static class DiContainer
     {
-        private static  IAuthorRepository AuthorRepository => new EfAuthorRepository();
-        private static  IBookRepository BookRepository => new EfBookRepository();
-        private static  IUserRepository UserRepository => new EfUserRepository();
-        public static IBookService BookService => new DbBookService(BookRepository);
-        public static IAuthorService AuthorService => new DbAuthorService(AuthorRepository);
-        public static IUserService UserService => new DbUserService(UserRepository);
+        private static IUnitOfWork UnitOfWork => new UnitOfWork();
+        public static IBookService BookService => new DbBookService(UnitOfWork);
+        public static IAuthorService AuthorService => new DbAuthorService(UnitOfWork);
+        public static IUserService UserService => new DbUserService(UnitOfWork);
     }
 }

@@ -7,21 +7,21 @@ namespace Services
 {
     public class DbUserService : IUserService
     {
-        private static IUserRepository _database;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DbUserService(IUserRepository applicationContext)
+        public DbUserService(IUnitOfWork unitOfWork)
         {
-            _database = applicationContext;
+            _unitOfWork = unitOfWork;
         }
 
         public List<User> GetUsers()
         {
-            return _database.GetItems();
+            return _unitOfWork.UserRepository.GetItems();
         }
 
         public User GetUserById(int id)
         {
-            return _database.GetItemById(id);
+            return _unitOfWork.UserRepository.GetItemById(id);
         }
 
         public bool DeleteUser(int id)
@@ -30,7 +30,7 @@ namespace Services
             {
                 Id = id
             };
-           return _database.DeleteItemById(user);
+           return _unitOfWork.UserRepository.DeleteItemById(user);
         }
 
         public bool EditUser(int userId, string login, string password)
@@ -41,7 +41,7 @@ namespace Services
                 Login = login,
                 Password = password,
             };
-            return _database.EditItem(user);
+            return _unitOfWork.UserRepository.EditItem(user);
         }
         
         public bool CreateUser(string login, string password)
@@ -51,7 +51,7 @@ namespace Services
                 Login = login,
                 Password = password,
             }; 
-           return _database.CreateItem(user);
+           return _unitOfWork.UserRepository.CreateItem(user);
         }
     }
 }

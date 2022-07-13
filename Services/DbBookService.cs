@@ -8,11 +8,11 @@ namespace Services
 {
     public class DbBookService : IBookService
     {
-        private static IBookRepository _database;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DbBookService(IBookRepository applicationContext)
+        public DbBookService(IUnitOfWork unitOfWork)
         {
-            _database = applicationContext;
+            _unitOfWork = unitOfWork;
         }
         
         public bool CreateBook(string bookName, int price, string authorName)
@@ -39,17 +39,17 @@ namespace Services
                     Name = bookData.AuthorName
                 }
             };
-            return _database.CreateItem(book);
+            return _unitOfWork.BookRepository.CreateItem(book);
         }
         
         public List<Book> GetBooks()
         {
-            return _database.GetItems();
+            return _unitOfWork.BookRepository.GetItems();
         }
        
         public Book GetBookByName(string name)
         {
-            return _database.GetBookByName(name);
+            return _unitOfWork.BookRepository.GetBookByName(name);
         }
         
         public bool DeleteBook(int id)
@@ -58,7 +58,7 @@ namespace Services
             {
                 Id = id
             };
-            return _database.DeleteItemById(book);
+            return _unitOfWork.BookRepository.DeleteItemById(book);
         }
         
         public bool EditBook(string bookName, string authorName, int price, int bookId)
@@ -86,7 +86,7 @@ namespace Services
                     Name = bookData.AuthorName
                 }
             };
-            return _database.EditItem(book);
+            return _unitOfWork.BookRepository.EditItem(book);
         }
     }
 }
