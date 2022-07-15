@@ -8,17 +8,22 @@ namespace Services
 {
     public class DbBookService : IBookService
     {
-        private static IBookRepository _database;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DbBookService(IBookRepository applicationContext)
+        public DbBookService(IUnitOfWork unitOfWork)
         {
-            _database = applicationContext;
+            _unitOfWork = unitOfWork;
         }
         
-        public bool CreateBook(BookDto bookData)
+        public bool CreateBook(string bookName, int price, string authorName)
         {
-            AuthorRepository authorRepository = new AuthorRepository();
-            var authorId = authorRepository.GetAuthorIdByName(bookData.AuthorName);
+            BookDto bookData = new BookDto()
+            {
+                BookName = bookName,
+                BookPrice = price,
+                AuthorName = authorName
+            };
+            var authorId = _unitOfWork.AuthorRepository.GetAuthorIdByName(bookData.AuthorName);
             if (authorId == 0)
             {
                 return false;
@@ -27,33 +32,35 @@ namespace Services
             {
                 Name = bookData.BookName,
                 Price = bookData.BookPrice,
-                Author = new Author()
-                {
-                    Id = authorId,
-                    Name = bookData.AuthorName
-                }
+                AuthorId = authorId,
             };
-            return _database.CreateBook(book);
+            return _unitOfWork.BookRepository.CreateItem(book);
         }
         
         public List<Book> GetBooks()
         {
-            return _database.GetBooks();
+            return _unitOfWork.BookRepository.GetItems();
         }
        
         public Book GetBookByName(string name)
         {
-            return _database.GetBookByName(name);
+            return _unitOfWork.BookRepository.GetBookByName(name);
         }
         
-        public bool DeleteBookById(int id)
+        public bool DeleteBook(int id)
         {
-            return _database.DeleteBookById(id);
+            return _unitOfWork.BookRepository.DeleteItemById(id);
         }
         
-        public bool EditBook(BookDto bookData, int bookId)
+        public bool EditBook(string bookName, string authorName, int price, int bookId)
         {
-            AuthorRepository authorRepository = new AuthorRepository();
+            BookDto bookData = new BookDto()
+            {
+                BookName = bookName,
+                BookPrice = price,
+                AuthorName = authorName
+            };
+            EfAuthorRepository authorRepository = new EfAuthorRepository();
             var authorId = authorRepository.GetAuthorIdByName(bookData.AuthorName);
             if (authorId == 0)
             {
@@ -64,13 +71,9 @@ namespace Services
                 Id = bookId,
                 Name = bookData.BookName,
                 Price = bookData.BookPrice,
-                Author = new Author()
-                {
-                    Id = authorId,
-                    Name = bookData.AuthorName
-                }
+                AuthorId = authorId
             };
-            return _database.EditBook(book);
+            return _unitOfWork.BookRepository.EditItem(book);
         }
     }
 }

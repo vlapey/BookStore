@@ -7,36 +7,47 @@ namespace Services
 {
     public class DbUserService : IUserService
     {
-        private static IUserRepository _database;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DbUserService(IUserRepository applicationContext)
+        public DbUserService(IUnitOfWork unitOfWork)
         {
-            _database = applicationContext;
+            _unitOfWork = unitOfWork;
         }
 
         public List<User> GetUsers()
         {
-            return _database.GetUsers();
+            return _unitOfWork.UserRepository.GetItems();
         }
 
         public User GetUserById(int id)
         {
-            return _database.GetUserById(id);
+            return _unitOfWork.UserRepository.GetItemById(id);
         }
 
-        public bool DeleteUserById(int id)
+        public bool DeleteUser(int id)
         {
-           return _database.DeleteUserById(id);
+            return _unitOfWork.UserRepository.DeleteItemById(id);
         }
 
-        public bool EditUser(User user)
+        public bool EditUser(int userId, string login, string password)
         {
-            return _database.EditUser(user);
+            User user = new User()
+            {
+                Id = userId,
+                Login = login,
+                Password = password,
+            };
+            return _unitOfWork.UserRepository.EditItem(user);
         }
         
-        public bool CreateUser(User user)
+        public bool CreateUser(string login, string password)
         {
-           return _database.CreateUser(user);
+            User user = new User()
+            {
+                Login = login,
+                Password = password,
+            }; 
+           return _unitOfWork.UserRepository.CreateItem(user);
         }
     }
 }
