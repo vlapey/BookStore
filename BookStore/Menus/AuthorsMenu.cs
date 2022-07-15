@@ -70,7 +70,7 @@ namespace BookStore.Menus
         private void ShowAuthorById()
         {
             Console.WriteLine("Введите Id автора, которого хотите вывести");
-            int authorId = Convert.ToInt32(Console.ReadLine());
+            var authorId = Convert.ToInt32(Console.ReadLine());
             Author author = _authorService.GetAuthorById(authorId);
             if (author == null)
             {
@@ -84,7 +84,7 @@ namespace BookStore.Menus
         {
             Console.WriteLine("Введите имя автора, чтобы получить его Id");
             string name = Console.ReadLine();
-            int result = _authorService.GetAuthorIdByName(name);
+            var result = _authorService.GetAuthorIdByName(name);
             if (result == 0)
             {
                 Console.WriteLine("Такого автора не существует");
@@ -96,47 +96,31 @@ namespace BookStore.Menus
         {
             Console.WriteLine("Введите Имя");
             string authorName = Console.ReadLine();
-            Author author = new Author()
-            {
-                Name = authorName,
-            };
-            var result = _authorService.CreateAuthor(author);
-            if (result)
-            {
-                Console.WriteLine("Автор добавлен");
-            }
-            else Console.WriteLine("Автор не добавлен");
+            var result = _authorService.CreateAuthor(authorName);
+            Console.WriteLine(result ? "Автор добавлен" : "Автор не добавлен");
         }
 
         private void Edit()
         {
             Console.WriteLine("Введите Id автора, которого хотите поменять");
-            int userId = Convert.ToInt32(Console.ReadLine());
+            var authorId = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Введите Имя автора, на которое хотите поменять");
             string authorName = Console.ReadLine();
-            Author author = new Author()
-            {
-                Id = userId,
-                Name = authorName,
-            };
-            bool result = _authorService.EditAuthor(author);
-            if (result)
-            {
-                Console.WriteLine("Автор изменен");
-            }
-            else Console.WriteLine("Ошибка, автор не изменен");
+            var result = _authorService.EditAuthor(authorId, authorName);
+            Console.WriteLine(result ? "Автор изменен" : "Ошибка, автор не изменен");
         }
 
         private void Delete()
         {
             Console.WriteLine("Введите Id автора, которого хотите удалить");
-            int id = Convert.ToInt32(Console.ReadLine());
-            bool result = _authorService.DeleteAuthorById(id);
-            if (result)
+            int.TryParse(Console.ReadLine(), out int authorId);
+            if (authorId == 0)
             {
-                Console.WriteLine("Автор удален");
+                Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");
+                return;
             }
-            else Console.WriteLine("Такого автора не существует");
+            var result = _authorService.DeleteAuthor(authorId);
+            Console.WriteLine(result ? "Автор удален" : "Такого автора не существует");
         }
     }
 }

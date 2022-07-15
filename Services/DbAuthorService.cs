@@ -7,41 +7,50 @@ namespace Services
 {
     public class DbAuthorService : IAuthorService
     {
-        private static IAuthorRepository _database;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DbAuthorService(IAuthorRepository applicationContext)
+        public DbAuthorService(IUnitOfWork unitOfWork)
         {
-            _database = applicationContext;
+            _unitOfWork = unitOfWork;
         }
-        
+
         public List<Author> GetAuthors()
         {
-            return _database.GetAuthors();
+            return _unitOfWork.AuthorRepository.GetItems();
         }
         
         public Author GetAuthorById(int id)
         {
-           return _database.GetAuthorById(id);
+           return _unitOfWork.AuthorRepository.GetItemById(id);
         }
         
-        public bool DeleteAuthorById(int id)
+        public bool DeleteAuthor(int authorId)
         {
-            return _database.DeleteAuthorById(id);
+            return _unitOfWork.AuthorRepository.DeleteItemById(authorId);
         }
         
-        public bool EditAuthor(Author author)
+        public bool EditAuthor(int authorId, string authorName)
         {
-            return _database.EditAuthor(author);
+            Author author = new Author()
+            {
+                Id = authorId,
+                Name = authorName,
+            };
+            return _unitOfWork.AuthorRepository.EditItem(author);
         }
         
-        public bool CreateAuthor(Author author)
+        public bool CreateAuthor(string authorName)
         {
-           return _database.CreateAuthor(author);
+            Author author = new Author()
+            {
+                Name = authorName
+            };
+           return _unitOfWork.AuthorRepository.CreateItem(author);
         }
         
         public int GetAuthorIdByName(string name)
         {
-            return _database.GetAuthorIdByName(name);
+            return _unitOfWork.AuthorRepository.GetAuthorIdByName(name);
         }
     }
 }
