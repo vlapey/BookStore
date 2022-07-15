@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Context
@@ -32,7 +33,7 @@ namespace Context
         
         public bool EditItem(T item)
         {
-            var updatingEntity = _dataBase.Set<T>().FirstOrDefault(t => t.Id == item.Id);
+            var updatingEntity = _dataBase.Set<T>().AsNoTracking().FirstOrDefault(t => t.Id == item.Id);
 
             if (updatingEntity is null)
             {
@@ -46,7 +47,7 @@ namespace Context
 
         public bool DeleteItemById(int id)
         {
-            var deletingEntity = _dataBase.Set<T>().FirstOrDefault(t => t.Id == id);
+            var deletingEntity = _dataBase.Set<T>().AsNoTracking().FirstOrDefault(t => t.Id == id);
 
             if (deletingEntity is null)
             {
