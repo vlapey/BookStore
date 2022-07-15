@@ -32,6 +32,13 @@ namespace Context
         
         public bool EditItem(T item)
         {
+            var updatingEntity = _dataBase.Set<T>().FirstOrDefault(t => t.Id == item.Id);
+
+            if (updatingEntity is null)
+            {
+                return false;
+            }
+            
             var result = _dataBase.Set<T>().Update(item) != null;
             _dataBase.SaveChanges();
             return result;
