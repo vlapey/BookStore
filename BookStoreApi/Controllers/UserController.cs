@@ -26,11 +26,11 @@ public class UserController : ControllerBase
     {
         return _userService.GetUserById(id);
     }
-
+    
     [HttpPost]
-    public bool DeleteUser(int id)
+    public bool CreateUser(string login, string password)
     {
-        return _userService.DeleteUser(id);
+        return _userService.CreateUser(login, password);
     }
     
     [HttpPost]
@@ -39,9 +39,9 @@ public class UserController : ControllerBase
         return _userService.EditUser(userId, login, password);
     }
     
-    [HttpPost]
-    public bool CreateUser(string login, string password)
+    [HttpDelete]
+    public bool DeleteUser(int id)
     {
-        return _userService.CreateUser(login, password);
+        return _userService.DeleteUser(id);
     }
 }

@@ -118,7 +118,7 @@ namespace BookStore.Menus
             }
             Console.WriteLine("Введите автора книги, на которого хотите поменять");
             string authorName = Console.ReadLine();
-            bool result = _bookService.EditBook(bookName, authorName, price, bookId);
+            bool result = _bookService.EditBook(bookId, bookName, price, authorName);
             if (result)
             {
                 Console.WriteLine("Книга изменена");

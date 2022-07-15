@@ -45,7 +45,7 @@ namespace Context
             return result;
         }
 
-        public bool DeleteItemById(int id)
+        public bool DeleteItem(int id)
         {
             var deletingEntity = _dataBase.Set<T>().AsNoTracking().FirstOrDefault(t => t.Id == id);
 

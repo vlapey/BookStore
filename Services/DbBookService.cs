@@ -15,6 +15,16 @@ namespace Services
             _unitOfWork = unitOfWork;
         }
         
+        public List<Book> GetBooks()
+        {
+            return _unitOfWork.BookRepository.GetItems();
+        }
+       
+        public Book GetBookByName(string name)
+        {
+            return _unitOfWork.BookRepository.GetBookByName(name);
+        }
+
         public bool CreateBook(string bookName, int price, string authorName)
         {
             BookDto bookData = new BookDto()
@@ -37,22 +47,7 @@ namespace Services
             return _unitOfWork.BookRepository.CreateItem(book);
         }
         
-        public List<Book> GetBooks()
-        {
-            return _unitOfWork.BookRepository.GetItems();
-        }
-       
-        public Book GetBookByName(string name)
-        {
-            return _unitOfWork.BookRepository.GetBookByName(name);
-        }
-        
-        public bool DeleteBook(int id)
-        {
-            return _unitOfWork.BookRepository.DeleteItemById(id);
-        }
-        
-        public bool EditBook(string bookName, string authorName, int price, int bookId)
+        public bool EditBook(int bookId, string bookName, int price, string authorName)
         {
             BookDto bookData = new BookDto()
             {
@@ -74,6 +69,11 @@ namespace Services
                 AuthorId = authorId
             };
             return _unitOfWork.BookRepository.EditItem(book);
+        }
+        
+        public bool DeleteBook(int id)
+        {
+            return _unitOfWork.BookRepository.DeleteItem(id);
         }
     }
 }

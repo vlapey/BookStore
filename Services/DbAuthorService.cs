@@ -24,19 +24,9 @@ namespace Services
            return _unitOfWork.AuthorRepository.GetItemById(id);
         }
         
-        public bool DeleteAuthor(int authorId)
+        public int GetAuthorIdByName(string name)
         {
-            return _unitOfWork.AuthorRepository.DeleteItemById(authorId);
-        }
-        
-        public bool EditAuthor(int authorId, string authorName)
-        {
-            Author author = new Author()
-            {
-                Id = authorId,
-                Name = authorName,
-            };
-            return _unitOfWork.AuthorRepository.EditItem(author);
+            return _unitOfWork.AuthorRepository.GetAuthorIdByName(name);
         }
         
         public bool CreateAuthor(string authorName)
@@ -48,9 +38,19 @@ namespace Services
            return _unitOfWork.AuthorRepository.CreateItem(author);
         }
         
-        public int GetAuthorIdByName(string name)
+        public bool EditAuthor(int authorId, string authorName)
         {
-            return _unitOfWork.AuthorRepository.GetAuthorIdByName(name);
+            Author author = new Author()
+            {
+                Id = authorId,
+                Name = authorName,
+            };
+            return _unitOfWork.AuthorRepository.EditItem(author);
+        }
+
+        public bool DeleteAuthor(int authorId)
+        {
+            return _unitOfWork.AuthorRepository.DeleteItem(authorId);
         }
     }
 }
