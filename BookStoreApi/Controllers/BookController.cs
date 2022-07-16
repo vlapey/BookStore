@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookStoreApi.Dto;
+using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
 
@@ -28,15 +29,15 @@ public class BookController : ControllerBase
     }
     
     [HttpPost]
-    public bool CreateBook(string bookName, int price, string authorName)
+    public bool CreateBook(BookDto book)
     {
-        return _bookService.CreateBook(bookName, price, authorName);
+        return _bookService.CreateBook(book.BookName, book.BookPrice, book.AuthorName);
     }
     
     [HttpPost]
-    public bool EditBook(int bookId, string bookName,int price, string authorName)
+    public bool EditBook(BookDto book)
     {
-        return _bookService.EditBook(bookId, bookName, price, authorName);
+        return _bookService.EditBook(book.BookId, book.BookName, book.BookPrice, book.AuthorName);
     }
     
     [HttpDelete]

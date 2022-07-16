@@ -1,3 +1,4 @@
+using BookStoreApi.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
@@ -28,15 +29,15 @@ public class UserController : ControllerBase
     }
     
     [HttpPost]
-    public bool CreateUser(string login, string password)
+    public bool CreateUser(UserDto user)
     {
-        return _userService.CreateUser(login, password);
+        return _userService.CreateUser(user.Login, user.Password);
     }
     
     [HttpPost]
-    public bool EditUser(int userId, string login, string password)
+    public bool EditUser(UserDto user)
     {
-        return _userService.EditUser(userId, login, password);
+        return _userService.EditUser(user.UserId, user.Login, user.Password);
     }
     
     [HttpDelete]
