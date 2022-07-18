@@ -1,3 +1,5 @@
+using AutoMapper;
+using BookStoreApi;
 using Context;
 using Services;
 using Services.Interfaces;
@@ -10,9 +12,15 @@ builder.Services.AddScoped<IUserService, DbUserService>();
 builder.Services.AddScoped<IAuthorService, DbAuthorService>();
 
 builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var config = new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile(new AutoMapperProfile());
+});
+var mapper = config.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 

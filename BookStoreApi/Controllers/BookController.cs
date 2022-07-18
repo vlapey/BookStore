@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
 using BookStoreApi.Dto;
+using AutoMapper;
 
 namespace BookStoreApi.Controllers;
 
@@ -12,11 +13,13 @@ public class BookController : ControllerBase
 {
     private readonly IBookService _bookService;
     private readonly IAuthorService _authorService;
+    private readonly IMapper _mapper;
     
-    public BookController(IBookService bookService, IAuthorService authorService)
+    public BookController(IBookService bookService, IAuthorService authorService, IMapper mapper)
     {
         _bookService = bookService;
         _authorService = authorService;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -39,12 +42,7 @@ public class BookController : ControllerBase
         {
             return false;
         }
-        Book book = new Book()
-        {
-            Name = bookData.BookName,
-            Price = bookData.BookPrice,
-            AuthorId = authorId
-        };
+        var book = _mapper.Map<Book>(bookData);
         return _bookService.CreateBook(book);
     }
     
@@ -56,13 +54,7 @@ public class BookController : ControllerBase
         {
             return false;
         }
-        Book book = new Book()
-        {
-            Id = bookData.BookId,
-            Name = bookData.BookName,
-            Price = bookData.BookPrice,
-            AuthorId = authorId
-        };
+        var book = _mapper.Map<Book>(bookData);
         return _bookService.EditBook(book);
     }
     

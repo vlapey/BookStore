@@ -3,6 +3,7 @@ using BookStoreApi.DtoWithId;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
+using AutoMapper;
 
 namespace BookStoreApi.Controllers;
 
@@ -11,10 +12,12 @@ namespace BookStoreApi.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly IMapper _mapper;
     
-    public UserController(IUserService userService)
+    public UserController(IUserService userService, IMapper mapper)
     {
         _userService = userService;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -32,23 +35,14 @@ public class UserController : ControllerBase
     [HttpPost]
     public bool CreateUser(UserDto userData)
     {
-        User user = new User()
-        {
-            Login = userData.Login,
-            Password = userData.Password
-        };
+        var user = _mapper.Map<User>(userData);
         return _userService.CreateUser(user);
     }
     
     [HttpPost]
     public bool EditUser(UserDtoWithId userData)
     {
-        User user = new User()
-        {
-            Id = userData.UserId,
-            Login = userData.Login,
-            Password = userData.Password
-        };
+        var user = _mapper.Map<User>(userData);
         return _userService.EditUser(user);
     }
     
