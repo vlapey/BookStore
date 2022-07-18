@@ -2,7 +2,6 @@
 using Context;
 using Models;
 using Services.Interfaces;
-using Services.Dto;
 
 namespace Services
 {
@@ -25,49 +24,13 @@ namespace Services
             return _unitOfWork.BookRepository.GetBookByName(name);
         }
 
-        public bool CreateBook(string bookName, int price, string authorName)
+        public bool CreateBook(Book book)
         {
-            BookDto bookData = new BookDto()
-            {
-                BookName = bookName,
-                BookPrice = price,
-                AuthorName = authorName
-            };
-            var authorId = _unitOfWork.AuthorRepository.GetAuthorIdByName(bookData.AuthorName);
-            if (authorId == 0)
-            {
-                return false;
-            }
-            Book book = new Book()
-            {
-                Name = bookData.BookName,
-                Price = bookData.BookPrice,
-                AuthorId = authorId,
-            };
             return _unitOfWork.BookRepository.CreateItem(book);
         }
         
-        public bool EditBook(int bookId, string bookName, int price, string authorName)
+        public bool EditBook(Book book)
         {
-            BookDto bookData = new BookDto()
-            {
-                BookName = bookName,
-                BookPrice = price,
-                AuthorName = authorName
-            };
-            EfAuthorRepository authorRepository = new EfAuthorRepository();
-            var authorId = authorRepository.GetAuthorIdByName(bookData.AuthorName);
-            if (authorId == 0)
-            {
-                return false;
-            }
-            Book book = new Book()
-            {
-                Id = bookId,
-                Name = bookData.BookName,
-                Price = bookData.BookPrice,
-                AuthorId = authorId
-            };
             return _unitOfWork.BookRepository.EditItem(book);
         }
         

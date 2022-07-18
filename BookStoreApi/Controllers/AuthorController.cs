@@ -1,4 +1,5 @@
 using BookStoreApi.Dto;
+using BookStoreApi.DtoWithId;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
@@ -35,15 +36,24 @@ public class AuthorController : ControllerBase
     }
     
     [HttpPost]
-    public bool CreateAuthor(AuthorDto author)
+    public bool CreateAuthor(AuthorDto authorData)
     {
-        return _authorService.CreateAuthor(author.AuthorName);
+        Author author = new Author()
+        {
+            Name = authorData.AuthorName
+        };
+        return _authorService.CreateAuthor(author);
     }
     
     [HttpPost]
-    public bool EditAuthor(AuthorDto author)
+    public bool EditAuthor(AuthorDtoWithId authorData)
     {
-        return _authorService.EditAuthor(author.AuthorId, author.AuthorName);
+        Author author = new Author()
+        {
+            Id = authorData.AuthorId,
+            Name = authorData.AuthorName
+        };
+        return _authorService.EditAuthor(author);
     }
     
     [HttpDelete]

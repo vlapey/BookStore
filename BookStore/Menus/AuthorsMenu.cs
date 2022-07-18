@@ -96,7 +96,11 @@ namespace BookStore.Menus
         {
             Console.WriteLine("Введите Имя");
             string authorName = Console.ReadLine();
-            var result = _authorService.CreateAuthor(authorName);
+            Author author = new Author()
+            {
+                Name = authorName
+            };
+            var result = _authorService.CreateAuthor(author);
             Console.WriteLine(result ? "Автор добавлен" : "Автор не добавлен");
         }
 
@@ -106,7 +110,12 @@ namespace BookStore.Menus
             var authorId = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Введите Имя автора, на которое хотите поменять");
             string authorName = Console.ReadLine();
-            var result = _authorService.EditAuthor(authorId, authorName);
+            Author author = new Author()
+            {
+                Id = authorId,
+                Name = authorName,
+            };
+            var result = _authorService.EditAuthor(author);
             Console.WriteLine(result ? "Автор изменен" : "Ошибка, автор не изменен");
         }
 

@@ -29,22 +29,13 @@ namespace Services
             return _unitOfWork.AuthorRepository.GetAuthorIdByName(name);
         }
         
-        public bool CreateAuthor(string authorName)
+        public bool CreateAuthor(Author author)
         {
-            Author author = new Author()
-            {
-                Name = authorName
-            };
-           return _unitOfWork.AuthorRepository.CreateItem(author);
+            return _unitOfWork.AuthorRepository.CreateItem(author);
         }
         
-        public bool EditAuthor(int authorId, string authorName)
+        public bool EditAuthor(Author author)
         {
-            Author author = new Author()
-            {
-                Id = authorId,
-                Name = authorName,
-            };
             return _unitOfWork.AuthorRepository.EditItem(author);
         }
 
