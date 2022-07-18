@@ -43,6 +43,7 @@ public class BookController : ControllerBase
             return false;
         }
         var book = _mapper.Map<Book>(bookData);
+        book.AuthorId = authorId;
         return _bookService.CreateBook(book);
     }
     
@@ -55,6 +56,7 @@ public class BookController : ControllerBase
             return false;
         }
         var book = _mapper.Map<Book>(bookData);
+        book.AuthorId = authorId;
         return _bookService.EditBook(book);
     }
     
