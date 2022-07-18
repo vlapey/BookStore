@@ -82,7 +82,12 @@ namespace BookStore.Menus
             string login = Console.ReadLine();
             Console.WriteLine("Введите пароль");
             string password = Console.ReadLine();
-            bool result = _userService.CreateUser(login, password);
+            User user = new User()
+            {
+                Login = login,
+                Password = password,
+            }; 
+            bool result = _userService.CreateUser(user);
             Console.WriteLine(result ? "Пользователь добавлен" : "Ошибка, пользователь не добавлен");
         }
 
@@ -94,7 +99,13 @@ namespace BookStore.Menus
             string login = Console.ReadLine();
             Console.WriteLine("Введите пароль пользователя, на который хотите поменять");
             string password = Console.ReadLine();
-            bool result = _userService.EditUser(userId, login, password);
+            User user = new User()
+            {
+                Id = userId,
+                Login = login,
+                Password = password,
+            }; 
+            bool result = _userService.EditUser(user);
             Console.WriteLine(result ? "Пользователь изменен" : "Ошибка, пользователь не изменен");
         }
 

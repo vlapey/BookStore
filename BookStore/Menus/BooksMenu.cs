@@ -1,6 +1,5 @@
 ﻿using System;
 using Models;
-using Services.Dto;
 using Services.Interfaces;
 
 namespace BookStore.Menus
@@ -90,12 +89,17 @@ namespace BookStore.Menus
             }
             Console.WriteLine("Введите автора книги, которую хотите добавить");
             string authorName = Console.ReadLine();
-            bool result = _bookService.CreateBook(bookName, price, authorName);
-            if (result)
+            Book book = new Book()
             {
-                Console.WriteLine("Книга добавлена");
-            }
-            else Console.WriteLine("Ошибка, книга не добавлена");
+                Name = bookName,
+                Price = price,
+                Author = new Author()
+                {
+                    Name = authorName
+                }
+            };
+            bool result = _bookService.CreateBook(book);
+            Console.WriteLine(result ? "Книга добавлена" : "Ошибка, книга не добавлена");
         }
         
         private void Edit()
@@ -118,12 +122,18 @@ namespace BookStore.Menus
             }
             Console.WriteLine("Введите автора книги, на которого хотите поменять");
             string authorName = Console.ReadLine();
-            bool result = _bookService.EditBook(bookName, authorName, price, bookId);
-            if (result)
+            Book book = new Book()
             {
-                Console.WriteLine("Книга изменена");
-            }
-            else Console.WriteLine("Ошибка, книга не изменена, проверьте введенные данные");
+                Id = bookId,
+                Name = bookName,
+                Price = price,
+                Author = new Author()
+                {
+                    Name = authorName
+                }
+            };
+            bool result = _bookService.EditBook(book);
+            Console.WriteLine(result ? "Книга изменена" : "Ошибка, книга не изменена, проверьте введенные данные");
         }
         
         private void Delete()

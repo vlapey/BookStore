@@ -23,31 +23,20 @@ namespace Services
         {
             return _unitOfWork.UserRepository.GetItemById(id);
         }
-
-        public bool DeleteUser(int id)
+        
+        public bool CreateUser(User user)
         {
-            return _unitOfWork.UserRepository.DeleteItemById(id);
+            return _unitOfWork.UserRepository.CreateItem(user);
         }
 
-        public bool EditUser(int userId, string login, string password)
+        public bool EditUser(User user)
         {
-            User user = new User()
-            {
-                Id = userId,
-                Login = login,
-                Password = password,
-            };
             return _unitOfWork.UserRepository.EditItem(user);
         }
         
-        public bool CreateUser(string login, string password)
+        public bool DeleteUser(int id)
         {
-            User user = new User()
-            {
-                Login = login,
-                Password = password,
-            }; 
-           return _unitOfWork.UserRepository.CreateItem(user);
+            return _unitOfWork.UserRepository.DeleteItem(id);
         }
     }
 }
