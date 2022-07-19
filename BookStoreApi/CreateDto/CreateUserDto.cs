@@ -1,6 +1,6 @@
-namespace BookStoreApi.Dto;
+namespace BookStoreApi.CreateDto;
 
-public class UserDto
+public class CreateUserDto
 {
     public string Login { get; set; }
     public string Password { get; set; }

@@ -1,8 +1,9 @@
-﻿using BookStoreApi.DtoWithId;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
-using BookStoreApi.Dto;
+using AutoMapper;
+using BookStoreApi.CreateDto;
+using BookStoreApi.EditDto;
 
 namespace BookStoreApi.Controllers;
 
@@ -12,11 +13,13 @@ public class BookController : ControllerBase
 {
     private readonly IBookService _bookService;
     private readonly IAuthorService _authorService;
+    private readonly IMapper _mapper;
     
-    public BookController(IBookService bookService, IAuthorService authorService)
+    public BookController(IBookService bookService, IAuthorService authorService, IMapper mapper)
     {
         _bookService = bookService;
         _authorService = authorService;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -32,37 +35,28 @@ public class BookController : ControllerBase
     }
     
     [HttpPost]
-    public bool CreateBook(BookDto bookData)
+    public bool CreateBook(CreateBookDto createBookData)
     {
-        var authorId = _authorService.GetAuthorIdByName(bookData.AuthorName);
+        var authorId = _authorService.GetAuthorIdByName(createBookData.AuthorName);
         if (authorId == 0)
         {
             return false;
         }
-        Book book = new Book()
-        {
-            Name = bookData.BookName,
-            Price = bookData.BookPrice,
-            AuthorId = authorId
-        };
+        var book = _mapper.Map<Book>(createBookData);
+        book.AuthorId = authorId;
         return _bookService.CreateBook(book);
     }
     
     [HttpPost]
-    public bool EditBook(BookDtoWithId bookData)
+    public bool EditBook(EditBookDto editBookData)
     {
-        var authorId = _authorService.GetAuthorIdByName(bookData.AuthorName);
+        var authorId = _authorService.GetAuthorIdByName(editBookData.AuthorName);
         if (authorId == 0)
         {
             return false;
         }
-        Book book = new Book()
-        {
-            Id = bookData.BookId,
-            Name = bookData.BookName,
-            Price = bookData.BookPrice,
-            AuthorId = authorId
-        };
+        var book = _mapper.Map<Book>(editBookData);
+        book.AuthorId = authorId;
         return _bookService.EditBook(book);
     }
     

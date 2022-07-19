@@ -21,7 +21,7 @@ namespace Context
 
         public T GetItemById(int id)
         {
-            return _dataBase.Set<T>().Find(id);
+            return _dataBase.Set<T>().AsNoTracking().FirstOrDefault(t => t.Id == id);
         }
         
         public bool CreateItem(T item)

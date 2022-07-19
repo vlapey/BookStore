@@ -1,31 +1,15 @@
-using Context;
-using Services;
-using Services.Interfaces;
+using BookStoreApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IBookService, DbBookService>();
-builder.Services.AddScoped<IUserService, DbUserService>();
-builder.Services.AddScoped<IAuthorService, DbAuthorService>();
+builder.Services.ConfigurePersistence();
+builder.Services.ConfigureServices();
 
 builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.ConfigureSwagger();
+builder.Services.ConfigureAutoMapper();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+app.ConfigureSwaggerWebApplication();
+app.ConfigureWebApplication();
