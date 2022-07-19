@@ -1,6 +1,6 @@
-namespace BookStoreApi.Dto;
+namespace BookStoreApi.CreateDto;
 
-public class BookDto
+public class CreateBookDto
 {
     public string Name { get; set; }
     public int Price { get; set; }

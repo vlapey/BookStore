@@ -1,9 +1,9 @@
-﻿using BookStoreApi.DtoWithId;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
-using BookStoreApi.Dto;
 using AutoMapper;
+using BookStoreApi.CreateDto;
+using BookStoreApi.EditDto;
 
 namespace BookStoreApi.Controllers;
 
@@ -35,27 +35,27 @@ public class BookController : ControllerBase
     }
     
     [HttpPost]
-    public bool CreateBook(BookDto bookData)
+    public bool CreateBook(CreateBookDto createBookData)
     {
-        var authorId = _authorService.GetAuthorIdByName(bookData.AuthorName);
+        var authorId = _authorService.GetAuthorIdByName(createBookData.AuthorName);
         if (authorId == 0)
         {
             return false;
         }
-        var book = _mapper.Map<Book>(bookData);
+        var book = _mapper.Map<Book>(createBookData);
         book.AuthorId = authorId;
         return _bookService.CreateBook(book);
     }
     
     [HttpPost]
-    public bool EditBook(BookDtoWithId bookData)
+    public bool EditBook(EditBookDto editBookData)
     {
-        var authorId = _authorService.GetAuthorIdByName(bookData.AuthorName);
+        var authorId = _authorService.GetAuthorIdByName(editBookData.AuthorName);
         if (authorId == 0)
         {
             return false;
         }
-        var book = _mapper.Map<Book>(bookData);
+        var book = _mapper.Map<Book>(editBookData);
         book.AuthorId = authorId;
         return _bookService.EditBook(book);
     }

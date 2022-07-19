@@ -1,6 +1,6 @@
-namespace BookStoreApi.DtoWithId;
+namespace BookStoreApi.EditDto;
 
-public class BookDtoWithId
+public class EditBookDto
 {
     public int Id { get; set; }
     public string Name { get; set; }

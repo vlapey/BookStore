@@ -1,9 +1,9 @@
-using BookStoreApi.Dto;
-using BookStoreApi.DtoWithId;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
 using AutoMapper;
+using BookStoreApi.CreateDto;
+using BookStoreApi.EditDto;
 
 namespace BookStoreApi.Controllers;
 
@@ -39,16 +39,16 @@ public class AuthorController : ControllerBase
     }
     
     [HttpPost]
-    public bool CreateAuthor(AuthorDto authorData)
+    public bool CreateAuthor(CreateAuthorDto createAuthorData)
     {
-        var author = _mapper.Map<Author>(authorData);
+        var author = _mapper.Map<Author>(createAuthorData);
         return _authorService.CreateAuthor(author);
     }
     
     [HttpPost]
-    public bool EditAuthor(AuthorDtoWithId authorData)
+    public bool EditAuthor(EditAuthorDto editAuthorData)
     {
-        var author = _mapper.Map<Author>(authorData);
+        var author = _mapper.Map<Author>(editAuthorData);
         return _authorService.EditAuthor(author);
     }
     

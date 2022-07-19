@@ -1,4 +1,6 @@
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Models;
 
 namespace Context
@@ -12,10 +14,16 @@ namespace Context
         {
             Database.EnsureCreated();
         }
-        
+
+        private IConfiguration Configuration { get; }
+        public MsSqlContext(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=HOME-PC;Database=bookstore;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
         }
     }
 }

@@ -1,9 +1,9 @@
-using BookStoreApi.Dto;
-using BookStoreApi.DtoWithId;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
 using AutoMapper;
+using BookStoreApi.CreateDto;
+using BookStoreApi.EditDto;
 
 namespace BookStoreApi.Controllers;
 
@@ -33,16 +33,16 @@ public class UserController : ControllerBase
     }
     
     [HttpPost]
-    public bool CreateUser(UserDto userData)
+    public bool CreateUser(CreateUserDto createUserData)
     {
-        var user = _mapper.Map<User>(userData);
+        var user = _mapper.Map<User>(createUserData);
         return _userService.CreateUser(user);
     }
     
     [HttpPost]
-    public bool EditUser(UserDtoWithId userData)
+    public bool EditUser(EditUserDto editUserData)
     {
-        var user = _mapper.Map<User>(userData);
+        var user = _mapper.Map<User>(editUserData);
         return _userService.EditUser(user);
     }
     

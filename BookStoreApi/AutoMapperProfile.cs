@@ -1,6 +1,6 @@
 using AutoMapper;
-using BookStoreApi.Dto;
-using BookStoreApi.DtoWithId;
+using BookStoreApi.CreateDto;
+using BookStoreApi.EditDto;
 using Models;
 
 namespace BookStoreApi;
@@ -9,11 +9,11 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<UserDto, User>().ReverseMap();
-        CreateMap<UserDtoWithId, User>().ReverseMap();
-        CreateMap<BookDto, Book>().ReverseMap();
-        CreateMap<BookDtoWithId, Book>().ReverseMap();
-        CreateMap<AuthorDto, Author>().ReverseMap();
-        CreateMap<AuthorDtoWithId, Author>().ReverseMap();
+        CreateMap<CreateUserDto, User>().ReverseMap();
+        CreateMap<EditUserDto, User>().ReverseMap();
+        CreateMap<CreateBookDto, Book>().ReverseMap();
+        CreateMap<EditBookDto, Book>().ReverseMap();
+        CreateMap<CreateAuthorDto, Author>().ReverseMap();
+        CreateMap<EditAuthorDto, Author>().ReverseMap();
     }
 }
