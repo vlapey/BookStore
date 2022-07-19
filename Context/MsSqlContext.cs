@@ -14,15 +14,15 @@ namespace Context
             Database.EnsureCreated();
         }
 
-        private IConfiguration Configuration { get; }
+        private string _connectionString;
         public MsSqlContext(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseSqlServer(_connectionString);
         }
     }
 }

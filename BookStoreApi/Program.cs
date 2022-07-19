@@ -6,10 +6,10 @@ builder.Services.ConfigurePersistence();
 builder.Services.ConfigureServices();
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.ConfigureSwagger();
 builder.Services.ConfigureAutoMapper();
 
 var app = builder.Build();
+
+app.ConfigureSwaggerWebApplication();
 app.ConfigureWebApplication();
