@@ -7,11 +7,11 @@ namespace Context
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
-        private MsSqlContext _dataBase;
+        protected MsSqlContext _dataBase;
 
-        public GenericRepository()
+        public GenericRepository(MsSqlContext context)
         {
-            _dataBase = new MsSqlContext();
+            _dataBase = context;
         }
         
         public List<T> GetItems()
