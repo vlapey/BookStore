@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Context;
 using Models;
 using Services.Interfaces;
@@ -8,70 +7,41 @@ namespace Services
 {
     public class DbAuthorService : IAuthorService
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public DbAuthorService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public List<Author> GetAuthors()
         {
-            List<Author> authors = new List<Author>();
-            var authordata = ApplicationContext.ToList($"SELECT * FROM authors");
-            foreach (var author in authordata)
-            {
-                authors.Add(new Author()
-                {
-                    Id = uint.Parse(author[0]),
-                    Name = author[1],
-                });
-            }
-
-            return authors;
+            return _unitOfWork.AuthorRepository.GetItems();
         }
-
-        public Author GetAuthorById(uint id)
+        
+        public Author GetAuthorById(int id)
         {
-            var authordata = ApplicationContext.ToList
-                ($"SELECT * FROM authors WHERE authors.id = {id}");
-            Author author = new Author()
-            {
-                Id = id,
-                Name = authordata[0][1],
-            };
-            return author;
+           return _unitOfWork.AuthorRepository.GetItemById(id);
         }
-
-        public bool DeleteAuthorById(uint id)
+        
+        public int GetAuthorIdByName(string name)
         {
-            var result = ApplicationContext.Execute($"DELETE FROM authors WHERE authors.id = {id}");
-            return result > 0;
+            return _unitOfWork.AuthorRepository.GetAuthorIdByName(name);
         }
-
-        public bool EditAuthor(Author author)
-        {
-            //todo: return suc ass statement (as in delete func)
-            var result = ApplicationContext.Execute($"UPDATE authors SET authors.name = '{author.Name}' " +
-                                       $"WHERE authors.id = {author.Id}");
-            return result > 0;
-        }
-
+        
         public bool CreateAuthor(Author author)
         {
-            //todo: return suc ass statement (as in delete func)
-            var result = ApplicationContext.Execute($"INSERT INTO `authors` (`name`) VALUES ('{author.Name}')");
-            return result > 0;
+            return _unitOfWork.AuthorRepository.CreateItem(author);
+        }
+        
+        public bool EditAuthor(Author author)
+        {
+            return _unitOfWork.AuthorRepository.EditItem(author);
         }
 
-        public uint GetAuthorIdByName(string name)
+        public bool DeleteAuthor(int authorId)
         {
-            var authordata = ApplicationContext.ToList
-                ($"SELECT authors.id FROM authors WHERE authors.name = '{name}'");
-            if (authordata.Count == 0)
-            {
-                Author author = new Author()
-                {
-                    Name = name
-                };
-                CreateAuthor(author);
-                return GetAuthorIdByName(name);
-            }
-
-            return Convert.ToUInt32(authordata[0][0]);
+            return _unitOfWork.AuthorRepository.DeleteItem(authorId);
         }
     }
 }

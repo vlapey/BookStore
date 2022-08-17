@@ -1,13 +1,10 @@
-﻿using System;
-
-namespace Models
+﻿namespace Models
 {
-    public class User
+    public class User : IEntity
     {
-        public uint Id;
-        public string Login;
-        public string Password;
-
+        public int Id { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
         public override string ToString()
         {
             return $"{Id}: {Login}, {Password}";

@@ -1,9 +1,9 @@
 ﻿namespace Models
 {
-    public class Author
+    public class Author : IEntity
     {
-        public uint Id;
-        public string Name;
+        public int Id { get; set; }
+        public string Name { get; set; }
         public override string ToString()
         {
             return $"{Id}: {Name}";

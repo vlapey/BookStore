@@ -6,10 +6,9 @@ namespace Services.Interfaces
     public interface IUserService
     {
         public List<User> GetUsers();
-        public User GetUserById(uint id);
-        public bool DeleteUserById(uint id);
-        public bool EditUser(User user);
+        public User GetUserById(int id);
         public bool CreateUser(User user);
-        public List<Book> GetUsersBooks(uint id);
+        public bool EditUser(User user);
+        public bool DeleteUser(int id);
     }
 }

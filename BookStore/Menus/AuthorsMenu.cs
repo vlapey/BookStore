@@ -1,106 +1,135 @@
 ﻿using System;
 using Models;
-using Services;
+using Services.Interfaces;
 
 namespace BookStore.Menus
 {
     public class AuthorsMenu
     {
-        private static DbAuthorService _authorService = new DbAuthorService();
-        public static void Display()
+        private static IAuthorService _authorService;
+
+        public AuthorsMenu(IAuthorService authorService)
         {
-            bool exit = false;
-            while (!exit)
+            _authorService = authorService;
+        }
+
+        public void Display()
+        {
+            while (true)
             {
-                Console.WriteLine("Вы выбрали авторский сервис");
-                Console.WriteLine("Выберите, что хотитет выполнить?\n" +
+                Console.WriteLine("Вы выбрали авторский сервис\n" +
+                                  "Выберите, что хотитет выполнить?\n" +
                                   "1 - Показать список всех авторов\n" +
                                   "2 - Показать автора по Id\n" +
                                   "3 - Показать Id автора по имени\n" +
                                   "4 - Создать автора\n" +
                                   "5 - Редактировать автора\n" +
                                   "6 - Удалить автора\n" +
-                                  "Другое - Выйти\n");
-                
-                int selector = int.Parse(Console.ReadLine());
+                                  "Другое - Вернуться в главное меню\n");
+
+                string selector = Console.ReadLine();
                 switch (selector)
                 {
-                    case 1:
+                    case "1":
                         ShowAll();
                         break;
-                    case 2:
+                    case "2":
                         ShowAuthorById();
                         break;
-                    case 3:
+                    case "3":
                         ShowAuthorIdByName();
                         break;
-                    case 4:
+                    case "4":
                         Create();
                         break;
-                    case 5:
+                    case "5":
                         Edit();
                         break;
-                    case 6:
+                    case "6":
                         Delete();
                         break;
                     default:
-                        exit = true;
-                        break;
-                }   
+                        return;
+                }
             }
         }
-        public static void ShowAll()
+
+        private void ShowAll()
         {
-            DbAuthorService authorService = new DbAuthorService();
-            foreach (var author in authorService.GetAuthors())
+            if (_authorService.GetAuthors() == null)
+            {
+                Console.WriteLine("Авторы еще не добавлены");
+                return;
+            }
+            foreach (var author in _authorService.GetAuthors())
             {
                 Console.WriteLine(author);
             }
         }
 
-        public static void ShowAuthorById()
+        private void ShowAuthorById()
         {
             Console.WriteLine("Введите Id автора, которого хотите вывести");
-            uint authorId = Convert.ToUInt32(Console.ReadLine());
-            Console.WriteLine(_authorService.GetAuthorById(authorId));
+            var authorId = Convert.ToInt32(Console.ReadLine());
+            Author author = _authorService.GetAuthorById(authorId);
+            if (author == null)
+            {
+                Console.WriteLine("Такого id не существует");
+                return;
+            }
+            Console.WriteLine(author);
         }
 
-        public static void ShowAuthorIdByName()
+        private void ShowAuthorIdByName()
         {
             Console.WriteLine("Введите имя автора, чтобы получить его Id");
             string name = Console.ReadLine();
-            Console.WriteLine(_authorService.GetAuthorIdByName(name));
+            var result = _authorService.GetAuthorIdByName(name);
+            if (result == 0)
+            {
+                Console.WriteLine("Такого автора не существует");
+            }
+            else Console.WriteLine(result);
         }
-        public static void Create()
+
+        private void Create()
         {
             Console.WriteLine("Введите Имя");
             string authorName = Console.ReadLine();
             Author author = new Author()
             {
-                Name = authorName,
+                Name = authorName
             };
-            _authorService.CreateAuthor(author);
+            var result = _authorService.CreateAuthor(author);
+            Console.WriteLine(result ? "Автор добавлен" : "Автор не добавлен");
         }
 
-        public static void Edit()
+        private void Edit()
         {
             Console.WriteLine("Введите Id автора, которого хотите поменять");
-            uint userId = Convert.ToUInt32(Console.ReadLine());
+            var authorId = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Введите Имя автора, на которое хотите поменять");
             string authorName = Console.ReadLine();
             Author author = new Author()
             {
-                Id = userId,
+                Id = authorId,
                 Name = authorName,
             };
-            _authorService.EditAuthor(author);
+            var result = _authorService.EditAuthor(author);
+            Console.WriteLine(result ? "Автор изменен" : "Ошибка, автор не изменен");
         }
 
-        public static void Delete()
+        private void Delete()
         {
             Console.WriteLine("Введите Id автора, которого хотите удалить");
-            uint id = Convert.ToUInt32(Console.ReadLine());
-            _authorService.DeleteAuthorById(id);
+            int.TryParse(Console.ReadLine(), out int authorId);
+            if (authorId == 0)
+            {
+                Console.WriteLine("Ошибка, айди должен быть числом и максимум 10 символов");
+                return;
+            }
+            var result = _authorService.DeleteAuthor(authorId);
+            Console.WriteLine(result ? "Автор удален" : "Такого автора не существует");
         }
     }
 }

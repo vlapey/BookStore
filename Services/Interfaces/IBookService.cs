@@ -7,8 +7,8 @@ namespace Services.Interfaces
     {
         public List<Book> GetBooks();
         public Book GetBookByName(string name);
-        public bool DeleteBookById(uint id);
-        public bool EditBook(Book book);
         public bool CreateBook(Book book);
+        public bool EditBook(Book book);
+        public bool DeleteBook(int id);
     }
 }

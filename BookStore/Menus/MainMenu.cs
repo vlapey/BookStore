@@ -2,32 +2,38 @@
 
 namespace BookStore.Menus
 {
-    public static class MainMenu
+    public class MainMenu
     {
-        public static void Display()
+        public void Display()
         {
-            Console.WriteLine("Выберите сервис:\n" +
-                              "1 - Книжный сервис\n" +
-                              "2 - Пользовательский сервис\n" +
-                              "3 - Авторский сервис\n" +
-                              "Другое - Выйти");
-
-            int selector = int.Parse(Console.ReadLine());
-            switch (selector)
+            BooksMenu booksMenu = new BooksMenu(DiContainer.BookService);
+            AuthorsMenu authorsMenu = new AuthorsMenu(DiContainer.AuthorService);
+            UsersMenu usersMenu = new UsersMenu(DiContainer.UserService);
+            
+            while (true)
             {
-                case 1:
-                    BooksMenu.Display();
-                    break;
+                Console.WriteLine("Выберите сервис:\n" +
+                                  "1 - Книжный сервис\n" +
+                                  "2 - Пользовательский сервис\n" +
+                                  "3 - Авторский сервис\n" +
+                                  "Другое - Выйти");
 
-                case 2:
-                    UsersMenu.Display();
-                    break;
-                case 3:
-                    AuthorsMenu.Display();
-                    break;
-                default:
-                    Console.WriteLine("Вы ввели неверное число, попробуйте снова");
-                    break;
+                string selector = Console.ReadLine();
+                switch (selector)
+                {
+                    case "1":
+                        booksMenu.Display();
+                        break;
+                    case "2":
+                        usersMenu.Display();
+                        break;
+                    case "3":
+                        authorsMenu.Display();
+                        break;
+                    default:
+                        Console.WriteLine("Вы вышли из программы");
+                        return;
+                }
             }
         }
     }

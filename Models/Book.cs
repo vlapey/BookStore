@@ -1,14 +1,12 @@
-﻿using System;
-
-namespace Models
+﻿namespace Models
 {
-    public class Book
+    public class Book : IEntity
     {
-        public uint Id;
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
-        public string Author { get; set; }
-        
+        public int AuthorId { get; set; }
+        public Author Author { get; set; }
         public override string ToString()
         {
             return $"{Id}: {Name}, {Price}, {Author}";
